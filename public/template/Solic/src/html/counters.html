@@ -1,0 +1,149 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Counters", "subtitle": 'Advanced Ui'})
+
+                <!-- Start::row-1 -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card custom-card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Day Counter</h3>
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="under-countdown row" id="timer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card custom-card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Numbers counter</h3>
+                                </div>
+                                <div class="card-body text-center">
+                                    <span
+                                        class="avatar avatar-xl brround bg-primary-transparent border-primary text-primary"><i
+                                            class="las la-users fs-34"></i></span>
+                                    <h6 class="mt-2">Employess</h6>
+                                    <h2 class="counter text-primary">2569</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card custom-card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Numbers counter</h3>
+                                </div>
+                                <div class="card-body text-center">
+                                    <span
+                                        class="avatar avatar-xl brround bg-success-transparent border-success text-success"><i
+                                            class="las la-briefcase  fs-34"></i></span>
+                                    <h6 class="mt-2 ">Profit</h6>
+                                    <h2 class="counter text-success"> 2,56989.32</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card custom-card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Numbers counter</h3>
+                                </div>
+                                <div class="card-body text-center">
+                                    <span
+                                        class="avatar avatar-xl brround bg-danger-transparent border-danger text-danger"><i
+                                            class="las la-trash  fs-34"></i></span>
+                                    <h6 class="mt-2 ">Errors</h6>
+                                    <h2 class="counter-ratio text-danger">0.8998</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-xl-4">
+                            <div class="card overflow-hidden">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="font-weight-bold"><a href="javascript:void(0);">Time Counting From
+                                            0</a>
+                                    </h5>
+                                    <div class="text-muted">To take a trivial example, which of us ever undertakes
+                                        laborious physical exerciser , except to obtain some advantage from it...
+                                    </div>
+                                    <div  class="bg-primary-transparent text-primary border-primary d-flex align-items-center justify-content-center p-2 mt-4 rounded-1">
+                                        <div id="outputt" class="timerClock fs-34 fw-bold">00:00:00</div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-xl-4">
+                            <div class="card overflow-hidden">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="font-weight-bold"><a href="javascript:void(0);">Time Counting From 60
+                                            to
+                                            20</a></h5>
+                                    <div class="text-muted">To take a trivial example, which of us ever undertakes
+                                        laborious physical exerciser , except to obtain some advantage from it...
+                                    </div>
+                                    <div  class="bg-warning-transparent text-warning border-warning d-flex align-items-center justify-content-center p-2 mt-4 fs-34 fw-bold  rounded-1">
+                                        <div id="time">00:60</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-xl-4">
+                            <div class="card overflow-hidden">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="font-weight-bold"><a href="javascript:void(0);">Time 1 minute
+                                            counter</a>
+                                    </h5>
+                                    <div class="text-muted">To take a trivial example, which of us ever undertakes
+                                        laborious physical exerciser , except to obtain some advantage from it...
+                                    </div>
+                                    <div>
+                                        <div class="bg-danger-transparent text-danger border-danger d-flex align-items-center justify-content-center p-2 mt-4  rounded-1">
+                                            <span class="timer fs-34 fw-bold">
+                                              <span id="counter"></span>
+                                            </span>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/side-bar.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+   
+	<script src="../assets/js/counterup.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

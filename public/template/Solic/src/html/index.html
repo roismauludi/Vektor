@@ -1,0 +1,507 @@
+@SPK@include("partials/mainhead.html")
+
+<link rel="stylesheet" href="../assets/libs/jsvectormap/css/jsvectormap.min.css">
+
+<link rel="stylesheet" href="../assets/libs/swiper/swiper-bundle.min.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Sales Dashboard", "subtitle": 'Home'})
+
+                
+                <!-- Start::row-1 -->
+                    <div class="row row-cards">
+                        <div class="col-xl-6 col-xxl-3 col-sm-12 col-lg-6 col-md-6">
+                            <div class="card card-img-holder text-default bg-color">
+                                <div class="card-body">
+                                    <div class="d-flex mb-1">
+                                        <div>
+                                            <h6 class="mb-2">Revenue</h6>
+                                            <h2 class="mb-0 text-dark  fw-bold d-inline-flex">19.89K</h2>
+                                            <span class="badge bg-success-transparent rounded-pill ms-1">+ 06% <i class="fe fe-arrow-up"></i></span>
+                                        </div>
+                                        <div class="avatar avatar-lg bg-primary-transparent mb-auto ms-auto br-4">
+                                            <i class='bx bx-bar-chart-square fs-23'></i>
+                                        </div>
+                                    </div>
+                                    <small class="mb-0 text-muted">Overview of Last month<span class="float-end text-muted">40%</span></small>
+                                    <div class="progress h-1 mt-1">
+                                        <div class="progress-bar bg-primary w-40 " role="progressbar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-xxl-3 col-sm-12 col-lg-6 col-md-6">
+                            <div class="card card-img-holder text-default bg-color">
+                                <div class="card-body">
+                                    <div class="d-flex mb-1">
+                                        <div>
+                                            <h6 class="mb-2">New Users</h6>
+                                            <h2 class="mb-0 text-dark  fw-bold d-inline-flex">684</h2>
+                                            <span class="badge bg-success-transparent rounded-pill ms-1">+ 15% <i class="fe fe-arrow-up"></i></span>
+                                        </div>
+                                        <div class="avatar avatar-lg bg-secondary-transparent mb-auto ms-auto br-4">
+                                            <i class='bx bx-user-circle fs-23'></i>
+                                        </div>
+                                    </div>
+                                    <small class="mb-0 text-muted">Overview of Last month<span class="float-end text-muted">60%</span></small>
+                                    <div class="progress h-1 mt-1">
+                                        <div class="progress-bar bg-secondary w-60" role="progressbar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-xxl-3 col-sm-12 col-lg-6 col-md-6">
+                            <div class="card card-img-holder text-default bg-color">
+                                <div class="card-body">
+                                    <div class="d-flex mb-1">
+                                        <div>
+                                            <h6 class="mb-2">Profit</h6>
+                                            <h2 class="mb-0 text-dark  fw-bold d-inline-flex">246</h2>
+                                            <span class="badge bg-danger-transparent rounded-pill ms-1">+ 08% <i class="fe fe-arrow-down"></i></span>
+                                        </div>
+                                        <div class="avatar avatar-lg bg-danger-transparent mb-auto ms-auto br-4">
+                                            <i class='bx bx-package fs-23'></i>
+                                        </div>
+                                    </div>
+                                    <small class="mb-0 text-muted">Overview of Last month<span class="float-end text-muted">30%</span></small>
+                                    <div class="progress h-1 mt-1">
+                                        <div class="progress-bar bg-danger w-50" role="progressbar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-xxl-3 col-sm-12 col-lg-6 col-md-6">
+                            <div class="card card-img-holder text-default bg-color">
+                                <div class="card-body">
+                                    <div class="d-flex mb-1">
+                                        <div>
+                                            <h6 class="mb-2">Invoices</h6>
+                                            <h2 class="mb-0 text-dark  fw-bold d-inline-flex">$4.20M</h2>
+                                            <span class="badge bg-danger-transparent rounded-pill ms-1">+ 18% <i class="fe fe-arrow-down"></i></span>
+                                        </div>
+                                        <div class="avatar avatar-lg bg-warning-transparent mb-auto ms-auto br-4">
+                                            <i class='bx bx-file fs-23'></i>
+                                        </div>
+                                    </div>
+                                    <small class="mb-0 text-muted">Overview of Last month<span class="float-end text-muted">50%</span></small>
+                                    <div class="progress h-1 mt-1">
+                                        <div class="progress-bar bg-warning w-50" role="progressbar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- End::row-1 -->
+
+                <!-- START ROW-2 -->
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="row">
+                            <div class="col-xl-6 col-md-6">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div class="d-flex">
+                                            <div class="">
+                                                <p class="mb-1 fw-semibold">
+                                                    Reccuring Revenue
+                                                </p>
+                                                <h3 class="my-2">$345.89K</h3>
+                                                <span class="mb-0 text-muted"><i class="fa fa-caret-down text-danger me-1"></i> 12% last month</span>
+                                            </div>
+                                            <div class="ms-auto my-auto">
+                                                <span id="total-purchase"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-md-6">
+                                <div class="card custom-card">
+                                    <div class="card-body">
+                                        <div class="d-flex">
+                                            <div class="">
+                                                <p class="mb-1 fw-semibold">
+                                                    Net Revenue
+                                                </p>
+                                                <h3 class="my-2">$256.8K</h3>
+                                                <span class="mb-0 text-muted"><i class="fa fa-caret-up text-success me-1"></i> 24% last month</span>
+                                            </div>
+                                            <div class="ms-auto my-auto">
+                                                <span id="net-revenue"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card custom-card overflow-hidden">
+                            <div class="card-header">
+                                <div class="card-title">Net Retention (this week)</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row text-start">
+                                    <div class="col">
+                                        <p class="mb-0 fw-semibold">Cancel</p>
+                                        <h5 class="mb-0">$6.8K</h5>
+                                    </div>
+                                    <div class="col">
+                                        <p class="mb-0 fw-semibold">Expansion</p>
+                                        <h5 class="mb-0">$4.74K</h5>
+                                    </div>
+                                    <div class="col">
+                                        <p class="mb-0 fw-semibold">Contraction</p>
+                                        <h5 class="mb-0">$2.8K</h5>
+                                    </div>
+                                </div>
+                                <div class="chart-wrapper">
+                                    <div id="widgetChart1" class="overflow-hidden"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <div class="card-title">Monthly Orders</div>
+                                <div class="dropdown ms-auto">
+                                    <button class="btn btn-outline-default btn-sm fw-bold text-primary fs-12 d-flex align-items-center dropdown-toggle"
+                                        type="button" id="dropdownMenuButton13" data-bs-toggle="dropdown"
+                                        aria-expanded="false">Weekly
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton13">
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Monthly</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Daily</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body px-0">
+                                <div class="row mb-3 px-3">
+                                    <div class="col-sm-4">
+                                        <h3 class="mb-0 text-primary">67.39%</h3>
+                                        <span class="fw-semibold mb-0">Electronics</span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h3 class="mb-0 text-secondary">59.78%</h3>
+                                        <span class="fw-semibold mb-0">Home Decores</span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h3 class="mb-0 text-danger">45.38%</h3>
+                                        <span class="fw-semibold mb-0">Clothes</span>
+                                    </div>
+                                </div>
+                                <div class="chart-wrapper">
+                                    <div id="balance" class=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END ROW-2 -->
+
+                <!-- START ROW-3 -->
+                <div class="row">
+                    <div class="col-md-12 col-xl-8 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between">
+                                <div class="card-title">Sales Analytics</div>
+                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-sort-down me-1"></i>Filter</button>
+                                <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                    <li><a href="javascript:void(0);" class="dropdown-item">Monthly</a></li>
+                                    <li><a href="javascript:void(0);" class="dropdown-item">Yearly</a></li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="row text-start mb-3">
+                                    <div class="col-sm-4 my-1">
+                                        <h6 class="mb-1">Paying Conversion rate</h6>
+                                        <h5 class="mb-0 number-font1 counter fw-semibold d-inline-flex">5,89%<span class="fs-12 text-muted fw-normal mt-2 d-inline-flex"><span class="text-success mx-1"><i class="fe fe-arrow-up"></i>0.7%</span>last month</span></h5>
+                                    </div>
+                                    <div class="col-sm-4 my-1">
+                                        <h6 class="mb-1">Signup Conversion rate</h6>
+                                        <h5 class="mb-0 number-font1 counter fw-semibold d-inline-flex">6,89%<span class="fs-12 text-muted fw-normal mt-2 d-inline-flex"><span class="text-danger mx-1"><i class="fe fe-arrow-down"></i>0.2%</span>last month</span></h5>
+                                    </div>
+                                    <div class="col-sm-4 my-1">
+                                        <h6 class="mb-1">Churn rate</h6>
+                                        <h5 class="mb-0 number-font1 counter fw-semibold d-inline-flex">2,76%<span class="fs-12 text-muted fw-normal mt-2 d-inline-flex"><span class="text-danger mx-1"><i class="fe fe-arrow-down"></i>1.3%</span>last month</span></h5>
+                                    </div>
+                                </div>
+                                <div id="revenueReport"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-xl-4 col-lg-12">
+                        <div class="card  custom-card">
+                            <div class="card-header">
+                                <div class="card-title">Types of Revenue</div>
+                            </div>
+                            <div class="card-body pb-0">
+                                <!-- <div id="radar-multiple"></div> -->
+                                <div id="top-categories"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END ROW-3 -->
+                
+                <!-- START ROW-4 -->
+                <div class="row">
+                    <div class="col-md-12 col-xl-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div class="card-title">Recent Invoices</div>
+                                <div class="btn-list d-sm-flex">
+                                    <div class="dropdown ms-auto">
+                                        <button class="btn btn-outline-default btn-sm fw-bold text-primary fs-12 d-flex align-items-center dropdown-toggle"
+                                            type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="bi bi-calendar-date fw-semibold mx-1"></i> Sort By: New
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="javascript:void(0);">Relevance</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);">Popular</a></li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary" type="button">Filter <i class="bi bi-filter-circle ms-1"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table card-table table-bordered table-vcenter text-dark table-outline text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="w-9">S.NO</th>
+                                                <th scope="col" class="w-10">Product Id</th>
+                                                <th scope="col" class="w-25">Name</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col" class="w-15">Payment Method</th>
+                                                <th scope="col">Amount</th>
+                                                <th scope="col" class="w-15">Info</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>01</td>
+                                                <td>#242021</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <img src="../assets/images/faces/1.jpg" class="avatar avatar-md rounded-circle" alt="person-image">
+                                                        <div class="d-flex mt-1 flex-column ms-2">
+                                                            <h6 class="mb-0 fs-14 fw-semibold text-dark">Phil Watson</h6>
+                                                            <span
+                                                                class="fs-12 text-muted">philwatson@gmail.com</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>31-05-2019</td>
+                                                <td class="text-success">Transfer</td>
+                                                <td>$2,48,960.00</td>
+                                                <td>
+                                                    <div class="btn-list ">
+                                                        <a class="btn btn-sm btn-primary" href="javascript:void(0);"> View more</a>
+                                                        <button type="button" class="btn btn-sm btn-secondary-light"><i class="bi bi-pencil-square fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-danger-light"><i class="bi bi-x-circle fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>02</td>
+                                                <td>#242022</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <span class="avatar avatar-md">
+                                                            <img src="../assets/images/faces/2.jpg" class="avatar avatar-md rounded-circle" alt="person-image">
+                                                        </span>
+                                                        <div class="flex-grow-1 ms-2">
+                                                            <h6 class="mb-0 fs-14 fw-semibold text-dark">Sonia Robertson</h6>
+                                                            <span class="fs-12 text-muted">soniarobertson@gmail.com</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>02-06-2019</td>
+                                                <td class="text-secondary">Shares</td>
+                                                <td>$78,956.00</td>
+                                                <td>
+                                                    <div class="btn-list">
+                                                        <a class="btn btn-sm btn-primary" href="javascript:void(0);"> View more</a>
+                                                        <button type="button" class="btn btn-sm btn-secondary-light"><i class="bi bi-pencil-square fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-danger-light"><i class="bi bi-x-circle fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>03</td>
+                                                <td>#242023</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <img src="../assets/images/faces/3.jpg" class="avatar avatar-md rounded-circle" alt="person-image">
+                                                        <div class="d-flex mt-1 flex-column ms-2">
+                                                            <h6 class="mb-0 fs-14 fw-semibold text-dark">Matt Arnold</h6>
+                                                            <span
+                                                                class="fs-12 text-muted">mattarnold@gmail.com</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>12-06-2019</td>
+                                                <td class="text-danger">Bonds</td>
+                                                <td>$5,85,976.00</td>
+                                                <td>
+                                                    <div class="btn-list">
+                                                        <a class="btn btn-sm btn-primary" href="javascript:void(0);"> View more</a>
+                                                        <button type="button" class="btn btn-sm btn-secondary-light"><i class="bi bi-pencil-square fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-danger-light"><i class="bi bi-x-circle fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>04</td>
+                                                <td>#242024</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <img src="../assets/images/faces/4.jpg" class="avatar avatar-md rounded-circle" alt="person-image">
+                                                        <div class="d-flex mt-1 flex-column ms-2">
+                                                            <h6 class="mb-0 fs-14 fw-semibold text-dark">Adam Hamilton</h6>
+                                                            <span
+                                                                class="fs-12 text-muted">adamhamilton@gmail.com</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>16-06-2019</td>
+                                                <td class="text-danger">Bonds</td>
+                                                <td>$34,692.00</td>
+                                                <td>
+                                                    <div class="btn-list">
+                                                        <a class="btn btn-sm btn-primary" href="javascript:void(0);"> View more</a>
+                                                        <button type="button" class="btn btn-sm btn-secondary-light"><i class="bi bi-pencil-square fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-danger-light"><i class="bi bi-x-circle fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>05</td>
+                                                <td>#242025</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <img src="../assets/images/faces/5.jpg" class="avatar avatar-md rounded-circle" alt="person-image">
+                                                        <div class="d-flex mt-1 flex-column ms-2">
+                                                            <h6 class="mb-0 fs-14 fw-semibold text-dark">Leah Morgan</h6>
+                                                            <span
+                                                                class="fs-12 text-muted">leahmorgan@gmail.com</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>17-06-2019</td>
+                                                <td class="text-success">Transfer</td>
+                                                <td>$7,89,465.00</td>
+                                                <td>
+                                                    <div class="btn-list">
+                                                        <a class="btn btn-sm btn-primary" href="javascript:void(0);"> View more</a>
+                                                        <button type="button" class="btn btn-sm btn-secondary-light"><i class="bi bi-pencil-square fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-danger-light"><i class="bi bi-x-circle fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>06</td>
+                                                <td>#242026</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <img src="../assets/images/faces/7.jpg" class="avatar avatar-md rounded-circle" alt="person-image">
+                                                        <div class="d-flex mt-1 flex-column ms-2">
+                                                            <h6 class="mb-0 fs-14 fw-semibold text-dark">Amelia	McDonald</h6>
+                                                            <span
+                                                                class="fs-12 text-muted">ameliamcDonald@gmail.com</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>21-06-2019</td>
+                                                <td class="text-secondary">Shares</td>
+                                                <td>$89,365.00</td>
+                                                <td>
+                                                    <div class="btn-list">
+                                                        <a class="btn btn-sm btn-primary" href="javascript:void(0);"> View more</a>
+                                                        <button type="button" class="btn btn-sm btn-secondary-light"><i class="bi bi-pencil-square fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-danger-light"><i class="bi bi-x-circle fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>07</td>
+                                                <td>#242027</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <img src="../assets/images/faces/9.jpg" class="avatar avatar-md rounded-circle" alt="person-image">
+                                                        <div class="d-flex mt-1 flex-column ms-2">
+                                                            <h6 class="mb-0 fs-14 fw-semibold text-dark">Simon Clark</h6>
+                                                            <span
+                                                                class="fs-12 text-muted">simonclark@gmail.com</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>22-06-2019</td>
+                                                <td class="text-secondary">Shares</td>
+                                                <td  >$1,23,567.00</td>
+                                                <td>
+                                                    <div class="btn-list">
+                                                        <a class="btn btn-sm btn-primary" href="javascript:void(0);"> View more</a>
+                                                        <button type="button" class="btn btn-sm btn-secondary-light"><i class="bi bi-pencil-square fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-danger-light"><i class="bi bi-x-circle fs-14" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END ROW-4 -->
+
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+        
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/side-bar.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+  
+
+    <!-- JSVector Maps JS -->
+    <script src="../assets/libs/jsvectormap/js/jsvectormap.min.js"></script>
+
+    <!-- JSVector Maps MapsJS -->
+    <script src="../assets/libs/jsvectormap/maps/world-merc.js"></script>
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/index.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+    
+</body>
+
+</html>

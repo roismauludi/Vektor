@@ -1,0 +1,493 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+            <!-- Start::app-content -->
+            <div class="main-content app-content">
+                <div class="container-fluid">
+                    
+                @SPK@include("partials/page-header.html", {"title": "File-manager-List", "subtitle": 'Pages'})
+
+                    <!-- Row -->
+                    <div class="row filemanager-top">
+                        <div class="col-lg-12 col-xl-12">
+                            <div class="row mb-4">
+                                <div class="col-sm-6">
+                                    <div class="fs-20 mb-4  filemanager-text">
+                                        Files List
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-auto file-1">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="Search folder..." type="text">
+                                        <button class="btn btn-secondary br-ts-0 br-bs-0" type="button">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/folder.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold">videos</h6>
+                                            <span class="text-muted">4.23gb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/folder.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold">Images</h6>
+                                            <span class="text-muted">1.23gb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/folder.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold">Downloads</h6>
+                                            <span class="text-muted">453kb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/word.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold">Word document</h6>
+                                            <span class="text-muted">23kb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/file.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold">document.pdf</h6>
+                                            <span class="text-muted">23kb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/file.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold">document.pdf</h6>
+                                            <span class="text-muted">23kb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/folder.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold">Downloads</h6>
+                                            <span class="text-muted">453kb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/file.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold">document.pdf</h6>
+                                            <span class="text-muted">23kb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/file.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold">document.pdf</h6>
+                                            <span class="text-muted">23kb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/folder.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold">Downloads</h6>
+                                            <span class="text-muted">453kb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/image.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold mt-2">login image</h6>
+                                            <span class="text-muted">23kb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/image.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold mt-2">beach image</h6>
+                                            <span class="text-muted">4.23gb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/image.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold mt-2">sky image</h6>
+                                            <span class="text-muted">1.23gb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/image.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold mt-2">Sea</h6>
+                                            <span class="text-muted">897mb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="card p-0 ">
+                                        <div class="d-flex align-items-center px-3 pt-3">
+                                            <div class="float-end ms-auto">
+                                                <a href="javascript:void(0);" class="option-dots" data-bs-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false"><i
+                                                        class="fe fe-more-vertical"></i></a>
+                                                <div class="dropdown-menu rounded-2">
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-edit d-inline-flex me-2"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-share d-inline-flex me-2"></i> Share</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fe fe-trash me-2 d-inline-flex"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-0 text-center">
+                                            <div class="file-manger-icon">
+                                                <a href="filemanager-details.html">
+                                                    <img src="../assets/images/media/files/image.png" alt="img" class="rounded-2">
+                                                </a>
+                                            </div>
+                                            <h6 class="mb-1 font-weight-semibold mt-2">Outdoor Image</h6>
+                                            <span class="text-muted">23kb</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="pagination float-end mb-4">
+                                <li class="page-item page-prev disabled">
+                                    <a class="page-link" href="javascript:void(0);" tabindex="-1">Prev</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                                <li class="page-item page-next">
+                                    <a class="page-link" href="javascript:void(0);">Next</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End Row -->
+                </div>
+            </div>
+            <!-- End::app-content -->
+
+            @SPK@include("partials/headersearch_modal.html")
+            @SPK@include("partials/footer.html")
+        @SPK@include("partials/side-bar.html")
+        @SPK@include("partials/headersearch_modal.html")
+
+        </div>
+
+        @SPK@include("partials/commonjs.html")
+
+        @SPK@include("partials/custom_switcherjs.html")
+
+
+        <!-- Custom JS -->
+        <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

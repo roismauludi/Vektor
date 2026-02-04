@@ -1,0 +1,392 @@
+@SPK@include("partials/mainhead.html")
+
+<link rel="stylesheet" href="../assets/libs/swiper/swiper-bundle.min.css">
+
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Product Details", "subtitle": 'Ecommerce'})
+
+				<!-- ROW-1 OPEN -->
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="card custom-card">
+							<div class="card-body h-100">
+								<div class="row row-sm ">
+                                    <div class="col-xxl-4  col-xl-6">
+                                        <div class="swiper swiper-preview-details bg-light product-details-page">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide" id="img-container">
+                                                    <img class="img-fluid" src="../assets/images/ecommerce/png/15.png" alt="img">
+                                                </div>
+                                                <div class="swiper-slide image-container">
+                                                    <img class="img-fluid" src="../assets/images/ecommerce/png/13.png" alt="img">
+                                                </div>
+                                                <div class="swiper-slide image-container">
+                                                    <img class="img-fluid" src="../assets/images/ecommerce/png/14.png" alt="img">
+                                                </div>
+                                                <div class="swiper-slide image-container">
+                                                    <img class="img-fluid" src="../assets/images/ecommerce/png/17.png" alt="img">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-button-next"></div>
+                                            <div class="swiper-button-prev"></div>
+                                        </div>
+                                        <div class="swiper swiper-view-details mt-2">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="../assets/images/ecommerce/png/15.png" alt="img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="../assets/images/ecommerce/png/13.png" alt="img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="../assets/images/ecommerce/png/14.png" alt="img">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="../assets/images/ecommerce/png/17.png" alt="img">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+									<div class="details col-xxl-4  col-xl-6">
+										<div class="product-gallery-data mb-3">
+											<h4 class="mb-0 fw-semibold">Modern Chair </h4>
+											<div class="d-flex align-items-center mb-0">
+												<span class="fw-semibold h3 text-dark">$507</span>
+												<span class="badge bg-info ms-2 mb-2">20% Off</span>
+											</div>
+                                            <p class="fs-18 mb-2">
+                                                <i class="ri-star-s-fill text-warning align-middle"></i>
+                                                <i class="ri-star-s-fill text-warning align-middle"></i>
+                                                <i class="ri-star-s-fill text-warning align-middle"></i>
+                                                <i class="ri-star-s-fill text-warning align-middle"></i>
+                                                <i class="ri-star-half-s-fill text-warning align-middle"></i>
+                                                <span class="fw-semibold text-muted ms-1">4.5<a class="text-info" href="javascript:void(0);">(1.30k Reviews)</a></span>
+                                            </p>
+											<h6 class="fw-semibold mt-1">Description</h6>
+											<p class="text-muted">labore et dolore magna enim ad minim veniam, quis
+												nostrud
+												exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+												Duis
+												aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+												eu
+												fugiat nulla pariatur. </p>
+												<h6 class="fw-semibold mt-1">color</h6>
+												<p class="mb-0 d-flex mb-3">
+													<a class="color-1 product-colors selected" href="javascript:void(0)">
+														<i class="ri-checkbox-blank-circle-fill"></i>
+													</a>
+													<a class="color-2 product-colors" href="javascript:void(0)">
+														<i class="ri-checkbox-blank-circle-fill"></i>
+													</a>
+													<a class="color-3 product-colors" href="javascript:void(0)">
+														<i class="ri-checkbox-blank-circle-fill"></i>
+													</a>
+													<a class="color-4 product-colors" href="javascript:void(0)">
+														<i class="ri-checkbox-blank-circle-fill"></i>
+													</a>
+													<a class="color-5 product-colors" href="javascript:void(0)">
+														<i class="ri-checkbox-blank-circle-fill"></i>
+													</a>
+												</p>
+												<h6 class="fw-semibold mt-1 mb-0">Features</h6>
+												<span class="text-muted">Fabric Premium made T-shirt</span>
+										</div>
+										<div class="sizes d-flex align-items-center">
+											<h6 class="fw-semibold mt-1">Sizes:</h6>
+											<span class="size d-flex mx-3" data-bs-toggle="tooltip" title="small"><label
+													class="rdiobox mb-0"><input checked="" name="rdio" type="radio">
+													<span class="fw-bold fs-16">S</span></label></span>
+											<span class="size d-flex me-3" data-bs-toggle="tooltip" title="medium"><label
+													class="rdiobox mb-0"><input name="rdio" type="radio">
+													<span class="fs-16">M</span></label></span>
+											<span class="size d-flex me-3" data-bs-toggle="tooltip" title="large"><label
+													class="rdiobox mb-0"><input name="rdio" type="radio">
+													<span class="fs-16">L</span></label></span>
+											<span class="size d-flex" data-bs-toggle="tooltip"
+												title="extra-large"><label class="rdiobox mb-0"><input name="rdio"
+														type="radio"> <span class="fs-16">XL</span></label></span>
+										</div>
+										<div class="d-flex  mt-2">
+											<div class="mt-2 product-title">Quantity:</div>
+											<div class="d-flex ms-2">
+												<ul class=" mb-0 qunatity-list">
+													<li>
+														<div class="form-group">
+															<select class="form-control" data-trigger name="choices-single-default" id="choices-single-default2">
+																<option value="1" selected>1</option> 
+																<option value="1">2</option>
+																<option value="2">3 </option>
+																<option value="3">4</option>
+																<option value="4">5</option>
+															</select>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="action mt-2">
+											<a href="wishlist.html" class="add-to-cart btn btn-danger my-1 me-1">ADD TO
+												WISHLIST</a>
+											<a href="cart.html" class="add-to-cart btn btn-success">ADD TO
+												CART</a>
+										</div>
+									</div>
+                                    <div class="col-xxl-4 mt-xxl-0 mt-3">
+                                        <div class="mb-5">
+                                            <div class="offer-promotion mb-4">
+                                                <div class="d-xxl-flex d-lg-block d-sm-flex flex-wrap justify-content-between align-items-center gap-2">
+                                                    <div class="text-warning my-auto">Use Code <span class="promotion-code fw-semibold">FIRBUY</span><a class="fs-10 text-warning ms-1 d-inline-block" href="javascript:void(0);">T&amp;C.</a></div>
+                                                    <div class="my-2">
+                                                        <span class="bg-warning-transparent text-default fs-12 offer-details mb-0">Get it for <span class="text-success fw-semibold">$1,099</span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <p class="text-danger mb-0 fs-16">Only 5 left in stock.</p>
+                                                <p class="mb-0 fs-12 lh-lg d-inline-flex">Sold by <span class="text-primary me-1 d-inline-flex"><u>Regaltos PVT.LTD</u></span>and quality checked by <span class="text-primary d-inline-flex"><u>Spruko Tchnologies</u>.</span></p>
+                                            </div>
+                                            <div class="mb-4">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">
+                                                        <div class="lh-1">
+                                                            <span class="text-success fw-semibold fs-14 d-flex align-items-center"><i class="ti ti-discount-2 fs-18 me-1"></i>3 Available offers</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <div class="fs-12 text-default">
+                                                            <span class="text-success me-1 fw-semibold">Bank Offer:</span><span class="flex-fill">5% off upto 500 on min purchase of $999<a href="javascript:void(0);" class="text-primary ms-1   d-inline-flex">View.</a></span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <div class="fs-12 text-default">
+                                                            <span class="text-success me-1 fw-semibold">Emi:</span><span class="flex-fill">No cost emi on selected bank card on min purchase of $1,499<a href="javascript:void(0);" class="text-primary ms-1  d-inline-flex">View.</a></span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item p-0">
+                                                        <ul class="collapse list-group" id="offers-more">
+                                                            <li class="list-group-item border-0 border-bottom">
+                                                                <div class="fs-12 text-default">
+                                                                    <span class="text-success me-1 fw-semibold">Free Delivery:</span><span class="flex-fill">Free delivery on first order<a href="javascript:void(0);" class="text-primary ms-1  d-inline-flex">View.</a></span>
+                                                                </div>
+                                                            </li>
+                                                            <li class="list-group-item border-0">
+                                                                <div class="fs-12 text-default">
+                                                                    <span class="text-success me-1 fw-semibold">Promotion:</span><span class="flex-fill">Offer upto 30% on grosery on purchase of this item<a href="javascript:void(0);" class="text-primary ms-1">T&amp;C.</a></span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="list-group-item border-top-0">
+                                                        <a class="text-success fs-12" data-bs-toggle="collapse" href="#offers-more" role="button" aria-expanded="false" aria-controls="offers-more"><u>More Offers</u></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="mb-4">
+                                                <p class="mb-0 fw-semibold">Returns:</p>
+                                                <p class="fs-12 text-muted">Min 7 days return and exchange policy. Return Policies may vary based on products and promotions. For full details on our Returns Policies, please <a href="javascript:void(0);" class="text-primary">click here</a>․</p>
+                                            </div>
+                                            <div class="alert alert-light mb-4 fs-12 text-muted" role="alert">
+                                                <a href="javascript:void(0);"><i class="ri-map-pin-line me-1 align-middle text-primary fs-15 d-inline-block"></i></a>Select location to find out estimated delivery date
+                                            </div>
+                                        </div>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ROW-1 CLOSED -->
+				
+
+				<!-- row -->
+				<div class="row related-products-ltr-l">
+					<div class="col-xl-3 col-md-6">
+						<div class="card item-card">
+							<div class="card-body pb-0 h-100">
+								<div class="text-center">
+									<img src="../assets/images/ecommerce/jpg/1.jpg" alt="img"
+										class="img-fluid w-100 rounded-2">
+								</div>
+								<div class="card-body relative product-des">
+									<div class="cardtitle">
+										<span>Items</span>
+										<h6>Pot with plant</h6>
+									</div>
+									<div class="cardprice">
+										<span class="type--strikethrough">$999</span>
+										<h6>$579</h6>
+									</div>
+								</div>
+							</div>
+							<div class="text-center border-top py-3 px-2 ">
+								<a href="products.html" class="btn btn-primary my-1 me-2"><i class="fe fe-eye me-1"></i> View More</a>
+								<a href="cart.html" class="btn btn-success"><i class="fe fe-shopping-cart me-1"></i>
+									Add to cart</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card item-card">
+							<div class="card-body pb-0 h-100">
+								<div class="text-center">
+									<img src="../assets/images/ecommerce/jpg/4.jpg" alt="img"
+										class="img-fluid w-100 rounded-2">
+								</div>
+								<div class="card-body relative product-des">
+									<div class="cardtitle">
+										<span>Fashion</span>
+										<h6>Mens Shoes</h6>
+									</div>
+									<div class="cardprice">
+										<span class="type--strikethrough">$779</span>
+										<h6>$399</h6>
+									</div>
+								</div>
+							</div>
+							<div class="text-center border-top py-3 px-2 ">
+								<a href="products.html" class="btn btn-primary my-1 me-2"><i class="fe fe-eye me-1"></i> View More</a>
+								<a href="cart.html" class="btn btn-success"><i class="fe fe-shopping-cart me-1"></i>
+									Add to cart</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card item-card">
+							<div class="card-body pb-0 h-100">
+								<div class="text-center">
+									<img src="../assets/images/ecommerce/jpg/7.jpg" alt="img"
+										class="img-fluid w-100 rounded-2">
+								</div>
+								<div class="card-body relative product-des">
+									<div class="cardtitle">
+										<span>Accessories</span>
+										<h6>Wooden Stool</h6>
+									</div>
+									<div class="cardprice">
+										<span class="type--strikethrough">$569</span>
+										<h6>$299</h6>
+									</div>
+								</div>
+							</div>
+							<div class="text-center border-top py-3 px-2 ">
+								<a href="products.html" class="btn btn-primary my-1 me-2"><i class="fe fe-eye me-1"></i> View More</a>
+								<a href="cart.html" class="btn btn-success"><i class="fe fe-shopping-cart me-1"></i>
+									Add to cart</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card item-card">
+							<div class="card-body pb-0 h-100">
+								<div class="text-center">
+									<img src="../assets/images/ecommerce/jpg/8.jpg" alt="img"
+										class="img-fluid w-100 rounded-2">
+								</div>
+								<div class="card-body relative product-des">
+									<div class="cardtitle">
+										<span>Accessories</span>
+										<h6>Collage Bag</h6>
+									</div>
+									<div class="cardprice">
+										<span class="type--strikethrough">$999</span>
+										<h6>$876</h6>
+									</div>
+								</div>
+							</div>
+							<div class="text-center border-top py-3 px-2 ">
+								<a href="products.html" class="btn btn-primary my-1 me-2"><i class="fe fe-eye me-1"></i> View More</a>
+								<a href="cart.html" class="btn btn-success"><i class="fe fe-shopping-cart me-1"></i>
+									Add to cart</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+
+				<!-- row -->
+				<div class="row row-sm">
+					<div class="col-md-12 col-xl-4 col-xs-12 col-sm-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="feature2">
+									<i
+										class="mdi mdi-airplane-takeoff bg-purple avatar avatar-lg mb-2 text-center avatar-rounded "></i>
+								</div>
+								<h5 class="mb-2 fs-16">Free Shipping</h5>
+								<span class="fs-14 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+									sed do eiusmod tempor incididunt ut labore et dolore magna aliqua domenus
+									orioneu.</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-xl-4 col-xs-12 col-sm-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="feature2">
+									<i class="mdi mdi-headset bg-pink avatar avatar-lg mb-2 text-center avatar-rounded"></i>
+								</div>
+								<h5 class="mb-2 fs-16">Customer Support</h5>
+								<span class="fs-14 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+									sed do eiusmod tempor incididunt ut labore et dolore magna aliqua domenus
+									orioneu.</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-xl-4 col-xs-12 col-sm-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="feature2">
+									<i class="mdi mdi-refresh bg-teal avatar avatar-lg mb-2 text-center avatar-rounded"></i>
+								</div>
+								<div class="icon-return"></div>
+								<h5 class="mb-2  fs-16">30 days money back</h5>
+								<span class="fs-14 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+									sed do eiusmod tempor incididunt ut labore et dolore magna aliqua domenus
+									orioneu.</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- row closed -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/side-bar.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Swiper JS -->
+    <script src="../assets/libs/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Internal Product-Details JS -->
+    <script src="../assets/js/product-details.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Mail-Compose", "subtitle": 'Pages'})
+
+                <!-- Start::row-1 -->
+				<div class="row">
+					<div class="col-lg-4 col-xl-3 col-md-12 col-sm-12">
+						<div class="card custom-card">
+							<div class="list-group list-group-transparent mb-0 mail-inbox pb-3">
+								<div class="mt-4 mb-4 mx-4 text-center">
+									<a href="email.html" class="btn btn-primary d-grid">Inbox</a>
+								</div>
+								<a href="javascript:void(0);" class="list-group-item d-flex align-items-center active">
+									<span class="icons"><i class="ri-mail-line"></i></span> Inbox <span class="ms-auto badge bg-success">14</span>
+								</a>
+								<a href="javascript:void(0);" class="list-group-item d-flex align-items-center">
+									<span class="icons"><i class="ri-mail-open-line"></i></span> Drafts
+								</a>
+								<a href="javascript:void(0);" class="list-group-item d-flex align-items-center">
+									<span class="icons"><i class="bx bx-alarm-snooze"></i></span> Snoozed
+								</a>
+								<a href="javascript:void(0);" class="list-group-item d-flex align-items-center">
+									<span class="icons"><i class="bx bx-bookmarks"></i></span> Important
+								</a>
+								<a href="javascript:void(0);" class="list-group-item d-flex align-items-center">
+									<span class="icons"><i class="bx bx-message-error"></i></span> Spam
+								</a>
+								<a href="javascript:void(0);" class="list-group-item d-flex align-items-center">
+									<span class="icons"><i class="bx bx-book-content"></i></span>  Contacts 
+								</a>
+								<a href="javascript:void(0);" class="list-group-item d-flex align-items-center">
+									<span class="icons"><i class="ri-star-line"></i></span> Starred <span class="ms-auto badge bg-danger">03</span>
+								</a>
+								<a href="javascript:void(0);" class="list-group-item d-flex align-items-center">
+									<span class="icons"><i class="ri-mail-send-line"></i></span> Sent Mail
+								</a>
+								<a href="javascript:void(0);" class="list-group-item d-flex align-items-center">
+									<span class="icons"><i class="ri-price-tag-3-line"></i></span> Tags
+								</a>
+								<a href="javascript:void(0);" class="list-group-item d-flex align-items-center">
+									<span class="icons"><i class="ri-delete-bin-line"></i></span> Trash
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-8 col-xl-9 col-md-12 col-sm-12">
+						<div class="card custom-card">
+							<div class="card-header">
+								<h3 class="card-title">Compose new message</h3>
+							</div>
+							<div class="card-body">
+								<form >
+									<div class="form-group mb-3">
+										<div class="row align-items-center">
+											<label class="col-sm-3 col-xl-12 form-label">To:</label>
+											<div class="col-sm-9 col-xl-12">
+												<input type="text" class="form-control">
+											</div>
+										</div>
+									</div>
+									<div class="form-group mb-3">
+										<div class="row align-items-center">
+											<label class="col-sm-3 col-xl-12 form-label">Subject:</label>
+											<div class="col-sm-9 col-xl-12">
+												<input type="text" class="form-control">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row ">
+											<label class="col-sm-3 col-xl-12 form-label">Message:</label>
+											<div class="col-sm-9 col-xl-12">
+												<textarea rows="10" class="form-control"></textarea>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="card-footer d-sm-flex">
+								<div class="my-auto">
+									<a href="javascript:void(0)" class="btn btn-outline-light me-1" data-bs-toggle="tooltip" title="" data-bs-original-title="Attach"><span class="ri-attachment-2 "></span></a>
+									<a href="javascript:void(0)" class="btn btn-outline-light me-1" data-bs-toggle="tooltip" title="" data-bs-original-title="Link"><span class="ri-link"></span></a>
+									<a href="javascript:void(0)" class="btn btn-outline-light me-1" data-bs-toggle="tooltip" title="" data-bs-original-title="Photos"><span class="ri-image-line"></span></a>
+									<a href="javascript:void(0)" class="btn btn-outline-light me-1" data-bs-toggle="tooltip" title="" data-bs-original-title="Delete"><span class="ri-delete-bin-line"></span></a>
+								</div>
+								<div class="btn-list ms-auto my-1">
+									<button  class="btn btn-danger btn-space">Cancel</button>
+									<button  class="btn btn-primary btn-space">Send message</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/side-bar.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

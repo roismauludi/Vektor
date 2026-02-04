@@ -1,0 +1,416 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Marketing  Dashboard", "subtitle": 'Home'})
+
+                
+                <!-- START ROW-1 -->
+                <div class="row">
+                    <div class="col-sm-6 col-lg-6 col-xl-3">
+                        <div class="card custom-card text-center">
+                            <div class="card-body">
+                                <h6 class="mb-3">Total Maintenance cost</h6>
+                                <h3 class="mb-2 text-dark fw-bold"><i class="ti-gift text-primary me-2 fs-25"></i> $25K</h3>
+                                <p class="mb-0 text-muted">
+                                    <span class="text-success"><i class="fa fa-chevron-circle-up text-success ms-1"></i> 1.6%</span>
+                                    last month
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-6 col-xl-3">
+                        <div class="card custom-card text-center">
+                            <div class="card-body">
+                                <h6 class="mb-3">Total Return on Assets</h6>
+                                <h3 class="mb-2 text-dark fw-bold"><i class="ti-tag text-secondary me-2"></i> 46.12%</h3>
+                                <p class="mb-0 text-muted">
+                                    <span class="text-danger"><i class="fa fa-chevron-circle-down text-danger ms-1"></i> 0.5%</span>
+                                    last month
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-6 col-xl-3">
+                        <div class="card custom-card text-center">
+                            <div class="card-body">
+                                <h6 class="mb-3">Total Assets Trunover</h6>
+                                <h3 class="mb-2 text-dark fw-bold"><i class="ti-reload text-danger me-2 fs-24"></i> 5.78%</h3>
+                                <p class="mb-0 text-muted">
+                                    <span class="text-success"><i class="fa fa-chevron-circle-up text-success ms-1"></i> 1.2%</span>
+                                    last month
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-6 col-xl-3">
+                        <div class="card custom-card text-center">
+                            <div class="card-body">
+                                <h6 class="mb-3">Total unit Cost</h6>
+                                <h3 class="mb-2 text-dark fw-bold"><i class="ti-medall-alt text-warning me-2"></i> $356K</h3>
+                                <p class="mb-0 text-muted">
+                                    <span class="text-danger"><i class="fa fa-chevron-circle-down text-danger ms-1"></i> 0.8%</span>
+                                    last month
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END ROW-1 -->
+
+                    <!-- START ROW-2 -->
+                <div class="row">
+                    <div class="col-md-12 col-xl-8 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div class="card-title">Return Items by Reasons Yearly</div>
+                                <button type="button" class="btn btn-sm btn-primary text-wrap">View All</button>
+                            </div>
+                            <div class="card-body">
+                                <div id="retunchart" class="h-300"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-xl-4 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <div class="card-title">Production quick stats</div>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="d-flex">
+                                            <div>
+                                                <p class="card-text mb-3">Production Volume</p>
+                                                <h4 class="mb-0 fw-semibold">75,789</h4>
+                                            </div>
+                                            <div class="ms-auto my-auto">
+                                                <div id="sparkline-1"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="d-flex">
+                                            <div>
+                                                <p class="card-text mb-3">Quantity Ordered</p>
+                                                <h4 class="mb-0 fw-semibold">45,789</h4>
+                                            </div>
+                                            <div class="ms-auto my-auto">
+                                                <div id="sparkline-2"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="d-flex">
+                                            <div>
+                                                <p class="card-text mb-3">Active Machines</p>
+                                                <h4 class="mb-0 fw-semibold">135</h4>
+                                            </div>
+                                            <div class="ms-auto my-auto">
+                                                <div id="sparkline-3"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="d-flex">
+                                            <div>
+                                                <p class="card-text mb-3">Sales Revenue</p>
+                                                <h4 class="mb-0 fw-semibold">2.56M</h4>
+                                            </div>
+                                            <div class="ms-auto my-auto">
+                                                <div id="sparkline-4"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END ROW-2 -->
+                
+                <!-- START ROW-3 -->
+                <div class="row">
+                    <div class="col-md-12 col-xl-6 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <div class="card-title">Production Volume by Top Machines</div>
+                            </div>
+                            <div class="card-body pb-0">
+                                <div id="machines" class="chartsh"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <div class="card-title">Monthly Work Load on Machines</div>
+                            </div>
+                            <div class="card-body p-0">
+                                <ul class="list-group Work-load">
+                                    <li class="list-group-item border-0">
+                                        <p class="mb-2">Machines1<span class="float-end fw-semibold">80%<i class="bi bi-arrow-up-short text-success"></i></span></p>
+                                        <div class="progress h-2">
+                                            <div class="progress-bar bg-primary w-80 " role="progressbar"></div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0">
+                                        <p class="mb-2">Machines2<span class="float-end fw-semibold">50%<i class="bi bi-arrow-down-short text-danger"></i></span></p>
+                                        <div class="progress h-2">
+                                            <div class="progress-bar bg-secondary w-50 " role="progressbar"></div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0">
+                                        <p class="mb-2">Machines3<span class="float-end fw-semibold">60%<i class="bi bi-arrow-up-short text-success"></i></span></p>
+                                        <div class="progress h-2">
+                                            <div class="progress-bar bg-danger w-60 " role="progressbar"></div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0">
+                                        <p class="mb-2">Machines4<span class="float-end fw-semibold">40%<i class="bi bi-arrow-up-short text-success"></i></span></p>
+                                        <div class="progress h-2">
+                                            <div class="progress-bar bg-warning w-40 " role="progressbar"></div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0">
+                                        <p class="mb-2">Machines5<span class="float-end fw-semibold">50%<i class="bi bi-arrow-up-short text-success"></i></span></p>
+                                        <div class="progress h-2">
+                                            <div class="progress-bar bg-info w-50 " role="progressbar"></div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 pb-3">
+                                        <p class="mb-2">Machines6<span class="float-end fw-semibold">70%<i class="bi bi-arrow-down-short text-danger"></i></span></p>
+                                        <div class="progress h-2">
+                                            <div class="progress-bar bg-success w-70 " role="progressbar"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between">
+                                <div class="card-title">Transactions</div>
+                                <div class="dropdown ms-auto">
+                                    <button class="btn btn-outline-default btn-sm fw-bold text-primary fs-12 d-flex align-items-center dropdown-toggle"
+                                        type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                        aria-expanded="false">Weekly
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Monthly</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Daily</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <ul class="list-group transactions">
+                                    <li class="list-group-item mb-2  border-0">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <span class="avatar avatar-md rounded-circle bg-primary">D</span>
+                                                <div class="flex-grow-1 ms-3 lh-1">
+                                                    <p class="mb-1 fw-medium fs-14">Dordon Matey</p>
+                                                    <span class="mb-0 fs-12 text-muted">10-Apr-2020</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <span class="badge bg-primary-transparent">$446</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item mb-2 border-0">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <span class="avatar avatar-md rounded-circle bg-secondary">A</span>
+                                                <div class="flex-grow-1 ms-3 lh-1">
+                                                    <p class="mb-1 fw-medium fs-14">Albert Med</p>
+                                                    <span class="mb-0 fs-12 text-muted">08-Apr-2020</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <span class="badge bg-secondary-transparent">$20.42</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item mb-2 border-0">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <span class="avatar avatar-md rounded-circle bg-danger">H</span>
+                                                <div class="flex-grow-1 ms-3 lh-1">
+                                                    <p class="mb-1 fw-medium fs-14">Historia</p>
+                                                    <span class="mb-0 fs-12 text-muted">06-Apr-2020</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <span class="badge bg-danger-transparent">$102.05</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item mb-2 border-0">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <span class="avatar avatar-md rounded-circle bg-warning">R</span>
+                                                <div class="flex-grow-1 ms-3 lh-1">
+                                                    <p class="mb-1 fw-medium fs-14">Robert Ali</p>
+                                                    <span class="mb-0 fs-12 text-muted">04-Apr-2020</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <span class="badge bg-warning-transparent">$90.05</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <span class="avatar avatar-md rounded-circle bg-success">R</span>
+                                                <div class="flex-grow-1 ms-3 lh-1">
+                                                    <p class="mb-1 fw-medium fs-14">Willson</p>
+                                                    <span class="mb-0 fs-12 text-muted">02-Apr-2020</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <span class="badge bg-success-transparent">$26.24</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END ROW-3 -->
+                
+                <!-- START ROW-4 -->
+                <div class="row">
+                    <div class="col-md-12 col-xl-12 col-lg-12">
+                        <div class="card custom-card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div class="card-title">Overview of Products List</div>
+                                <button class="btn btn-sm btn-primary text-wrap" type="button">Download Report <i class="bi bi-download ms-1"></i></button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table card-table table-bordered table-vcenter text-dark text-nowrap mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Product ID</th>
+                                                <th>Product</th>
+                                                <th>Product Cost</th>
+                                                <th>Total</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#P56756</td>
+                                                <td>Mi LED Smart TV 4A 80</td>
+                                                <td>$14,500</td>
+                                                <td>2,977</td>
+                                                <td><span class="badge bg-success">Available</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>#P23976</td>
+                                                <td>Thomson R9 122cm (48 inch) Full HD LED TV </td>
+                                                <td>$30,000</td>
+                                                <td>678</td>
+                                                <td><span class="badge bg-primary">Limited</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>#P18556</td>
+                                                <td>Vu 80cm (32 inch) HD Ready LED TV</td>
+                                                <td>$13,200</td>
+                                                <td>4,922</td>
+                                                <td><span class="badge bg-warning">Avilable</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>#P39276</td>
+                                                <td>Micromax 81cm (32 inch) HD Ready LED TV</td>
+                                                <td>$15,100</td>
+                                                <td>1,234</td>
+                                                <td><span class="badge bg-secondary">Limited</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>#P72963</td>
+                                                <td>HP 200 Mouse &amp; Wireless Laptop Keyboard </td>
+                                                <td>$5,987</td>
+                                                <td>4,789</td>
+                                                <td><span class="badge bg-danger">No Stock</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>P48263</td>
+                                                <td>Digisol DG-HR3400 Router </td>
+                                                <td>$11,987</td>
+                                                <td>938</td>
+                                                <td><span class="badge bg-success">Limited</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>#P63973</td>
+                                                <td>Dell WM118 Wireless Optical Mouse</td>
+                                                <td>$4,700</td>
+                                                <td>5,876</td>
+                                                <td><span class="badge bg-secondary">Available</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>#P62917</td>
+                                                <td>Digisol DG-HR3400 Router </td>
+                                                <td>$11,987</td>
+                                                <td>938</td>
+                                                <td><span class="badge bg-success">Limited</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>#P42591</td>
+                                                <td>Dell WM118 Wireless Optical Mouse</td>
+                                                <td>$4,700</td>
+                                                <td>5,876</td>
+                                                <td><span class="badge bg-secondary">Available</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END ROW-4 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/side-bar.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Ecommerce-Dashboard JS -->
+    <script src="../assets/js/index-1.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

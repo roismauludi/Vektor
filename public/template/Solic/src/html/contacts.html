@@ -1,0 +1,798 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                <!-- Start::row-1 -->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card custom-card mt-4">
+                            <div class="card-body">
+                                <div class="contact-header">
+                                    <div class="d-sm-flex d-block align-items-center justify-content-between">
+                                        <div class="h5 fw-medium mb-0">Contacts</div>
+                                        <div class="d-flex mt-sm-0 mt-2 align-items-center">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control bg-light border-0" placeholder="Search Contact" aria-describedby="search-contact-member">
+                                                <button class="btn btn-light" type="button" id="search-contact-member"><i class="ri-search-line text-muted"></i></button>
+                                            </div>
+                                            <div class="dropdown ms-2">
+                                                <button class="btn btn-icon btn-primary-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="ti ti-dots-vertical"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="javascript:void(0);">Delete All</a></li>
+                                                    <li><a class="dropdown-item" href="javascript:void(0);">Copy All</a></li>
+                                                    <li><a class="dropdown-item" href="javascript:void(0);">Move To</a></li>
+                                                </ul>
+                                            </div>
+                                            <button class="btn btn-icon btn-secondary-light ms-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add Contact"><i class="ri-add-line"></i></button>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-danger"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/4.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Melissa Jane
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">melissajane2134@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-danger"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/1.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Simon Cowall
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">simoncowal111@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-danger"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/2.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Susana Sane
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">susanasane@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-danger"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/3.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Sahne Watson
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">shanewatson@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-danger"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/4.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Dwayne Happy
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">dwaynehappy235@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-danger"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/5.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Meisha Tite
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">meishatite456@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-danger"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/6.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Andrew Gerfield
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">andrewgerfield00@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-muted"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/7.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Samantha Melon
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">andrewgerfield00@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-danger"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/8.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Elisha Smith
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">elishasmith@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-danger"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/9.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Devon Convoy
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">devonconvoy65@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-danger"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl bg-primary">
+                                            JS
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Shensovic Jeremy
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">shensovicjeremy@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-muted"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/10.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Jason Mama
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">jasonmama96@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-muted"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/11.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Monika Karen
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">monikakaren@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-danger"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/12.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Tom Holland
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">tomholland98@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-danger"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/13.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Anelica Julie
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">angelicajulie@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-muted"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/14.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Aneera Khan
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">aneerakhan@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-danger"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/13.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Linda Simson
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">lindasimson@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-2 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="card custom-card">
+                            <div class="card-body">
+                                <div class="text-center align-items-top ">
+                                    <div class="d-flex justify-content-between">
+                                        <button aria-label="button" class="btn btn-sm btn-icon btn-light" type="button">
+                                            <i class="ri-heart-3-fill text-muted"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-icon btn-light btn-wave" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-share-line me-2 align-middle d-inline-block"></i>Share</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-phone-line me-2 align-middle d-inline-block"></i>Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-chat-2-line me-2 align-middle d-inline-block"></i>Message</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-video-chat-line me-2 align-middle d-inline-block"></i>Video Call</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);"><i class="ri-delete-bin-5-line me-2 align-middle d-inline-block"></i>Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="">
+                                        <div class="avatar avatar-xl">
+                                            <img src="../assets/images/faces/14.jpg" alt="">
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1 fw-medium">
+                                                Umaga Nigel
+                                            </h6>
+                                            <p class="mb-1 text-muted contact-mail text-truncate">umaganigel89@gmail.com</p>
+                                            <p class="fw-medium fs-11 mb-0 text-primary">
+                                                +1(555) 354 2345
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-primary-transparent mt-1">
+                                        View Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item disabled"><a class="page-link" href="javascript:void(0);">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/side-bar.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

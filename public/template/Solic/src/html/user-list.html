@@ -1,0 +1,506 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "User-list", "subtitle": 'Advanced Ui'})
+
+                <!-- Start::row-1 -->
+				<div class="row">
+					<div class="col-lg-4 col-xl-3">
+						<div class="card border p-0 shadow-none">
+							<div class="d-flex align-items-center flex-wrap p-3">
+								<div class="main-img-user avatar avatar-xxl avatar-status"> <img alt="avatar" class="rounded-circle avatar avatar-xxl" src="../assets/images/faces/12.jpg"> </div>
+								<div class="wrapper ms-3">
+									<p class="mb-0 mt-1  font-weight-semibold">MARIANE GALEON</p>
+									<small class="text-muted">Administrator</small>
+								</div>
+								<div class="float-end ms-auto">
+									<a href="javascript:void(0);" class="option-dots"
+										data-bs-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false"><i
+											class="fe fe-more-vertical fs-18"></i></a>
+									<div class="dropdown-menu dropdown-menu-start">
+										<a class="dropdown-item d-flex mt-1"
+											href="javascript:void(0);"><i
+												class="fe fe-edit me-2"></i> View
+											Profile</a>
+										<a class="dropdown-item d-flex mt-1"
+											href="javascript:void(0);"><i
+												class="fe fe-trash me-2"></i> Edit</a>
+										<a class="dropdown-item d-flex mt-1"
+											href="javascript:void(0);"><i
+												class="fe fe-edit me-2"></i> Message</a>
+										<a class="dropdown-item d-flex mt-1"
+											href="javascript:void(0);"><i
+												class="fe fe-trash me-2"></i> Delete</a>
+									</div>
+								</div>
+							</div>
+							<div class="card-body border-top">
+								<p class="mb-5">Duis aute irure dolor in reprehrighterit
+									in
+									voluptate velit esse cillum dolore eu fugiat nulla
+									pariatur</p>
+								<div class="mb-0 user-details">
+									<div class="mb-4">
+										<span class=""><i class="fe fe-mail p-2 bg-warning-transparent text-warning border-warning rounded-circle me-3 d-inline-flex"></i></span>
+										<span class="fs-14 fw-medium">collinbridg@gmail.com</span>
+									</div>
+									<div class="mb-4">
+										<span class=""><i class="fe fe-map-pin p-2 bg-secondary-transparent text-secondary border-secondary rounded-circle me-3 d-inline-flex"></i></span>
+										<span class="fs-14 fw-medium">England, UK</span>
+									</div>
+									<div>
+										<span class=""><i class="fe fe-phone-call p-2 bg-success-transparent text-success border-success rounded-circle me-3 d-inline-flex"></i></span>
+										<span class="fs-14 fw-medium">+345 657 567</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card custom-card">
+							<div class="card-header">
+								<h3 class="card-title">Team</h3>
+							</div>
+							<div class="card-body o-auto team">
+								<ul class="list-unstyled list-separated mb-0">
+									<li class="list-separated-item">
+										<div class="d-flex mb-3">
+											<div>
+												<span class="">
+													<img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/5.jpg">
+												</span>
+											</div>
+											<div class="flex-grow-1 ms-2">
+												<a href="javascript:void(0)" class="text-inherit">Anna White</a>
+												<small class="d-block item-except text-sm text-muted h-1x">annawhite@info.com</small>
+											</div>
+											<div class="ms-auto">
+												<div class="item-action dropdown">
+													<a href="javascript:void(0)" data-bs-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+													<div class="dropdown-menu dropdown-menu-right">
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
+														<div class="dropdown-divider"></div>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="list-separated-item">
+										<div class="d-flex mb-3">
+											<div>
+												<span class="">
+													<img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/1.jpg">
+												</span>
+											</div>
+											<div class="flex-grow-1 ms-2">
+												<a href="javascript:void(0)" class="text-inherit">Karen	Miller</a>
+												<small class="d-block item-except text-sm text-muted h-1x">karen@example.com</small>
+											</div>
+											<div class="ms-auto">
+												<div class="item-action dropdown">
+													<a href="javascript:void(0)" data-bs-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+													<div class="dropdown-menu dropdown-menu-right">
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
+														<div class="dropdown-divider"></div>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="list-separated-item">
+										<div class="d-flex mb-3">
+											<div>
+												<span class="">
+													<img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/1.jpg">
+												</span>
+											</div>
+											<div class="flex-grow-1 ms-2">
+												<a href="javascript:void(0)" class="text-inherit">Nicola Powell</a>
+												<small class="d-block item-except text-sm text-muted h-1x">lapowell@info.com</small>
+											</div>
+											<div class="ms-auto">
+												<div class="item-action dropdown">
+													<a href="javascript:void(0)" data-bs-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+													<div class="dropdown-menu dropdown-menu-right">
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
+														<div class="dropdown-divider"></div>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="list-separated-item">
+										<div class="d-flex mb-3">
+											<div>
+												<span class="">
+													<img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/7.jpg">
+												</span>
+											</div>
+											<div class="flex-grow-1 ms-2">
+												<a href="javascript:void(0)" class="text-inherit">Nathan Payne</a>
+												<small class="d-block item-except text-sm text-muted h-1x">nathan765@info.com</small>
+											</div>
+											<div class="ms-auto">
+												<div class="item-action dropdown">
+													<a href="javascript:void(0)" data-bs-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+													<div class="dropdown-menu dropdown-menu-right">
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
+														<div class="dropdown-divider"></div>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="list-separated-item">
+										<div class="d-flex mb-3">
+											<div>
+												<span class="">
+													<img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/4.jpg">
+												</span>
+											</div>
+											<div class="flex-grow-1 ms-2">
+												<a href="javascript:void(0)" class="text-inherit">Jacob	Slater</a>
+												<small class="d-block item-except text-sm text-muted h-1x">jacob567@info.com</small>
+											</div>
+											<div class="ms-auto">
+												<div class="item-action dropdown">
+													<a href="javascript:void(0)" data-bs-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+													<div class="dropdown-menu dropdown-menu-right">
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
+														<div class="dropdown-divider"></div>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="list-separated-item">
+										<div class="d-flex">
+											<div>
+												<span class="">
+													<img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/1.jpg">
+												</span>
+											</div>
+											<div class="flex-grow-1 ms-2">
+												<a href="javascript:void(0)" class="text-inherit">Victor Blake</a>
+												<small class="d-block item-except text-sm text-muted h-1x">victor_1@info.com</small>
+											</div>
+											<div class="ms-auto">
+												<div class="item-action dropdown">
+													<a href="javascript:void(0)" data-bs-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+													<div class="dropdown-menu dropdown-menu-right">
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-tag"></i> Action </a>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Another action </a>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-message-square"></i> Something else here</a>
+														<div class="dropdown-divider"></div>
+														<a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-link"></i> Separated link</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div><!-- COL-END -->
+					<div class="col-lg-8 col-xl-9">
+						<div class="input-group mb-5">
+							<input type="text" class="form-control" placeholder="search here...">
+							<button type="button" class="btn btn-secondary mb-0">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</button>
+						</div>
+						<div class="card  custom-card border-0">
+							<div class="card-header border border-bottom-0 p-4 d-flex justify-content-between align-items-center">
+								<h2 class="card-title">1 - 30 of 546 users</h2>
+								<button type="button" class="btn btn-outline-light dropdown-toggle btn-s"
+									data-bs-toggle="dropdown" aria-expanded="false">
+									Latest
+								</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="javascript:void(0);">Oldest</a></li>
+									<li><a class="dropdown-item" href="javascript:void(0);">Latest</a></li>
+								</ul>
+							</div>
+							<div class="e-table">
+								<div class="table-responsive table-lg">
+									<table class="table table-bordered mb-0 text-dark">
+										<thead>
+											<tr>
+												<th  class="text-center">
+													<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+														<input class="form-check-input ms-2" type="checkbox" value="" checked="">
+													</div>
+												</th>
+												<th class="text-center">Photo</th>
+												<th >Name</th>
+												<th>Date</th>
+												<th class="text-center">Actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="align-middle text-center">
+													<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+														<input class="form-check-input ms-2" type="checkbox" value="">
+													</div>
+												</td>
+												<td class="align-middle text-center"><img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/6.jpg"></td>
+												<td class="text-nowrap align-middle">Adam Cotter</td>
+												<td class="text-nowrap align-middle"><span>09 Dec 2017</span></td>
+
+												<td class="text-center align-middle">
+													<div class="btn-group align-top">
+														<button class="btn btn-sm btn-primary badge" type="button">Edit</button> <button class="btn btn-sm btn-primary badge" type="button"><i class="fa fa-trash"></i></button>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="align-middle text-center">
+													<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+														<input class="form-check-input ms-2" type="checkbox" value="">
+													</div>
+												</td>
+												<td class="align-middle text-center">
+													<img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/5.jpg">
+												</td>
+												<td class="text-nowrap align-middle">Pauline Noble</td>
+												<td class="text-nowrap align-middle"><span>26 Jan 2018</span></td>
+
+												<td class="text-center align-middle">
+													<div class="btn-group align-top">
+														<button class="btn btn-sm btn-primary badge" type="button">Edit</button> <button class="btn btn-sm btn-primary badge" type="button"><i class="fa fa-trash"></i></button>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="align-middle text-center">
+													<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+														<input class="form-check-input ms-2" type="checkbox" value="">
+													</div>
+												</td>
+												<td class="align-middle text-center"><img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/4.jpg"></td>
+												<td class="text-nowrap align-middle">Sherilyn Metzel</td>
+												<td class="text-nowrap align-middle"><span>27 Jan 2018</span></td>
+
+												<td class="text-center align-middle">
+													<div class="btn-group align-top">
+														<button class="btn btn-sm btn-primary badge" type="button">Edit</button> <button class="btn btn-sm btn-primary badge" type="button"><i class="fa fa-trash"></i></button>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="align-middle text-center">
+													<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+														<input class="form-check-input ms-2" type="checkbox" value="">
+													</div>
+												</td>
+												<td class="align-middle text-center"><img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/3.jpg"></td>
+												<td class="text-nowrap align-middle">Terrie Boaler</td>
+												<td class="text-nowrap align-middle"><span>20 Jan 2018</span></td>
+
+												<td class="text-center align-middle">
+													<div class="btn-group align-top">
+														<button class="btn btn-sm btn-primary badge" type="button">Edit</button> <button class="btn btn-sm btn-primary badge" type="button"><i class="fa fa-trash"></i></button>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="align-middle text-center">
+													<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+														<input class="form-check-input ms-2" type="checkbox" value="">
+													</div>
+												</td>
+												<td class="align-middle text-center"><img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/2.jpg"></td>
+												<td class="text-nowrap align-middle">Rutter Pude</td>
+												<td class="text-nowrap align-middle"><span>13 Jan 2018</span></td>
+
+												<td class="text-center align-middle">
+													<div class="btn-group align-top">
+														<button class="btn btn-sm btn-primary badge" type="button">Edit</button> <button class="btn btn-sm btn-primary  badge" type="button"><i class="fa fa-trash"></i></button>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="align-middle text-center">
+													<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+														<input class="form-check-input ms-2" type="checkbox" value="">
+													</div>
+												</td>
+												<td class="align-middle text-center"><img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/1.jpg"></td>
+												<td class="text-nowrap align-middle">Clifford Benjamin</td>
+												<td class="text-nowrap align-middle"><span>25 Jan 2018</span></td>
+
+												<td class="text-center align-middle">
+													<div class="btn-group align-top">
+														<button class="btn btn-sm btn-primary badge" type="button">Edit</button> <button class="btn btn-sm btn-primary badge" type="button"><i class="fa fa-trash"></i></button>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="align-middle text-center">
+													<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+														<input class="form-check-input ms-2" type="checkbox" value="">
+													</div>
+												</td>
+												<td class="align-middle text-center"><img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/7.jpg"></td>
+												<td class="text-nowrap align-middle">Thedric Romans</td>
+												<td class="text-nowrap align-middle"><span>12 Jan 2018</span></td>
+
+												<td class="text-center align-middle">
+													<div class="btn-group align-top">
+														<button class="btn btn-sm btn-primary badge" type="button">Edit</button> <button class="btn btn-sm btn-primary badge" type="button"><i class="fa fa-trash"></i></button>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="align-middle text-center">
+													<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+														<input class="form-check-input ms-2" type="checkbox" value="">
+													</div>
+												</td>
+												<td class="align-middle text-center"><img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/8.jpg"></td>
+												<td class="text-nowrap align-middle">Haily Carthew</td>
+												<td class="text-nowrap align-middle"><span>27 Jan 2018</span></td>
+
+												<td class="text-center align-middle">
+													<div class="btn-group align-top">
+														<button class="btn btn-sm btn-primary badge" type="button">Edit</button> <button class="btn btn-sm btn-primary badge" type="button"><i class="fa fa-trash"></i></button>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="align-middle text-center">
+													<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+														<input class="form-check-input ms-2" type="checkbox" value="">
+													</div>
+												</td>
+												<td class="align-middle text-center"><img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/9.jpg"></td>
+												<td class="text-nowrap align-middle">Dorothea Joicey</td>
+												<td class="text-nowrap align-middle"><span>12 Dec 2017</span></td>
+
+												<td class="text-center align-middle">
+													<div class="btn-group align-top">
+														<button class="btn btn-sm btn-primary badge" type="button">Edit</button> <button class="btn btn-sm btn-primary badge" type="button"><i class="fa fa-trash"></i></button>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="align-middle text-center">
+													<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+														<input class="form-check-input ms-2" type="checkbox" value="">
+													</div>
+												</td>
+												<td class="align-middle text-center"><img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/10.jpg"></td>
+												<td class="text-nowrap align-middle">Mikaela Pinel</td>
+												<td class="text-nowrap align-middle"><span>10 Dec 2017</span></td>
+
+												<td class="text-center align-middle">
+													<div class="btn-group align-top">
+														<button class="btn btn-sm btn-primary badge" type="button">Edit</button> <button class="btn btn-sm btn-primary badge" type="button"><i class="fa fa-trash"></i></button>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="align-middle text-center">
+													<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+														<input class="form-check-input ms-2" type="checkbox" value="">
+													</div>
+												</td>
+												<td class="align-middle text-center"><img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/11.jpg"></td>
+												<td class="text-nowrap align-middle">Donnell Farries</td>
+												<td class="text-nowrap align-middle"><span>03 Dec 2017</span></td>
+
+												<td class="text-center align-middle">
+													<div class="btn-group align-top">
+														<button class="btn btn-sm btn-primary badge" type="button">Edit</button> <button class="btn btn-sm btn-primary badge" type="button"><i class="fa fa-trash"></i></button>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="align-middle text-center">
+													<div class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+														<input class="form-check-input ms-2" type="checkbox" value="">
+													</div>
+												</td>
+												<td class="align-middle text-center"><img alt="image" class="avatar avatar-md rounded-circle" src="../assets/images/faces/6.jpg"></td>
+												<td class="text-nowrap align-middle">Letizia Puncher</td>
+												<td class="text-nowrap align-middle"><span>09 Dec 2017</span></td>
+
+												<td class="text-center align-middle">
+													<div class="btn-group align-top">
+														<button class="btn btn-sm btn-primary badge" type="button">Edit</button> <button class="btn btn-sm btn-primary badge" type="button"><i class="fa fa-trash"></i></button>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div>
+							<ul class="pagination float-end mb-5">
+								<li class="page-item page-prev disabled">
+									<a class="page-link" href="javascript:void(0);" tabindex="-1">Prev</a>
+								</li>
+								<li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+								<li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+								<li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+								<li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
+								<li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
+								<li class="page-item page-next">
+									<a class="page-link" href="javascript:void(0);">Next</a>
+								</li>
+							</ul>
+						</div>
+					</div><!-- COL-END -->
+				</div>
+                <!--End::row-1 -->
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/side-bar.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

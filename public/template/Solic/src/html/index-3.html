@@ -1,0 +1,445 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Retail  Dashboard", "subtitle": 'Home'})
+
+                <!-- START ROW-1 -->
+				<div class="row">
+					<div class="col-sm-6 col-lg-6 col-xl-3">
+						<div class="card custom-card overflow-hidden">
+							<div class="card-body">
+								<div class="d-flex">
+									<div>
+										<h6 class="mb-3">Total Sales</h6>
+										<h4 class="fw-semibold mb-0">658 <span class="text-primary fs-12"><i class="ri-arrow-down-s-fill"></i>1.05%<i class="ri-arrow-down-line text-primary ms-1"></i></span></h4>
+									</div>
+									<div class="avatar avatar-lg bg-primary-transparent br-4 ms-auto my-auto">
+										<i class="ri-truck-line fs-20"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-lg-6 col-xl-3">
+						<div class="card custom-card overflow-hidden">
+							<div class="card-body">
+								<div class="d-flex">
+									<div>
+										<h6 class="mb-3">Total Brands</h6>
+										<h4 class="fw-semibold mb-0">224 <span class="text-secondary fs-12"><i class="ri-arrow-down-s-fill"></i>0.40%<i class="ri-arrow-up-line text-secondary ms-1"></i></span></h4>
+									</div>
+									<div class="avatar avatar-lg bg-secondary-transparent ms-auto br-4 my-auto">
+										<i class="ri-building-3-line fs-20"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-lg-6 col-xl-3">
+						<div class="card custom-card overflow-hidden">
+							<div class="card-body">
+								<div class="d-flex">
+									<div>
+										<h6 class="mb-3">Total Revenue</h6>
+										<h4 class="fw-semibold mb-0">80% <span class="text-danger fs-12"><i class="ri-arrow-down-s-fill"></i>0.8%<i class="ri-arrow-down-line text-danger ms-1"></i></span></h4>
+									</div>
+									<div class="avatar avatar-lg bg-danger-transparent ms-auto br-4 my-auto">
+										<i class="ri-bar-chart-grouped-line fs-20"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-lg-6 col-xl-3">
+						<div class="card custom-card overflow-hidden">
+							<div class="card-body">
+								<div class="d-flex">
+									<div>
+										<h6 class="mb-3">Total Unit Sold</h6>
+										<h4 class="fw-semibold mb-0">64 <span class="text-warning fs-12 d-inline-flex align-items-center"><i class="ri-arrow-down-s-fill"></i>0.2%<i class="ri-arrow-up-line text-warning ms-1"></i></span></h4>
+									</div>
+									<div class="avatar avatar-lg bg-warning-transparent ms-auto br-4 my-auto">
+										<i class="ri-trello-line fs-20"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END ROW-1 -->
+
+				<!-- START ROW-2 -->
+				<div class="row">
+					<div class="col-xl-9 col-md-12 col-lg-12">
+						<div class="card custom-card">
+							<div class="card-header d-flex justify-content-between align-items-center">
+								<div class="card-title">Monthly Orders Statistics</div>
+								<button type="button" class="btn btn-sm btn-primary text-wrap d-inline-flex align-items-center"><i class="ri-download-2-line me-1"></i>Download</button>
+							</div>
+							<div class="card-body">
+								<div class="row text-start">
+									<div class="col-sm-3">
+										<div class="d-flex">
+											<div class="avatar avatar-md rounded-circle bg-primary-transparent">
+												<i class="fa fa-cart-plus fa-stack-1x text-primary"></i>
+											</div>
+											<div class="flex-grow-1 ms-3">
+												<p class="mb-0 fw-semibold">Total Orders</p>
+												<h5 class="fw-bold text-dark mb-0">578</h5>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="d-flex">
+											<div class="avatar avatar-md rounded-circle bg-secondary-transparent">
+												<i class="fa fa-dropbox fa-stack-1x text-secondary"></i>
+											</div>
+											<div class="flex-grow-1 ms-3">
+												<p class="mb-0 fw-semibold">Avg Orders per Customer</p>
+												<h5 class="fw-bold text-dark mb-0">5.79</h5>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="total-orders"></div>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-12 col-lg-12">
+						<div class="card custom-card">
+							<div class="card-header">
+								<div class="card-title">Sales By Category</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="card-body p-1 ps-3">
+										<div class="d-flex align-items-center">
+											<div>
+												<h6 class="mb-2">Electronics</h6>
+												<h5 class="mb-0 fw-semibold">$5,893</h5>
+											</div>
+											<div class="ms-auto ">
+												<div id="Sales"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12 border-top">
+									<div class="card-body p-1 ps-3">
+										<div class="d-flex align-items-center">
+											<div>
+												<h6 class="mb-2">Toys</h6>
+												<h5 class="mb-0 fw-semibold">$3,412</h5>
+											</div>
+											<div class="ms-auto ">
+												<div id="Toys"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12 border-top">
+									<div class="card-body p-1 ps-3">
+										<div class="d-flex align-items-center">
+											<div>
+												<h6 class="mb-2">Kids Wear</h6>
+												<h5 class="mb-0 fw-semibold">$78.34</h5>
+											</div>
+											<div class="ms-auto ">
+												<div id="Kids"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12 border-top">
+									<div class="card-body p-1 ps-3">
+										<div class="d-flex align-items-center">
+											<div>
+												<h6 class="mb-2">Home Decores</h6>
+												<h5 class="mb-0 fw-semibold">$20.46</h5>
+											</div>
+											<div class="ms-auto">
+												<div id="Decores"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END ROW-2 -->
+
+				<!-- START ROW-3 -->
+				<div class="row">
+					<div class="col-sm-12 col-lg-12 col-xl-4">
+						<div class="card custom-card">
+							<div class="card-header">
+								<div class="card-title">Countrywise Sales</div>
+							</div>
+							<div class="card-body">
+								<div id="country-sales" class="chart-pie"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-lg-12 col-xl-8">
+						<div class="card custom-card">
+							<div class="card-header d-flex justify-content-between">
+								<div class="card-title">Total Customers & Visitors</div>
+								<div class="dropdown ms-auto">
+									<button class="btn btn-outline-default btn-sm fw-bold text-primary fs-12 d-flex align-items-center dropdown-toggle"
+										type="button" id="dropdownMenuButton11" data-bs-toggle="dropdown"
+										aria-expanded="false">Monthly
+									</button>
+									<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton11">
+										<li><a class="dropdown-item" href="javascript:void(0);">Weekly</a></li>
+										<li><a class="dropdown-item" href="javascript:void(0);">Daily</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="card-body">
+								<div id="totalvisitors" class="mb-0 chart-toolbar"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END ROW-3 -->
+
+				<!-- START ROW-4 -->
+				<div class="row">
+					<div class="col-sm-12 col-lg-12 col-xl-8">
+						<div class="card custom-card">
+							<div class="card-header border-bottom-0 d-flex justify-content-between">
+								<div class="card-title">Return Item Reasons</div>
+								<div class="dropdown ms-auto">
+									<button class="btn btn-outline-default btn-sm fw-bold text-primary fs-12 d-flex align-items-center dropdown-toggle"
+										type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+										aria-expanded="false">Daily
+									</button>
+									<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+										<li><a class="dropdown-item" href="javascript:void(0);">Weekly</a></li>
+										<li><a class="dropdown-item" href="javascript:void(0);">Monthly</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="">
+								<div class="table-responsive">
+									<table class="table card-table table-vcenter text-dark mb-0 text-nowrap">
+										<thead class="border">
+											<tr>
+												<th>S.NO</th>
+												<th class="wd-200">Customer</th>
+												<th>Order ID</th>
+												<th>Order Date</th>
+												<th>Order Status</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													01
+												</td>
+												<td>
+													<div class="d-flex text-break me-3">
+														<img src="../assets/images/faces/9.jpg" class="avatar avatar-md rounded-circle cover-image max-width-auto" alt="">
+														<div class="flex-grow-1 ms-2 lh-1">
+															<h6 class="mb-0 fs-14 fw-semibold text-dark">Trevor Thomson</h6>
+															<span class="fs-12 text-muted text-break  text-wrap">emilypoole@gmail.com</span>
+														</div>
+													</div>
+												</td>
+												<td>PRO12345</td>
+												<td>Online Payment</td>
+												<td><span class="badge bg-success">Delivered</span></td>
+											</tr>
+											<tr>
+												<td>
+													02
+												</td>
+												<td>
+													<div class="d-flex text-break me-3">
+														<img src="../assets/images/faces/8.jpg" class="avatar avatar-md rounded-circle cover-image max-width-auto" alt="">
+														<div class="flex-grow-1 ms-2 lh-1">
+															<h6 class="mb-0 fs-14 fw-semibold text-dark">Carl Ball</h6>
+															<span class="fs-12 text-muted text-break  text-wrap">carlball@gmail.com</span>
+														</div>
+													</div>
+												</td>
+												<td>PRO67890</td>
+												<td>Online Payment</td>
+												<td><span class="badge bg-info">Pending</span></td>
+											</tr>
+											<tr>
+												<td>
+													03
+												</td>
+												<td>
+													<div class="d-flex text-break me-3">
+														<img src="../assets/images/faces/7.jpg" class="avatar avatar-md rounded-circle cover-image max-width-auto" alt="">
+														<div class="flex-grow-1 ms-2 lh-1">
+															<h6 class="mb-0 fs-14 fw-semibold text-dark">Sarah Alsop</h6>
+															<span class="fs-12 text-muted text-break  text-wrap">sarahalsop@gmail.com</span>
+														</div>
+													</div>
+												</td>
+												<td>PRO23457</td>
+												<td>Cash on delivered</td>
+												<td><span class="badge bg-warning">Delivering</span></td>
+											</tr>
+											<tr>
+												<td>
+													04
+												</td>
+												<td>
+													<div class="d-flex text-break me-3">
+														<img src="../assets/images/faces/6.jpg" class="avatar avatar-md rounded-circle cover-image max-width-auto" alt="">
+														<div class="flex-grow-1 ms-2 lh-1">
+															<h6 class="mb-0 fs-14 fw-semibold text-dark">Ruth Hart</h6>
+															<span class="fs-12 text-muted text-break  text-wrap">ruthhart@gmail.com</span>
+														</div>
+													</div>
+												</td>
+												<td>PRO94567</td>
+												<td>Online Payment</td>
+												<td><span class="badge bg-danger">Shipped</span></td>
+											</tr>
+											<tr>
+												<td>
+													05
+												</td>
+												<td>
+													<div class="d-flex text-break me-3">
+														<img src="../assets/images/faces/5.jpg" class="avatar avatar-md rounded-circle cover-image max-width-auto" alt="">
+														<div class="flex-grow-1 ms-2 lh-1">
+															<h6 class="mb-0 fs-14 fw-semibold text-dark">Peter Ince</h6>
+															<span class="fs-12 text-muted text-break  text-wrap">peterince@gmail.com</span>
+														</div>
+													</div>
+												</td>
+												<td>PRO56789</td>
+												<td>Cash on delivered</td>
+												<td><span class="badge bg-primary">Add Cart</span></td>
+											</tr>
+											<tr>
+												<td>
+													06
+												</td>
+												<td>
+													<div class="d-flex text-break me-3">
+														<img src="../assets/images/faces/4.jpg" class="avatar avatar-md rounded-circle cover-image max-width-auto" alt="">
+														<div class="flex-grow-1 ms-2 lh-1 ">
+															<h6 class="mb-0 fs-14 fw-semibold text-dark">Sophie Ross</h6>
+															<span class="fs-12 text-muted text-break  text-wrap">sophieross@gmail.com</span>
+														</div>
+													</div>
+												</td>
+												<td>PRO30978</td>
+												<td>Online Payment</td>
+												<td><span class="badge bg-danger">Shipped</span></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-lg-12 col-xl-4">
+						<div class="card  custom-card">
+							<div class="card-header d-flex justify-content-between align-items-center">
+								<div class="card-title">Return Item Reasons</div>
+								<nav class="nav">
+									<div class="dropdown">
+										<a class="text-muted p-0" href="javascript:;" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="ri-more-2-fill"></i></a>
+										<div class="dropdown-menu dropdown-menu-end">
+											<a class="dropdown-item" href="javascript:void(0)">Monthly</a>
+											<a class="dropdown-item" href="javascript:void(0)">Weekly</a>
+											<a class="dropdown-item" href="javascript:void(0)">Yearly</a>
+										</div>
+									</div>
+								</nav>
+							</div>
+							<div class="card-body">
+								<p class="mb-4">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum   atque</p>
+								<div class="mb-4">
+									<p class="mb-2">Defective Items<span class="float-end fw-semibold">90%</span></p>
+									<div class="progress  progress-sm">
+										<div class="progress-bar bg-primary w-70 " role="progressbar"></div>
+									</div>
+								</div>
+								<div class="mb-4">
+									<p class="mb-2">Damaged Items<span class="float-end fw-semibold">70%</span></p>
+									<div class="progress  progress-sm">
+										<div class="progress-bar bg-secondary w-70" role="progressbar"></div>
+									</div>
+								</div>
+								<div class="mb-4">
+									<p class="mb-2">Late Delivery<span class="float-end fw-semibold">80%</span></p>
+									<div class="progress  progress-sm">
+										<div class="progress-bar bg-danger w-80" role="progressbar"></div>
+									</div>
+								</div>
+								<div class="mb-4">
+									<p class="mb-2">Wrong Item Delivered<span class="float-end fw-semibold">50%</span></p>
+									<div class="progress  progress-sm">
+										<div class="progress-bar bg-warning w-50" role="progressbar"></div>
+									</div>
+								</div>
+								<div class="mb-4">
+									<p class="mb-2">Wrong Item Delivered<span class="float-end fw-semibold">50%</span></p>
+									<div class="progress  progress-sm">
+										<div class="progress-bar bg-success w-50" role="progressbar"></div>
+									</div>
+								</div>
+								<div class="mb-0">
+									<p class="mb-2">Item Does Not Fit<span class="float-end fw-semibold">65%</span></p>
+									<div class="progress  progress-sm">
+										<div class="progress-bar bg-info w-65" role="progressbar"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END ROW-4 -->
+
+
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/side-bar.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    <!-- Apex Charts JS -->
+    <script src="../assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Jobs-Dashboard -->
+    <script src="../assets/js/index-3.js"></script>
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>

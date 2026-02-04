@@ -1,0 +1,260 @@
+@SPK@include("partials/mainhead.html")
+
+<!-- Prism CSS -->
+<link rel="stylesheet" href="../assets/libs/prismjs/themes/prism-coy.min.css">
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!--APP-CONTENT START-->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+
+                @SPK@include("partials/page-header.html", {"title": "Collapse", "subtitle": 'Advanced Ui'})
+
+                <!-- Start:: row-1 -->
+                <div class="row">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card custom-card">
+                                <div class="card-header justify-content-between">
+                                    <div class="card-title">
+                                        Example
+                                    </div>
+                                    <div class="prism-toggle">
+                                        <button class="btn btn-sm btn-primary-light">Show Code<i class="ri-code-line ms-2 d-inline-block align-middle"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p class="mb-0">
+                                        <a class="btn btn-primary collapsed mb-2" data-bs-toggle="collapse"
+                                            href="#collapseExample" role="button" aria-expanded="false"
+                                            aria-controls="collapseExample">
+                                            Link with href
+                                        </a>
+                                        <button class="btn btn-secondary collapsed mb-2" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                                            aria-expanded="false" aria-controls="collapseExample">
+                                            Button with data-bs-target
+                                        </button>
+                                    </p>
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="card card-body mb-0">
+                                            Some placeholder content for the collapse component. This panel
+                                            is
+                                            hidden by default but revealed when the user activates the
+                                            relevant
+                                            trigger.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-none border-top-0">
+    <!-- Prism Code -->
+    <pre class="language-html"><code class="language-html">&lt;p class="mb-0"&gt;
+        &lt;a class="btn btn-primary collapsed mb-2" data-bs-toggle="collapse"
+            href="#collapseExample" role="button" aria-expanded="false"
+            aria-controls="collapseExample"&gt;
+            Link with href
+        &lt;/a&gt;
+        &lt;button class="btn btn-secondary collapsed mb-2" type="button"
+            data-bs-toggle="collapse" data-bs-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample"&gt;
+            Button with data-bs-target
+        &lt;/button&gt;
+    &lt;/p&gt;
+    &lt;div class="collapse" id="collapseExample"&gt;
+        &lt;div class="card card-body mb-0"&gt;
+            Some placeholder content for the collapse component. This panel
+            is
+            hidden by default but revealed when the user activates the
+            relevant
+            trigger.
+        &lt;/div&gt;
+    &lt;/div&gt;</code></pre>
+    <!-- Prism Code -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card custom-card">
+                                <div class="card-header justify-content-between">
+                                    <div class="card-title">
+                                        Targets Collapse
+                                    </div>
+                                    <div class="prism-toggle">
+                                        <button class="btn btn-sm btn-primary-light">Show Code<i class="ri-code-line ms-2 d-inline-block align-middle"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p class="mb-0">
+                                        <a class="btn btn-primary mb-2" data-bs-toggle="collapse"
+                                            href="#multiCollapseExample1" role="button" aria-expanded="false"
+                                            aria-controls="multiCollapseExample1">Toggle first element</a>
+                                        <button class="btn btn-success mb-2" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#multiCollapseExample2" aria-expanded="false"
+                                            aria-controls="multiCollapseExample2">Toggle second
+                                            element</button>
+                                        <button class="btn btn-danger mb-2" type="button" data-bs-toggle="collapse"
+                                            data-bs-target=".multi-collapse" aria-expanded="false"
+                                            aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle
+                                            both elements</button>
+                                    </p>
+                                    <div class="row">
+                                        <div class="col m-1">
+                                            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                                <div class="card card-body mb-0">
+                                                    Some placeholder content for the first collapse
+                                                    component of
+                                                    this multi-collapse example. This panel is hidden by
+                                                    default
+                                                    but revealed when the user activates the relevant
+                                                    trigger.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col m-1">
+                                            <div class="collapse multi-collapse" id="multiCollapseExample2">
+                                                <div class="card card-body mb-0">
+                                                    Some placeholder content for the second collapse
+                                                    component
+                                                    of this multi-collapse example. This panel is hidden by
+                                                    default but revealed when the user activates the
+                                                    relevant
+                                                    trigger.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-none border-top-0">
+    <!-- Prism Code -->
+    <pre class="language-html"><code class="language-html">&lt;p class="mb-0"&gt;
+        &lt;a class="btn btn-primary mb-2" data-bs-toggle="collapse"
+            href="#multiCollapseExample1" role="button" aria-expanded="false"
+            aria-controls="multiCollapseExample1"&gt;Toggle first element&lt;/a&gt;
+        &lt;button class="btn btn-success mb-2" type="button" data-bs-toggle="collapse"
+            data-bs-target="#multiCollapseExample2" aria-expanded="false"
+            aria-controls="multiCollapseExample2"&gt;Toggle second
+            element&lt;/button&gt;
+        &lt;button class="btn btn-danger mb-2" type="button" data-bs-toggle="collapse"
+            data-bs-target=".multi-collapse" aria-expanded="false"
+            aria-controls="multiCollapseExample1 multiCollapseExample2"&gt;Toggle
+            both elements&lt;/button&gt;
+    &lt;/p&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="col m-1"&gt;
+            &lt;div class="collapse multi-collapse" id="multiCollapseExample1"&gt;
+                &lt;div class="card card-body mb-0"&gt;
+                    Some placeholder content for the first collapse
+                    component of
+                    this multi-collapse example. This panel is hidden by
+                    default
+                    but revealed when the user activates the relevant
+                    trigger.
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col m-1"&gt;
+            &lt;div class="collapse multi-collapse" id="multiCollapseExample2"&gt;
+                &lt;div class="card card-body mb-0"&gt;
+                    Some placeholder content for the second collapse
+                    component
+                    of this multi-collapse example. This panel is hidden by
+                    default but revealed when the user activates the
+                    relevant
+                    trigger.
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;</code></pre>
+    <!-- Prism Code -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title">Horizontal Collapse</div>
+                                <div class="prism-toggle">
+                                    <button class="btn btn-sm btn-primary-light">Show Code<i class="ri-code-line ms-2 d-inline-block align-middle"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseWidthExample" aria-expanded="false"
+                                        aria-controls="collapseWidthExample">
+                                        Toggle width collapse
+                                    </button>
+                                </p>
+                                <div style="min-height: 120px;">
+                                    <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                                        <div class="card card-body" style="width: 230px;">
+                                            This is some placeholder content for a horizontal collapse. It's
+                                            hidden
+                                            by default and shown when triggered.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer d-none border-top-0">
+<!-- Prism Code -->
+<pre class="language-html"><code class="language-html">&lt;p&gt;
+    &lt;button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapseWidthExample" aria-expanded="false"
+        aria-controls="collapseWidthExample"&gt;
+        Toggle width collapse
+    &lt;/button&gt;
+&lt;/p&gt;
+&lt;div style="min-height: 120px;"&gt;
+    &lt;div class="collapse collapse-horizontal" id="collapseWidthExample"&gt;
+        &lt;div class="card card-body" style="width: 230px;"&gt;
+            This is some placeholder content for a horizontal collapse. It's
+            hidden
+            by default and shown when triggered.
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<!-- Prism Code -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End:: row-1 -->
+                
+
+            </div>
+        </div>
+        <!--APP-CONTENT CLOSE-->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/side-bar.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Prism JS -->
+    <script src="../assets/libs/prismjs/prism.js"></script>
+    <script src="../assets/js/prism-custom.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+
+</body>
+
+</html>

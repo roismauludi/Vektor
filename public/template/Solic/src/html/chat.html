@@ -1,0 +1,435 @@
+@SPK@include("partials/mainhead.html")
+
+</head>
+
+<body>
+
+    @SPK@include("partials/switcher.html")
+    @SPK@include("partials/loader.html")
+
+    <div class="page">
+        @SPK@include("partials/header.html")
+        @SPK@include("partials/sidebar.html")
+
+        <!-- Start::app-content -->
+        <div class="main-content app-content">
+            <div class="container-fluid">
+            
+                @SPK@include("partials/page-header.html", {"title": "Chat", "subtitle": 'Pages'})
+
+				<div class="row chatbox">
+					<div class="col-md-12 col-lg-12 col-xl-3">
+						<div class="main-content-app">
+							<div class="card custom-card overflow-hidden mb-xl-0 mb-5">
+								<div class="chat-search">
+									<div class="input-group">
+										<input type="text" class="form-control  bg-white" placeholder="Search">
+											<button type="button" class="btn btn-primary ">
+												<i class="fa fa-search" aria-hidden="true"></i>
+											</button>
+									</div>
+								</div>
+								<div class="contacts_body p-0" id="chat-msg-scroll">
+									<ul class="contacts mb-0">
+										<li class="active">
+											<div class="d-flex flex-wrap">
+												<div class="img_cont">
+													<img src="../assets/images/faces/3.jpg" class="rounded-circle user_img" alt="img">
+												</div>
+												<div class="d-sm-flex flex-wrap flex-1 ms-2 align-items-center">
+													<div class="user_info">
+														<h6 class="mb-0 ">Beron Verodhi <span class="dot-label bg-success ms-2"></span></h6>
+														<span class="fs-13">Hi How r you ?</span>
+													</div>
+													<div class="ms-auto"> <small class="ms-sm-auto text-muted fs-12">01-02-2019</small></div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="d-flex flex-wrap">
+												<div class="img_cont">
+													<img src="../assets/images/faces/1.jpg" class="rounded-circle user_img" alt="img">
+												</div>
+												<div class="d-sm-flex flex-wrap flex-1 ms-2 align-items-center">
+													<div class="user_info ms-0 ms-sm-2">
+														<h6 class="mb-0 ">Mohiie Varne<span class="dot-label bg-danger ms-2"></span></h6>
+														<span class="fs-13">Maec enas tempus, tellus eget</span>
+													</div>
+													<div class="ms-auto"> <small class="ms-sm-auto text-muted fs-12">01-02-2019</small></div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="d-flex flex-wrap">
+												<div class="img_cont">
+													<img src="../assets/images/faces/12.jpg" class="rounded-circle user_img" alt="img">
+												</div>
+												<div class="d-sm-flex flex-wrap flex-1 ms-2 align-items-center">
+													<div class="user_info ms-0 ms-sm-2">
+														<h6 class="mb-0 ">Aden Mouli<span class="dot-label bg-success ms-2"></span></h6>
+														<span class="fs-13">Plz check the mail</span>
+													</div>
+													<div class="ms-auto d-flex">
+														<small class="ms-sm-auto text-muted fs-12">02-02-2019</small>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="d-flex flex-wrap">
+												<div class="img_cont">
+													<img src="../assets/images/faces/15.jpg" class="rounded-circle user_img" alt="img">
+												</div>
+												<div class="d-sm-flex flex-wrap flex-1 ms-2 align-items-center">
+													<div class="user_info ms-0 ms-sm-2">
+														<h6 class="mb-0 ">Valesh Bogii<span class="dot-label bg-success ms-2"></span></h6>
+														<span class="fs-13">Nam quam nunc, bl ndit vel...</span>
+													</div>
+													<div class="ms-auto d-flex">
+														<small class="ms-sm-auto text-muted fs-12">02-02-2019</small>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="d-flex flex-wrap">
+												<div class="img_cont">
+													<img src="../assets/images/faces/17.jpg" class="rounded-circle user_img" alt="img">
+												</div>
+												<div class="d-sm-flex flex-wrap flex-1 ms-2 align-items-center">
+													<div class="user_info ms-0 ms-sm-2">
+														<h6 class="mb-0 ">Khadija Mehr<span class="dot-label bg-danger ms-2"></span></h6>
+														<span class="fs-13">dimen tum rhoncus, sem quam</span>
+													</div>
+													<div class="ms-auto d-flex">
+														<small class="ms-sm-auto text-muted fs-12">03-02-2019</small>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="d-flex flex-wrap">
+												<div class="img_cont">
+													<img src="../assets/images/faces/7.jpg" class="rounded-circle user_img" alt="img">
+												</div>
+												<div class="d-sm-flex flex-wrap flex-1 ms-2 align-items-center">
+													<div class="user_info ms-0 ms-sm-2">
+														<h6 class="mb-0 ">Angela Allan<span class="dot-label bg-danger ms-2"></span></h6>
+														<span class="fs-13">ndimen tum rhoncus, sem quam</span>
+													</div>
+													<div class="ms-auto d-flex">
+														<small class="ms-sm-auto text-muted fs-12">19-03-2019</small>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="d-flex flex-wrap">
+												<div class="img_cont">
+													<img src="../assets/images/faces/20.jpg" class="rounded-circle user_img" alt="img">
+												</div>
+												<div class="d-sm-flex flex-wrap flex-1 ms-2 align-items-center">
+													<div class="user_info ms-0 ms-sm-2">
+														<h6 class="mb-0 ">Matt	Lee<span class="dot-label bg-success ms-2"></span></h6>
+														<span class="fs-13">ndimen tum rhoncus, sem quam</span>
+													</div>
+													<div class="ms-auto d-flex">
+														<small class="ms-sm-auto text-muted fs-12">13-03-2019</small>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="d-flex flex-wrap">
+												<div class="img_cont">
+													<img src="../assets/images/faces/19.jpg" class="rounded-circle user_img" alt="img">
+												</div>
+												<div class="d-sm-flex flex-wrap flex-1 ms-2 align-items-center">
+													<div class="user_info ms-0 ms-sm-2">
+														<h6 class="mb-0 ">Anna	Carr<span class="dot-label bg-danger ms-2"></span></h6>
+														<span class="fs-13">ndimen tum rhoncus, sem quam</span>
+													</div>
+													<div class="ms-auto d-flex">
+														<small class="ms-sm-auto text-muted fs-12">03-03-2019</small>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="d-flex flex-wrap">
+												<div class="img_cont">
+													<img src="../assets/images/faces/18.jpg" class="rounded-circle user_img" alt="img">
+												</div>
+												<div class="d-sm-flex flex-wrap flex-1 ms-2 align-items-center">
+													<div class="user_info ms-0 ms-sm-2">
+														<h6 class="mb-0 ">Joyce Stewart<span class="dot-label bg-success ms-2"></span></h6>
+														<span class="fs-13">Nam quam nunc aecenas tincid</span>
+													</div>
+													<div class="ms-auto d-flex">
+														<small class="ms-sm-auto text-muted fs-12">04-04-2019</small>
+													</div>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-lg-12 col-xl-6 chat">
+						<div class="main-content-app">
+							<div class="card custom-card  shadow-none overflow-hidden mb-xl-0 mb-5">
+								<div class="action-header clearfix">
+									<div class="float-start hidden-xs d-flex ms-2">
+										<div class="img_cont me-3">
+											<img src="../assets/images/faces/15.jpg" class="rounded-circle user_img" alt="img">
+										</div>
+										<div class="align-items-center mt-2">
+											<h5 class="mb-0 fw-medium">Revend Honok</h5>
+											<span class="dot-label bg-success"></span><span class="me-3">online</span>
+										</div>
+									</div>
+									<ul class="ah-actions actions align-items-center" >
+										<li class="call-icon">
+											<a href="javascript:void(0);" class="d-done d-md-flex" data-bs-toggle="tooltip" data-bs-original-title="Add call">
+												<i class="fe fe-phone-call"></i>
+											</a>
+										</li>
+										<li class="video-icon">
+											<a href="javascript:void(0);" class="d-done d-md-flex" data-bs-toggle="tooltip" data-bs-original-title="Video call">
+												<i class="fe fe-video"></i>
+											</a>
+										</li>
+										<li class="video-icon">
+											<a href="javascript:void(0);" class="d-done d-md-flex" data-bs-toggle="tooltip" data-bs-original-title="Add contact">
+												<i class="fe fe-user-plus"></i>
+											</a>
+										</li>
+										<li class="video-icon">
+											<a href="javascript:void(0);" class="d-done d-md-flex" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+												<i class="fe fe-trash-2"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<!-- ACTION HEADER END -->
+								<!-- MSG CARD-BODY OPEN -->
+								<div class="card-body msg_card_body" id="main-chat-content">
+									<div class="chat-box-single-line">
+										<abbr class="timestamp">February 1st, 2020</abbr>
+									</div>
+									<div class="d-flex justify-content-start">
+										<div class="img_cont_msg">
+											<img src="../assets/images/faces/15.jpg" class="rounded-circle user_img_msg" alt="img">
+										</div>
+										<div class="msg_cotainer">
+											Hi, how are you Jenna Side?
+											<span class="msg_time">8:40 AM, Today</span>
+										</div>
+									</div>
+									<div class="d-flex justify-content-end">
+										<div class="msg_cotainer_send">
+											Hi Jacob Fisher i am good tnx how about you?
+											<span class="msg_time_send">8:55 AM, Today</span>
+										</div>
+										<div class="img_cont_msg">
+											<img src="../assets/images/faces/1.jpg" class="rounded-circle user_img_msg" alt="img">
+										</div>
+									</div>
+									<div class="d-flex justify-content-start">
+										<div class="img_cont_msg">
+											<img src="../assets/images/faces/15.jpg" class="rounded-circle user_img_msg" alt="img">
+										</div>
+										<div class="msg_cotainer">
+											I am good too, thank you for your chat template
+											<span class="msg_time">9:00 AM, Today</span>
+										</div>
+									</div>
+									<div class="d-flex justify-content-end">
+										<div class="msg_cotainer_send">
+											You welcome Jacob Fisher
+											<span class="msg_time_send">9:05 AM, Today</span>
+										</div>
+										<div class="img_cont_msg">
+											<img src="../assets/images/faces/1.jpg" class="rounded-circle user_img_msg" alt="img">
+										</div>
+									</div>
+									<div class="d-flex justify-content-start">
+										<div class="img_cont_msg">
+											<img src="../assets/images/faces/15.jpg" class="rounded-circle user_img_msg" alt="img">
+										</div>
+										<div class="msg_cotainer">
+											Yo, Can you update Views?
+											<span class="msg_time">9:07 AM, Today</span>
+										</div>
+									</div>
+									<div class="d-flex justify-content-end">
+										<div class="msg_cotainer_send">
+											But I must explain to you how all this mistaken  born and I will give some images below
+											<span class="msg_time_send">9:10 AM, Today</span>
+											<div class="row mt-2">
+												<div class="col-4">
+													<img class="img-fluid rounded" src="../assets/images/media/5.jpg " alt="banner image">
+												</div>
+												<div class="col-4">
+													<img class="img-fluid rounded" src="../assets/images/media/14.jpg " alt="banner image">
+												</div>
+												<div class="col-4">
+													<img class="img-fluid rounded" src="../assets/images/media/1.jpg " alt="banner image">
+												</div>
+											</div>
+										</div>
+										<div class="img_cont_msg">
+											<img src="../assets/images/faces/1.jpg" class="rounded-circle user_img_msg" alt="img">
+										</div>
+									</div>
+									<div class="d-flex justify-content-start">
+										<div class="img_cont_msg">
+											<img src="../assets/images/faces/15.jpg" class="rounded-circle user_img_msg" alt="img">
+										</div>
+										<div class="msg_cotainer">
+											Okay Bye, text you later..
+											<span class="msg_time">9:12 AM, Today</span>
+										</div>
+									</div>
+								</div>
+								<!-- MSG CARD-BODY END -->
+								<!-- CARD-FOOTER OPEN -->
+								<div class="card-footer">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Typing a message here...">
+											<button class="btn btn-primary" type="button"><i class="fa fa-paper-plane-o"></i></button>
+									</div><!-- CARD FOOTER END -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-12 col-xl-3">
+						<div class="card custom-card chat-account" id="chat-user-details">
+							<div class="main-content-app d-block pt-0">
+								<div class="card-body text-center border-bottom">
+									<div class="user-lock text-center">
+										<div class="dropdown text-end">
+											<a href="javascript:void(0);" class="option-dots text-muted" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <i class="fe fe-more-vertical fs-16"></i> </a>
+											<div class="dropdown-menu dropdown-menu-end"> 
+												<a class="dropdown-item" href="javascript:void(0);">
+													<i class="fe fe-message-square me-2 d-inline-flex"></i> Message</a> 
+													<a class="dropdown-item" href="javascript:void(0);">
+														<i class="fe fe-edit-2 me-2  d-inline-flex"></i> Edit</a> <a class="dropdown-item" href="javascript:void(0);">
+															<i class="fe fe-eye me-2  d-inline-flex"></i> View</a> <a class="dropdown-item" href="javascript:void(0);">
+																<i class="fe fe-trash-2 me-2  d-inline-flex"></i> Delete</a> 
+															</div>
+										</div>
+										<a href="profile.html"><img alt="avatar" class="brround avatar avatar-xxl avatar-rounded" src="../assets/images/faces/15.jpg"></a>
+									</div>
+									<a href="profile.html"><h5 class=" mb-0 mt-4 fw-medium">Revend Honok</h5></a>
+									<p class="mb-0 mt-1 text-muted">Web Designer</p>
+								</div>
+								<div class="card-body border-bottom">
+									<h6 class="mb-3 tx-normal">Contact Details</h6>
+									<div class="d-flex">
+										<div>
+											<a href="javascript:void(0);" class="btn btn-icon btn-primary-transparent m-0"><i class="fe fe-phone"></i></a>
+										</div>
+										<div class="ms-3">
+											<p class="fs-13 mb-0">Phone</p>
+											<p class="fs-12 text-muted">+1 135792468</p>
+										</div>
+									</div>
+									<div class="d-flex">
+										<div>
+											<a href="javascript:void(0);" class="btn btn-icon btn-primary-transparent m-0"><i class="fe fe-mail"></i></a>
+										</div>
+										<div class="ms-3">
+											<p class="fs-13 mb-0">Email</p>
+											<p class="fs-12 text-muted">liesa@gmail.com.</p>
+										</div>
+									</div>
+									<div class="d-flex">
+										<div>
+											<a href="javascript:void(0);" class="btn btn-icon btn-primary-transparent m-0"><i class="fe fe-map-pin"></i></a>
+										</div>
+										<div class="ms-3">
+											<p class="fs-13 mb-0">Address</p>
+											<p class="fs-12 text-muted mb-0">California.</p>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+									<h6 class="mb-3 tx-normal">Shared Files</h6>
+									<div class="d-flex align-items-center mb-3">
+										<a href="javascript:void(0);" class="btn btn-icon btn-primary-transparent m-0"><i class="mdi mdi-file-image"></i></a>
+										<div class="media-body ms-3 d-flex">
+											<div class="">
+												<p class="fs-13 text-dark mb-0">Image1.jpg</p>
+												<span class="fs-12 text-muted">200 KB</span>
+											</div>
+											<div class="ms-auto my-auto">
+												<i class="fe fe-download my-auto text-muted tx-18"></i>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-center mb-3">
+										<a href="javascript:void(0);" class="btn btn-icon btn-danger-transparent m-0"><i class="mdi mdi-file-pdf"></i></a>
+										<div class="media-body ms-3 d-flex">
+											<div class="">
+												<p class="fs-13 text-dark mb-0">Doc1.pdf</p>
+												<span class="fs-12 text-muted">48 KB</span>
+											</div>
+											<div class="ms-auto my-auto">
+												<i class="fe fe-download my-auto text-muted tx-18"></i>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-center mb-3">
+										<a href="javascript:void(0);" class="btn btn-icon btn-info-transparent m-0"><i class="mdi mdi-file-word"></i></a>
+										<div class="media-body ms-3 d-flex">
+											<div class="">
+												<p class="fs-13 text-dark mb-0">Word1.doc</p>
+												<span class="fs-12 text-muted">35 KB</span>
+											</div>
+											<div class="ms-auto my-auto">
+												<i class="fe fe-download my-auto text-muted tx-18"></i>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-center">
+										<a href="javascript:void(0);" class="btn btn-icon btn-warning-transparent m-0"><i class="mdi mdi-file-powerpoint"></i></a>
+										<div class="media-body ms-3 d-flex">
+											<div class="">
+												<p class="fs-13 text-dark mb-0">Example1.ppt</p>
+												<span class="fs-12 text-muted">54 KB</span>
+											</div>
+											<div class="ms-auto my-auto">
+												<i class="fe fe-download my-auto text-muted tx-18"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+        <!-- End::app-content -->
+
+        @SPK@include("partials/headersearch_modal.html")
+        @SPK@include("partials/footer.html")
+        @SPK@include("partials/side-bar.html")
+
+    </div>
+
+    @SPK@include("partials/commonjs.html")
+
+    @SPK@include("partials/custom_switcherjs.html")
+
+    <!-- Chat JS -->
+    <script src="../assets/js/chat.js"></script>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/custom.js"></script>
+
+</body>
+
+</html>
