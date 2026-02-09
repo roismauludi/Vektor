@@ -75,7 +75,9 @@ class Pengajuan extends Model
 
         $foto = $this->relationLoaded('fotos')
             ? $this->fotos->firstWhere('kategori', $kategori)
-            : $this->fotos()->where('kategori', $kategori)->first();
+            : $this->fotos()
+                ->where('kategori', $kategori)
+                ->first();
 
         return $foto?->path;
     }

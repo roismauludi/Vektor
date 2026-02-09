@@ -12,6 +12,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
@@ -99,31 +100,34 @@ class PengajuanController extends Controller
             'details.*.email'     => 'required|email|max:255',
         ]);
 
-        $validated['lama_berkerja'] =
-            $validated['jam_mulai'] . ' - ' . $validated['jam_selesai'];
+        $validated['lama_berkerja'] = $validated['jam_mulai'] . ' - ' . $validated['jam_selesai'];
 
-        $identitasFilePath = null;
-        if ($request->hasFile('identitas_file')) {
-            $identitasFilePath = $request
-                ->file('identitas_file')
-                ->store('identitas', 'public');
+        // Tentukan kode pengajuan final terlebih dahulu
+        $kodePengajuan = $validated['kode_pengajuan'] ?? null;
+        if (
+            ! $kodePengajuan ||
+            Pengajuan::where('kode_pengajuan', $kodePengajuan)->exists()
+        ) {
+            $kodePengajuan = $this->generateKodePengajuan();
         }
 
-        $kodePengajuan = $validated['kode_pengajuan'] ?? null;
+        // Simpan file identitas dengan nama diawali kode pengajuan
+        $identitasFilePath = null;
+        if ($request->hasFile('identitas_file')) {
+            $identitasFile = $request->file('identitas_file');
+            $identitasExtension = $identitasFile->getClientOriginalExtension();
+            $identitasRandom = uniqid();
+            $identitasFilename = $kodePengajuan . '_identitas_' . $identitasRandom . '.' . $identitasExtension;
+
+            $identitasFilePath = $identitasFile->storeAs('identitas', $identitasFilename, 'public');
+        }
 
         try {
             DB::transaction(function () use (
                 $validated,
                 $identitasFilePath,
-                &$kodePengajuan
+                $kodePengajuan
             ) {
-                if (
-                    ! $kodePengajuan ||
-                    Pengajuan::where('kode_pengajuan', $kodePengajuan)->exists()
-                ) {
-                    $kodePengajuan = $this->generateKodePengajuan();
-                }
-
                 $pengajuan = Pengajuan::create([
                     'kode_pengajuan'      => $kodePengajuan,
                     'jenis'               => $validated['jenis'],
@@ -253,7 +257,8 @@ class PengajuanController extends Controller
                         $pengajuan->kode_pengajuan,
                         'kendaraan',
                         $request->file('foto_kendaraan'),
-                        self::FOTO_BASE_DIR
+                        self::FOTO_BASE_DIR,
+                        false
                     );
                 }
 
@@ -262,7 +267,8 @@ class PengajuanController extends Controller
                         $pengajuan->kode_pengajuan,
                         'penyerahan_kunci',
                         $request->file('foto_penyerahan_kunci'),
-                        self::FOTO_BASE_DIR
+                        self::FOTO_BASE_DIR,
+                        false
                     );
                 }
 
@@ -271,7 +277,8 @@ class PengajuanController extends Controller
                         $pengajuan->kode_pengajuan,
                         'lainnya',
                         $request->file('foto_lainnya'),
-                        self::FOTO_BASE_DIR
+                        self::FOTO_BASE_DIR,
+                        false
                     );
                 }
 
@@ -384,9 +391,13 @@ class PengajuanController extends Controller
             if ($identitasFilePath) {
                 Storage::disk('public')->delete($identitasFilePath);
             }
-            $identitasFilePath = $request
-                ->file('identitas_file')
-                ->store('identitas', 'public');
+
+            $identitasFile = $request->file('identitas_file');
+            $identitasExtension = $identitasFile->getClientOriginalExtension();
+            $identitasRandom = uniqid();
+            $identitasFilename = $pengajuan->kode_pengajuan . '_identitas_' . $identitasRandom . '.' . $identitasExtension;
+
+            $identitasFilePath = $identitasFile->storeAs('identitas', $identitasFilename, 'public');
         }
 
         try {
@@ -484,7 +495,8 @@ class PengajuanController extends Controller
                         $pengajuan->kode_pengajuan,
                         'kendaraan_kembali',
                         $request->file('foto_kendaraan_kembali'),
-                        self::FOTO_BASE_DIR
+                        self::FOTO_BASE_DIR,
+                        true
                     );
                 }
 
@@ -494,7 +506,8 @@ class PengajuanController extends Controller
                         $pengajuan->kode_pengajuan,
                         'pengembalian_kunci',
                         $request->file('foto_pengembalian_kunci'),
-                        self::FOTO_BASE_DIR
+                        self::FOTO_BASE_DIR,
+                        true
                     );
                 }
 
@@ -503,7 +516,8 @@ class PengajuanController extends Controller
                         $pengajuan->kode_pengajuan,
                         'lainnya_kembali',
                         $request->file('foto_lainnya'),
-                        self::FOTO_BASE_DIR
+                        self::FOTO_BASE_DIR,
+                        true
                     );
                 }
 
@@ -545,12 +559,14 @@ class PengajuanController extends Controller
         string $kodePengajuan,
         string $kategori,
         UploadedFile $file,
-        string $storeDir
+        string $storeDir,
+        bool $pengembalian = false
     ): void {
         $kategori = strtolower(trim($kategori));
 
         $existingFoto = PengajuanFoto::where('kode_pengajuan', $kodePengajuan)
             ->where('kategori', $kategori)
+            ->where('pengembalian', $pengembalian)
             ->first();
 
         $isUpdate = $existingFoto !== null;
@@ -561,12 +577,17 @@ class PengajuanController extends Controller
             Storage::disk('public')->delete($existingFoto->path);
         }
 
-        $path = $file->store($storeDir, 'public');
+        $extension = $file->getClientOriginalExtension();
+        $randomName = Str::random(40);
+        $fileName = $kodePengajuan . '_' . $randomName . '.' . $extension;
+
+        $path = $file->storeAs($storeDir, $fileName, 'public');
 
         PengajuanFoto::updateOrCreate(
             [
                 'kode_pengajuan' => $kodePengajuan,
                 'kategori' => $kategori,
+                'pengembalian' => $pengembalian,
             ],
             [
                 'path' => $path,

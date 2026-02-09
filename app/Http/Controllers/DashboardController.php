@@ -23,6 +23,12 @@ class DashboardController extends Controller
         $knownTotal = array_sum($progressSummary);
         $progressSummary['Lainnya'] = max(0, $totalPengajuan - $knownTotal);
 
-        return view('dashboard', compact('totalPengajuan', 'progressSummary'));
+        // Ringkasan pengajuan per hari (berdasarkan created_at)
+        $dailySummary = Pengajuan::selectRaw('DATE(created_at) as tanggal, COUNT(*) as total')
+            ->groupBy('tanggal')
+            ->orderBy('tanggal', 'asc')
+            ->get();
+
+        return view('dashboard', compact('totalPengajuan', 'progressSummary', 'dailySummary'));
     }
 }

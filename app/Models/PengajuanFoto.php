@@ -15,11 +15,13 @@ class PengajuanFoto extends Model
     protected $fillable = [
         'kode_pengajuan',
         'kategori',
+        'pengembalian',
         'path',
         'creator_id',
     ];
 
     protected $casts = [
+        'pengembalian' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

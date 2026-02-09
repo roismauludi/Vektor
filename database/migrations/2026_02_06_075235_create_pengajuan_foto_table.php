@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode_pengajuan')->index();
             $table->string('kategori')->index();
+            $table->boolean('pengembalian')->default(false)->index();
             $table->string('path')->nullable();
             $table->foreignId('creator_id')
                 ->nullable()
@@ -23,7 +24,8 @@ return new class extends Migration
                 ->nullOnDelete();
             $table->timestamps();
 
-            $table->unique(['kode_pengajuan', 'kategori']);
+            // Unik per pengajuan + kategori + status pengembalian (agar tidak perlu kategori *_kembali)
+            $table->unique(['kode_pengajuan', 'kategori', 'pengembalian']);
 
             $table->foreign('kode_pengajuan')
                 ->references('kode_pengajuan')

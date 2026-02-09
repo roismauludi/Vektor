@@ -100,6 +100,40 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- Ringkasan pengajuan per hari --}}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h5 class="card-title mb-3">Ringkasan Pengajuan per Hari</h5>
+
+                                @if(isset($dailySummary) && $dailySummary->count())
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Tanggal</th>
+                                                    <th class="text-end">Total Pengajuan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($dailySummary as $row)
+                                                    <tr>
+                                                        <td>{{ \Carbon\Carbon::parse($row->tanggal)->format('d-m-Y') }}</td>
+                                                        <td class="text-end">{{ number_format($row->total) }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @else
+                                    <p class="text-muted mb-0">Belum ada data pengajuan untuk ditampilkan.</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

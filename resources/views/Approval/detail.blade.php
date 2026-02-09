@@ -68,21 +68,21 @@
                                     {{ $pengajuan->creator->nama }}
                                 </td>
                                 <td rowspan="{{ $rowspan }}">
-                                @if ($pengajuan->progress == 'Menunggu verifikasi')
                                     <div class="d-grid gap-2">
                                         <button type="button"
                                                 class="btn btn-sm btn-success btn-approve"
-                                                data-id="{{ $pengajuan->id }}">
+                                                data-id="{{ $pengajuan->id }}"
+                                                {{ $pengajuan->progress !== 'Menunggu verifikasi' ? 'disabled' : '' }}>
                                             Approve
                                         </button>
                                         <button type="button"
                                                 class="btn btn-sm btn-danger btn-reject"
-                                                data-id="{{ $pengajuan->id }}">
+                                                data-id="{{ $pengajuan->id }}"
+                                                {{ $pengajuan->progress !== 'Menunggu verifikasi' ? 'disabled' : '' }}>
                                             Reject
                                         </button>
                                     </div>
-                                @endif
-                            </td>
+                                </td>
                             @endif
                         </tr>
                         @endforeach
