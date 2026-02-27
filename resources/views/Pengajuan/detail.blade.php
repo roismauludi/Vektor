@@ -2,13 +2,47 @@
 @section('title', 'Detail Pengajuan')
 
 @section('content')
+@php
+    $progressLower = strtolower(trim($pengajuan->progress));
+    $isWaitingVerification = str_contains($progressLower, 'menunggu') && str_contains($progressLower, 'verifikasi');
+@endphp
+
+<div class="row mb-3">
+    <div class="col-12">
+        <div class="d-flex justify-content-end">
+            <a href="{{ route('pengajuan.list') }}" class="btn btn-outline-secondary">
+                <i class="ri-arrow-left-line me-1"></i>
+                Kembali
+            </a>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-12">
         <div class="row">
             <div class="col-md-6">
                 <div class="card custom-card mb-4">
-                    <div class="card-header">
-                        <p class="text-muted mb-1">Detail Pengajuan</p>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <p class="text-muted mb-0">Detail Pengajuan</p>
+                        <div class="d-flex align-items-center gap-2">
+                            @role('Security')
+                            <form action="{{ route('pengajuan.cancel', $pengajuan->id) }}" method="post" class="mb-0">
+                                @csrf
+                                @method('POST')
+                                <button type="submit"
+                                        class="btn btn-sm btn-danger"
+                                        {{ $isWaitingVerification ? '' : 'disabled' }}>
+                                    <i class="ri-close-circle-line me-1"></i>
+                                    Cancel Pengajuan
+                                </button>
+                            </form>
+                            @endrole
+                            <a href="{{ route('pengajuan.list') }}" class="btn btn-sm btn-outline-secondary">
+                                <i class="ri-arrow-right-line ms-1"></i>
+                                Kembali
+                            </a>
+                        </div>
                     </div>
 
                     <div class="card-body">
@@ -19,12 +53,14 @@
                                     <td>{{ $pengajuan->kode_pengajuan }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Jenis</th>
-                                    <td>{{ $pengajuan->jenis }}</td>
+                                    <th>Jenis / Kategori Aset</th>
+                                    <td>{{ optional($pengajuan->aset)->kategori ?? $pengajuan->jenis ?? '-' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Kode Aset</th>
-                                    <td>{{ $pengajuan->tower_kode ?? $pengajuan->central_kode }}</td>
+                                    <td>
+                                        {{ optional($pengajuan->aset)->kode_aset ?? $pengajuan->aset_kode ?? '-' }}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Perusahaan Tamu</th>
@@ -123,15 +159,13 @@
         </div>
 
         @php
-            $progressLower = strtolower(trim($pengajuan->progress));
             $hasPhotos =
                 $pengajuan->fotoPath('kendaraan') ||
                 $pengajuan->fotoPath('penyerahan_kunci') ||
                 $pengajuan->fotoPath('pengembalian_kunci') ||
                 $pengajuan->fotoPath('lainnya');
-            $isWaitingVerification = str_contains($progressLower, 'menunggu') || str_contains($progressLower, 'verifikasi');
             
-            // Tampilkan foto jika: progress approved ATAU sudah ada foto yang diupload
+            // Tampilkan foto jika progress approved atau sudah ada foto yang diupload
             $canShowPhotos = $progressLower === 'approved' || $hasPhotos;
         @endphp
 

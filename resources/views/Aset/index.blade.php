@@ -8,8 +8,12 @@
             <div class="card-header d-flex justify-content-between align-items-center mb-3">
                 <h5 class="card-title mb-0">Data Aset</h5>
                 <div class="d-flex gap-2">
+                    @can('view-pengajuan')
                     <a href="{{ route('pengajuan.list') }}" class="btn btn-outline-primary btn-wave">Peminjaman</a>
+                    @endcan
+                    @can('create-aset')
                     <a href="{{ route('aset.create') }}" class="btn btn-primary btn-wave">Tambah Aset</a>
+                    @endcan
                 </div>
             </div>
 
@@ -52,7 +56,9 @@
                                 <td>{{ $asset->nama }}</td>
                                 <td>{{ $asset->lokasi }}</td>
                                 <td>
+                                    @can('detail-aset')
                                     <a class="btn btn-sm btn-primary" href="{{ route('aset.detail', $asset->id) }}">Detail</a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

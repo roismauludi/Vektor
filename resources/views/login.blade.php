@@ -14,8 +14,8 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .split-bg {
+            background: linear-gradient(to right, #f25920 0%, #f25920 50%, #f9fafb 50%, #f9fafb 100%);
         }
 
         .login-card {
@@ -53,7 +53,7 @@
         }
 
         .btn-login {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f25920 100%);
             transition: all 0.3s ease;
         }
 
@@ -64,27 +64,21 @@
     </style>
 </head>
 
-<body class="h-screen flex justify-center items-center gradient-bg">
-    <div class="login-card p-10 rounded-2xl shadow-2xl w-full max-w-md mx-4">
+<body class="h-screen flex justify-center items-center split-bg">
+    <div class="login-card p-20 rounded-2xl shadow-2xl w-full max-w-md mx-4 bg-white">
         <!-- Logo Section -->
         <div class="flex flex-col items-center mb-8 logo-container">
-            <div class="bg-gradient-to-br from-indigo-500 to-purple-600 p-4 rounded-full mb-4 shadow-lg">
-                <img src="{{ asset('icons.png') }}" alt="VEKTOR Logo" class="w-16 h-16 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <i class="fas fa-key text-white text-4xl" style="display: none;"></i>
-            </div>
-            <h2 class="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                VEKTOR
-            </h2>
-            <p class="text-gray-500 text-sm mt-2">Sistem Peminjaman Aset</p>
+            <p class="text-2xl font-bold">VEKTOR</p>
+            <p class="text-gray-500 text-sm">Sistem Peminjaman Aset</p>
         </div>
 
         <form method="POST" action="{{ route('login.post') }}">
             @csrf
 
             <div class="mb-5">
-                <label class="block text-gray-700 font-medium mb-2">
+                <!-- <label class="block text-gray-700 font-medium mb-2">
                     <i class="fas fa-envelope mr-2 text-indigo-500"></i>Email
-                </label>
+                </label> -->
                 <div class="input-wrapper">
                     <i class="fas fa-envelope input-icon"></i>
                     <input type="email" name="email"
@@ -97,9 +91,9 @@
             </div>
 
             <div class="mb-6">
-                <label class="block text-gray-700 font-medium mb-2">
+                <!-- <label class="block text-gray-700 font-medium mb-2">
                     <i class="fas fa-lock mr-2 text-indigo-500"></i>Password
-                </label>
+                </label> -->
                 <div class="input-wrapper">
                     <i class="fas fa-lock input-icon"></i>
                     <input type="password" name="password"
@@ -118,16 +112,13 @@
 
             <button 
                 type="submit" 
-                class="w-full btn-login text-white py-3 rounded-lg font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-indigo-300"
-            >
-                <i class="fas fa-sign-in-alt mr-2"></i>
+                class="w-full btn-login text-white py-3 rounded-lg font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-indigo-300">
                 Masuk
             </button>
         </form>
-
     </div>
 
-       <script>
+    <script>
         setTimeout(() => {
             const msg = document.getElementById('flashMessage');
             if (msg) msg.style.display = 'none';

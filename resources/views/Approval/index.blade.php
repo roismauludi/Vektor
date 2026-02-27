@@ -15,7 +15,7 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>Kode</th>
-                                <th>Jenis</th>
+                                <th>Kategori Aset</th>
                                 <th>Aset</th>
                                 <th>Perusahaan</th>
                                 <th>Jumlah Orang</th>
@@ -27,14 +27,20 @@
                         </thead>
                         <tbody>
                             @forelse ($pengajuan as $item)
-                                @php
-                                    $asetKode = $item->jenis === 'tower' ? $item->tower_kode : $item->central_kode;
-                                    $asetNama = $asetKode ? ($asetMap[$asetKode] ?? $asetKode) : '-';
-                                @endphp
                                 <tr>
                                     <td class="fw-semibold">{{ $item->kode_pengajuan }}</td>
-                                    <td><span class="badge bg-primary">{{ ucfirst($item->jenis) }}</span></td>
-                                    <td>{{ $asetNama }}</td>
+                                    <td>
+                                        <span class="badge bg-info">
+                                            {{ optional($item->aset)->kategori ?? '-' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{ optional($item->aset)->nama ?? '-' }}
+                                        @if($item->aset && $item->aset->lokasi)
+                                            <br>
+                                            <small class="text-muted">{{ $item->aset->lokasi }}</small>
+                                        @endif
+                                    </td>
                                     <td>
                                         <div>{{ $item->perusahaan_tamu }}</div>
                                         <small class="text-muted">Pengutus: {{ $item->perusahaan_pengutus }}</small>

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('pengajuan', function (Blueprint $table) {
-            $table->string('foto_lainnya')->nullable()->after('foto_penyerahan_kunci');
+        Schema::table('list_aset', function (Blueprint $table) {
+            $table->string('kategori', 255)->nullable()->change();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pengajuan', function (Blueprint $table) {
-            $table->dropColumn(['foto_lainnya']);
+        Schema::table('list_aset', function (Blueprint $table) {
+            $table->string('kategori', 255)->nullable(false)->change();
         });
     }
 };

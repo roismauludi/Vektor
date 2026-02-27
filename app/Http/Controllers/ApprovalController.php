@@ -15,20 +15,12 @@ class ApprovalController extends Controller
         $pengajuan = Pengajuan::with([
             'creator:id,nama',
             'details',
+            'aset',
         ])
             ->orderByDesc('created_at')
             ->get();
-
-        $kodeAset = $pengajuan
-            ->pluck('tower_kode')
-            ->merge($pengajuan->pluck('central_kode'))
-            ->filter()
-            ->unique()
-            ->values();
-
-        $asetMap = ListAset::whereIn('kode_aset', $kodeAset)->pluck('nama', 'kode_aset');
-
-        return view('Approval.index', compact('pengajuan', 'asetMap'));
+        
+        return view('Approval.index', compact('pengajuan'));
     }
     public function detail($id)
     {
@@ -53,7 +45,7 @@ class ApprovalController extends Controller
             'keterangan'     => 'Pengajuan diapprove oleh ' . Auth::user()->nama,
         ]);
 
-        return back()->with('success', 'Pengajuan berhasil diapprove');
+        return redirect()->route('approval.index')->with('success', 'Pengajuan berhasil diapprove');
     }
 
     public function reject(Request $request, $id)
@@ -68,7 +60,6 @@ class ApprovalController extends Controller
             'creator_id' => Auth::id(),
             'keterangan' => $request->keterangan,
         ]);
-
-        return back()->with('success', 'Pengajuan berhasil ditolak');
+        return redirect()->route('approval.index')->with('success', 'Pengajuan berhasil ditolak');
     }
 }

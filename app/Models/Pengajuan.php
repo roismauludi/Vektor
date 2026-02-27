@@ -16,8 +16,7 @@ class Pengajuan extends Model
     protected $fillable = [
         'kode_pengajuan',
         'jenis',
-        'tower_kode',
-        'central_kode',
+        'aset_kode',
         'perusahaan_tamu',
         'perusahaan_pengutus',
         'jumlah',
@@ -54,14 +53,9 @@ class Pengajuan extends Model
         return $this->hasMany(PengajuanLog::class, 'kode_pengajuan', 'kode_pengajuan');
     }
 
-    public function towerAset()
+    public function aset(): BelongsTo
     {
-        return $this->belongsTo(ListAset::class, 'tower_kode', 'kode_aset');
-    }
-
-    public function centralAset()
-    {
-        return $this->belongsTo(ListAset::class, 'central_kode', 'kode_aset');
+        return $this->belongsTo(ListAset::class, 'aset_kode', 'kode_aset');
     }
 
     public function fotos(): HasMany

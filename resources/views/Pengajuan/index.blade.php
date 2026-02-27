@@ -40,19 +40,17 @@
                                 <td>{{ $pengajuan->kode_pengajuan }}</td>
 
                                 <td>
-                                    @if ($pengajuan->jenis === 'tower')
-                                        <span class="badge bg-info">Tower</span>
-                                    @else
-                                        <span class="badge bg-info">Central</span>
-                                    @endif
+                                    <span class="badge bg-info">
+                                        {{ optional($pengajuan->aset)->kategori ?? '-' }}
+                                    </span>
                                 </td>
 
                                 <td>
-                                    {{ $pengajuan->towerAset->kode_aset?? $pengajuan->centralAset->kode_aset?? '-' }}
+                                    {{ optional($pengajuan->aset)->kode_aset ?? '-' }}
                                 </td>
 
                                 <td>
-                                    {{ $pengajuan->towerAset->nama?? $pengajuan->centralAset->nama?? '-' }}
+                                    {{ optional($pengajuan->aset)->nama ?? '-' }}
                                 </td>
 
                                 <td>
@@ -62,12 +60,6 @@
 
                                     @if ($status === 'open')
                                         <span class="badge bg-success">Open</span>
-
-                                    @elseif ($status === 'dipinjam')
-                                        <span class="badge bg-warning text-dark">Dipinjam</span>
-
-                                        @elseif ($status === 'cancel')
-                                        <span class="badge bg-danger">Cancel</span>
 
                                     @elseif ($status === 'close')
                                         <span class="badge bg-dark">Close</span>
@@ -82,13 +74,15 @@
                                 <!-- PROGRESS -->
                                 <td>
                                     @if ($progress === 'approved')
-                                        <span class="badge bg-primary">Approved</span>
+                                        <span class="badge bg-primary text-white">Approved</span>
                                     @elseif ($progress === 'in-progress')
                                         <span class="badge bg-warning text-dark">In Progress</span>
                                     @elseif ($progress === 'selesai')
                                         <span class="badge bg-success">Selesai</span>
                                     @elseif ($progress === 'rejected')
                                         <span class="badge bg-danger">Rejected</span>
+                                    @elseif ($progress === 'cancel')
+                                        <span class="badge bg-danger">Cancel</span>
                                     @else
                                         <span class="badge bg-secondary">
                                             {{ ucfirst($pengajuan->progress) }}
@@ -97,6 +91,7 @@
                                 </td>
 
                                 <td>
+                                @role('Security')
                                     @if ($progress === 'approved'
                                         && (!$pengajuan->fotoPath('kendaraan') || !$pengajuan->fotoPath('penyerahan_kunci')))
                                         <a href="{{ route('pengajuan.upload', $pengajuan->id) }}"
@@ -118,6 +113,8 @@
                                             <i class="ri-edit-line me-1"></i>
                                             Update
                                         </a>
+                                        
+                                    @endrole
 
                                     @endif
                                     <a href="{{ route('pengajuan.detail', $pengajuan->id) }}"
@@ -140,30 +137,34 @@
 
 <div class="modal fade" id="modalPilihanPengajuan" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title">Pilih Jenis Pengajuan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header border-0 pb-1" style="background-color: #f25920;">
+                <h5 class="modal-title text-white fw-semibold">
+                    Ajukan Peminjaman
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <a href="{{ route('pengajuan.tower') }}"
-                           class="btn btn-outline-primary w-100">
-                            Tower
-                        </a>
+            <div class="modal-body py-4 px-4">
+                <div class="text-center mb-4">
+                    <div class="mb-3">
+                        <i class="ri-file-add-line" style="font-size: 3rem; color: #f25920;"></i>
                     </div>
-                    <div class="col-md-6">
-                        <a href="{{ route('pengajuan.central') }}"
-                           class="btn btn-outline-primary w-100">
-                            Central
-                        </a>
-                    </div>
+                    <h6 class="fw-semibold mb-2">Buat Pengajuan Peminjaman Baru</h6>
+                    <p class="text-muted mb-0 small">Silakan klik tombol di bawah untuk membuat pengajuan peminjaman aset baru</p>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <a href="{{ route('pengajuan.create') }}" class="btn btn-primary btn-lg">
+                        <i class="ri-add-circle-line me-2"></i>
+                        Buat Pengajuan Baru
+                    </a>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="ri-close-line me-2"></i>
+                        Batal
+                    </button>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

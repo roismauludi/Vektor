@@ -23,12 +23,36 @@ class PengajuanController extends Controller
     public function list()
     {
         $listPengajuan = Pengajuan::with([
-            'towerAset',
-            'centralAset',
+            'aset',
             'fotos'
         ])->orderBy('created_at', 'desc')->get();
 
         return view('Pengajuan.index', compact('listPengajuan'));
+    }
+
+    public function createUmum()
+    {
+        $kodePengajuanDefault = $this->generateKodePengajuan();
+
+        $kategoriAsetOptions = ListAset::query()
+            ->select('kategori')
+            ->whereNotNull('kategori')
+            ->where('kategori', '!=', '')
+            ->distinct()
+            ->orderBy('kategori')
+            ->pluck('kategori')
+            ->values();
+
+        $listAsetsForFilter = ListAset::query()
+            ->select(['kode_aset', 'nama', 'lokasi', 'kategori'])
+            ->orderBy('kode_aset')
+            ->get();
+
+        return view('Pengajuan.create', [
+            'kodePengajuanDefault' => $kodePengajuanDefault,
+            'kategoriAsetOptions' => $kategoriAsetOptions,
+            'listAsetsForFilter' => $listAsetsForFilter,
+        ]);
     }
 
     public function detail($id)
@@ -39,32 +63,11 @@ class PengajuanController extends Controller
         return view('Pengajuan.detail', compact('pengajuan', 'pengajuanDetails', 'pengajuanLogs'));
     }
 
-    public function create(string $jenis = 'tower')
-    {
-        $jenis = strtolower($jenis);
-        $allowedJenis = ['tower', 'central'];
-        if (! in_array($jenis, $allowedJenis, true)) {
-            $jenis = 'tower';
-        }
-
-        $identitasOptions = ['KTP', 'SIM'];
-        $kodePengajuanDefault = $this->generateKodePengajuan();
-        
-        $listAsets = ListAset::whereRaw('LOWER(kategori) = ?', [$jenis])
-            ->orderBy('kode_aset')
-            ->get();
-
-        $view = $jenis === 'central' ? 'Pengajuan.central' : 'Pengajuan.tower';
-
-        return view($view, compact('identitasOptions', 'listAsets', 'kodePengajuanDefault'));
-    }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'jenis'               => 'required|in:central,tower',
-            'tower'               => 'required_if:jenis,tower|string|max:255',
-            'central'             => 'required_if:jenis,central|string|max:255',
+            'aset_kode'           => 'required|string|max:255',
+            'kategori_aset'       => 'nullable|string|max:255',
             'kode_pengajuan'      => 'nullable|string|max:255',
 
             'perusahaan_tamu'     => 'required|string|max:255',
@@ -100,6 +103,10 @@ class PengajuanController extends Controller
             'details.*.email'     => 'required|email|max:255',
         ]);
 
+        $asetKode = $validated['aset_kode'];
+        $asetModel = ListAset::where('kode_aset', $asetKode)->first();
+        $jenis = $asetModel?->kategori;
+
         $validated['lama_berkerja'] = $validated['jam_mulai'] . ' - ' . $validated['jam_selesai'];
 
         // Tentukan kode pengajuan final terlebih dahulu
@@ -126,17 +133,14 @@ class PengajuanController extends Controller
             DB::transaction(function () use (
                 $validated,
                 $identitasFilePath,
-                $kodePengajuan
+                $kodePengajuan,
+                $asetKode,
+                $jenis
             ) {
                 $pengajuan = Pengajuan::create([
                     'kode_pengajuan'      => $kodePengajuan,
-                    'jenis'               => $validated['jenis'],
-                    'tower_kode'          => $validated['jenis'] === 'tower'
-                        ? $validated['tower']
-                        : null,
-                    'central_kode'        => $validated['jenis'] === 'central'
-                        ? $validated['central']
-                        : null,
+                    'jenis'               => $jenis,
+                    'aset_kode'           => $asetKode,
                     'perusahaan_tamu'     => $validated['perusahaan_tamu'],
                     'perusahaan_pengutus' => $validated['perusahaan_pengutus'],
                     'jumlah'              => $validated['jumlah'],
@@ -167,7 +171,7 @@ class PengajuanController extends Controller
                     'kode_pengajuan' => $pengajuan->kode_pengajuan,
                     'creator_id'     => Auth::id(),
                     'aksi'           => 'create',
-                    'keterangan'     => 'Pengajuan dibuat melalui form ' . $validated['jenis'],
+                    'keterangan'     => 'Pengajuan dibuat melalui form umum',
                 ]);
             });
         } catch (\Throwable $th) {
@@ -180,10 +184,12 @@ class PengajuanController extends Controller
                 ->with('error', 'Gagal menyimpan pengajuan: ' . $th->getMessage());
         }
 
-        return back()->with(
-            'success',
-            'Pengajuan berhasil dibuat dengan kode ' . $kodePengajuan
-        );
+        return redirect()
+            ->route('pengajuan.list')
+            ->with(
+                'success',
+                'Pengajuan berhasil dibuat dengan kode ' . $kodePengajuan
+            );
     }
 
     private function generateKodePengajuan(): string
@@ -325,7 +331,6 @@ class PengajuanController extends Controller
         }
 
         $jenis = strtolower($pengajuan->jenis);
-        $identitasOptions = ['KTP', 'SIM'];
         
         $listAsets = ListAset::whereRaw('LOWER(kategori) = ?', [$jenis])
             ->orderBy('kode_aset')
@@ -333,9 +338,7 @@ class PengajuanController extends Controller
 
         $pengajuanDetails = PengajuanDetail::where('kode_pengajuan', $pengajuan->kode_pengajuan)->get();
 
-        $view = $jenis === 'central' ? 'Pengajuan.edit-central' : 'Pengajuan.edit-tower';
-
-        return view($view, compact('pengajuan', 'identitasOptions', 'listAsets', 'pengajuanDetails'));
+        return view('Pengajuan.edit', compact('pengajuan', 'listAsets', 'pengajuanDetails'));
     }
 
     public function update(Request $request, $id)
@@ -348,9 +351,8 @@ class PengajuanController extends Controller
         }
 
         $validated = $request->validate([
-            'jenis'               => 'required|in:central,tower',
-            'tower'               => 'required_if:jenis,tower|string|max:255',
-            'central'             => 'required_if:jenis,central|string|max:255',
+            'jenis'               => 'required|string|max:255',
+            'aset_kode'           => 'required|string|max:255',
 
             'perusahaan_tamu'     => 'required|string|max:255',
             'perusahaan_pengutus' => 'required|string|max:255',
@@ -409,8 +411,7 @@ class PengajuanController extends Controller
             ) {
                 $pengajuan->update([
                     'jenis'               => $validated['jenis'],
-                    'tower_kode'          => $validated['jenis'] === 'tower'? $validated['tower']: null,
-                    'central_kode'        => $validated['jenis'] === 'central'? $validated['central']: null,
+                    'aset_kode'           => $validated['aset_kode'],
                     'perusahaan_tamu'     => $validated['perusahaan_tamu'],
                     'perusahaan_pengutus' => $validated['perusahaan_pengutus'],
                     'jumlah'              => $validated['jumlah'],
@@ -607,5 +608,22 @@ class PengajuanController extends Controller
             'aksi'           => $aksi,
             'keterangan'     => $keterangan,
         ]);
+    }
+
+    public function cancel($id)
+    {
+        $pengajuan = Pengajuan::findOrFail($id);
+        $pengajuan->progress = 'Cancel';
+        $pengajuan->status = 'Close';
+        $pengajuan->save();
+
+        PengajuanLog::create([
+            'kode_pengajuan' => $pengajuan->kode_pengajuan,
+            'creator_id'     => Auth::id(),
+            'aksi'           => 'cancel',
+            'keterangan'     => 'Pengajuan dibatalkan oleh ' . Auth::user()->nama,
+        ]);
+
+        return redirect()->route('pengajuan.list')->with('success', 'Pengajuan berhasil dibatalkan');
     }
 }

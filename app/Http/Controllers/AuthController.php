@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Testing\Fluent\Concerns\Has;
 
 class AuthController extends Controller
 {
@@ -18,7 +17,7 @@ class AuthController extends Controller
 
     public function user()
     {
-        $users = User::all();
+        $users = User::whereDoesntHave('roles', fn ($q) => $q->where('name', 'Admin'))->get();
         return view('User.index', compact('users'));
     }
     
@@ -42,9 +41,10 @@ class AuthController extends Controller
             'divisi' => 'required|string|max:255',
             'lokasi_penugasan' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
+            'role' => 'nullable|string|in:security,PIC,view',
         ]);
 
-        User::create([
+        $user = User::create([
             'nama' => $validate['nama'],
             'username' => $validate['username'],
             'email' => $validate['email'],
@@ -53,6 +53,11 @@ class AuthController extends Controller
             'lokasi_penugasan' => $validate['lokasi_penugasan'],
             'password' => Hash::make($validate['password'])
         ]);
+
+        // Assign role (kecuali Admin) jika dipilih
+        if (!empty($validate['role'])) {
+            $user->assignRole($validate['role']);
+        }
 
         return redirect()->route('user')->with('success', 'User Berhasil Ditambahkan');
     }
@@ -80,6 +85,7 @@ class AuthController extends Controller
             'divisi' => 'required|string|max:255',
             'lokasi_penugasan' => 'required|string|max:255',
             'password' => 'nullable|string|min:8|confirmed',
+            'role' => 'nullable|string|in:Admin,security,PIC,view',
         ]);
 
         $user = User::findOrFail($request->id);
@@ -98,6 +104,11 @@ class AuthController extends Controller
         }
 
         $user->update($updateData);
+
+        // Update role jika ada
+        if (isset($validate['role'])) {
+            $user->syncRoles([$validate['role']]);
+        }
 
         return redirect()->route('user.detail', $user->id)->with('success', 'User Berhasil Diupdate');
     }
@@ -125,6 +136,45 @@ class AuthController extends Controller
         return back()->withErrors([
             'email' => 'Email atau password salah.',
         ])->withInput($request->only('email'));
+    }
+
+     /**
+     * Halaman edit profil user oleh Admin/PIC (edit data user lain).
+     */
+    public function profil($id)
+    {
+        $user = User::findOrFail($id);
+        return view('User.profil', compact('user'));
+    }
+
+    /**
+     * Update profil user oleh Admin/PIC.
+     */
+    public function updateprofil(Request $request)
+    {
+        $validate = $request->validate([
+            'id' => 'required|exists:users,id',
+            'email' => 'required|email|unique:users,email,' . $request->id,
+            'jabatan' => 'nullable|string|max:255',
+            'divisi' => 'nullable|string|max:255',
+            'lokasi_penugasan' => 'nullable|string|max:255',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        $user = User::findOrFail($request->id);
+
+        $user->email = $validate['email'];
+        $user->jabatan = $validate['jabatan'] ?? null;
+        $user->divisi = $validate['divisi'] ?? null;
+        $user->lokasi_penugasan = $validate['lokasi_penugasan'] ?? null;
+
+        if (! empty($validate['password'])) {
+            $user->password = Hash::make($validate['password']);
+        }
+
+        $user->save();
+
+        return redirect()->route('user.detail', $user->id)->with('success', 'Profil user berhasil diperbarui.');
     }
 
     public function logout(Request $request)

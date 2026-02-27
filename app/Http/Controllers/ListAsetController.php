@@ -30,11 +30,23 @@ class ListAsetController extends Controller
     {
         $validated = $request->validate([
             'kategori'  => 'required|string|max:255',
-            'nama'      => 'required|string|max:255',
             'lokasi'    => 'required|string|max:255',
+            'nama'      => 'required|string|max:255',
+            // khusus kategori "Lainnya" (kategori manual)
+            'kategori_lainnya' => 'nullable|string|max:255',
         ]);
 
+        if ($request->kategori === 'Lainnya') {
+            $request->validate([
+                'kategori_lainnya' => ['required', 'string', 'max:255'],
+            ]);
+
+            // saat "Lainnya", nilai field kategori diambil dari input manual
+            $validated['kategori'] = $request->kategori_lainnya;
+        }
+
         $validated['kode_aset'] = $this->generateKodeAset();
+        unset($validated['kategori_lainnya']);
 
         ListAset::create($validated);
 

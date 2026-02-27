@@ -44,6 +44,193 @@
     <!-- Choices Css -->
     <link rel="stylesheet" href="{{ asset('template/Solic/dist/assets') }}/libs/choices.js/public/assets/styles/choices.min.css">
 
+    <!-- Custom Style untuk Header dan Sidebar -->
+    <style>
+        /* CSS Variables untuk warna konsisten */
+        :root {
+            --primary-color: #f25920 !important;
+            --primary-rgb: 242, 89, 32 !important;
+            --primary: #f25920 !important;
+        }
+        
+        /* Header Styling - Semua Variasi dengan Selector Kuat */
+        header.app-header,
+        .app-header,
+        .app-header::before,
+        .app-header::after,
+        .main-header-container,
+        .main-header-container::before,
+        .main-header-container::after,
+        .header-content-left,
+        .header-content-left::before,
+        .header-content-right,
+        .header-content-right::before,
+        .header-element,
+        .header-link,
+        .horizontal-logo,
+        body .app-header,
+        body .main-header-container {
+            background: #f25920 !important;
+            background-color: #f25920 !important;
+        }
+
+        [class*="header"]:not([class*="dropdown"]):not([class*="menu"]) {
+            background: #f25920 !important;
+            background-color: #f25920 !important;
+        }
+        
+        /* Sidebar Styling - Semua Variasi dengan Selector Kuat */
+        aside.app-sidebar,
+        .app-sidebar,
+        .app-sidebar::before,
+        .app-sidebar::after,
+        .main-sidebar-header,
+        .main-sidebar-header::before,
+        .main-sidebar-header::after,
+        .main-sidebar,
+        .main-sidebar::before,
+        .main-sidebar::after,
+        .main-menu-container,
+        .main-menu-container::before,
+        .main-menu-container::after,
+        nav.main-menu-container,
+        .main-menu,
+        .slide,
+        .slide__category,
+        .side-menu__item,
+        body .app-sidebar,
+        body .main-sidebar,
+        body .main-sidebar-header {
+            background: #f25920 !important;
+            background-color: #f25920 !important;
+        }
+        
+        /* Override semua background sidebar dengan selector lebih kuat */
+        [class*="sidebar"]:not([class*="dropdown"]),
+        [class*="side-menu"],
+        [class*="slide"]:not([class*="menu"]) {
+            background: #f25920 !important;
+            background-color: #f25920 !important;
+        }
+        
+        /* Menu Item Active State */
+        .side-menu__item.active,
+        .side-menu__item[aria-expanded="true"],
+        .slide.active > .side-menu__item,
+        .slide.has-sub.active > .side-menu__item,
+        .slide.active .side-menu__item {
+            background-color: rgba(255, 255, 255, 0.15) !important;
+            background: rgba(255, 255, 255, 0.15) !important;
+        }
+        
+        /* Menu Item Hover */
+        .side-menu__item:hover,
+        .slide:hover > .side-menu__item {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+        }
+        
+        /* Submenu */
+        .slide-menu,
+        .slide-menu::before,
+        .slide-menu::after,
+        .child1,
+        .mega-menu,
+        .slide-menu.child1,
+        .slide-menu.mega-menu {
+            background: #f25920 !important;
+            background-color: #f25920 !important;
+        }
+        
+        /* Override warna primary dari template dengan selector lebih kuat */
+        body .border-primary {
+            border-color: #f25920 !important;
+        }
+        body .text-primary {
+            color: #f25920 !important;
+        }
+        body .bg-primary {
+            background-color: #f25920 !important;
+        }
+        /* Teks PUTIH pada elemen dengan background orange - agar terbaca */
+        body .btn-primary,
+        body .btn.bg-primary,
+        body .badge.bg-primary,
+        body .badge[class*="primary"] {
+            color: #ffffff !important;
+        }
+        
+        /* Badge dan Notification */
+        .badge.bg-primary,
+        .header-icon-badge,
+        .pulse-danger {
+            background-color: #f25920 !important;
+            background: #f25920 !important;
+            color: #ffffff !important;
+        }
+        
+        /* Link di header */
+        .header-link,
+        .header-link-icon,
+        .header-link i {
+            color: #ffffff !important;
+        }
+        
+        /* Teks dan icon di sidebar - pastikan putih di atas orange */
+        .app-sidebar .side-menu__label,
+        .app-sidebar .side-menu__item,
+        .app-sidebar .category-name,
+        .app-sidebar .side-menu__angle,
+        .app-sidebar a.side-menu__item,
+        .app-sidebar .slide-menu a {
+            color: #ffffff !important;
+        }
+        .app-sidebar .side-menu__icon,
+        .app-sidebar svg.side-menu__icon {
+            fill: #ffffff !important;
+            color: #ffffff !important;
+        }
+        .app-sidebar .slide-left svg,
+        .app-sidebar .slide-right svg {
+            fill: #ffffff !important;
+        }
+        
+        /* Card Header Styling - Background Putih saja, teks tetap default */
+        .card-header,
+        .card .card-header,
+        .card.custom-card .card-header,
+        body .card-header,
+        body .card .card-header,
+        body .card.custom-card .card-header {
+            background-color: #ffffff !important;
+            background: #ffffff !important;
+        }
+        
+        /* Override inline styles jika ada - pastikan teks putih pada background orange */
+        [style*="background"][style*="orange"],
+        [style*="background-color"][style*="orange"],
+        [style*="background"][style*="#ff6"],
+        [style*="background-color"][style*="#ff6"],
+        [style*="background-color"][style*="f25920"],
+        [style*="background"][style*="f25920"] {
+            background-color: #f25920 !important;
+            background: #f25920 !important;
+        }
+        .modal-header[style*="f25920"] .modal-title,
+        .modal-header[style*="f25920"] h1,
+        .modal-header[style*="f25920"] h2,
+        .modal-header[style*="f25920"] h3,
+        .modal-header[style*="f25920"] h4,
+        .modal-header[style*="f25920"] h5 {
+            color: #ffffff !important;
+        }
+        
+        /* Pastikan tidak ada warna oranye lain yang muncul */
+        * {
+            --bs-primary: #f25920 !important;
+            --bs-primary-rgb: 242, 89, 32 !important;
+        }
+    </style>
 
 <link rel="stylesheet" href="{{ asset('template/Solic/dist/assets') }}/libs/jsvectormap/css/jsvectormap.min.css">
 
@@ -56,472 +243,6 @@
 </head>
 
 <body>
-
-    <!-- Start Switcher -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="switcher-canvas" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title text-default" id="offcanvasRightLabel">Switcher</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <nav class="border-bottom border-block-end-dashed">
-                <div class="nav nav-tabs nav-justified" id="switcher-main-tab" role="tablist">
-                    <button class="nav-link active" id="switcher-home-tab" data-bs-toggle="tab" data-bs-target="#switcher-home"
-                        type="button" role="tab" aria-controls="switcher-home" aria-selected="true">Theme Styles</button>
-                    <button class="nav-link" id="switcher-profile-tab" data-bs-toggle="tab" data-bs-target="#switcher-profile"
-                        type="button" role="tab" aria-controls="switcher-profile" aria-selected="false">Theme Colors</button>
-                </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active border-0" id="switcher-home" role="tabpanel" aria-labelledby="switcher-home-tab"
-                    tabindex="0">
-                    <div class="">
-                        <p class="switcher-style-head">Theme Color Mode:</p>
-                        <div class="row switcher-style gx-0">
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-light-theme">
-                                        Light
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="theme-style" id="switcher-light-theme"
-                                        checked>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-dark-theme">
-                                        Dark
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="theme-style" id="switcher-dark-theme">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="">
-                        <p class="switcher-style-head">Directions:</p>
-                        <div class="row switcher-style gx-0">
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-ltr">
-                                        LTR
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="direction" id="switcher-ltr" checked>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-rtl" style="opacity: 0.5; cursor: not-allowed;">
-                                        RTL (Disabled)
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="direction" id="switcher-rtl" disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="alert alert-info mt-2 mb-0" style="font-size: 11px;">
-                            <i class="fe fe-info"></i> Mode RTL dinonaktifkan. Aplikasi menggunakan mode LTR.
-                        </div>
-                    </div>
-                    <div class="">
-                        <p class="switcher-style-head">Navigation Styles:</p>
-                        <div class="row switcher-style gx-0">
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-vertical">
-                                        Vertical
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="navigation-style" id="switcher-vertical"
-                                        checked>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-horizontal">
-                                        Horizontal
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="navigation-style"
-                                        id="switcher-horizontal">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="navigation-menu-styles">
-                        <p class="switcher-style-head">Vertical & Horizontal Menu Styles:</p>
-                        <div class="row switcher-style gx-0 pb-2 gy-2">
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-menu-click">
-                                        Menu Click
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="navigation-menu-styles"
-                                        id="switcher-menu-click">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-menu-hover">
-                                        Menu Hover
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="navigation-menu-styles"
-                                        id="switcher-menu-hover">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-icon-click">
-                                        Icon Click
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="navigation-menu-styles"
-                                        id="switcher-icon-click">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-icon-hover">
-                                        Icon Hover
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="navigation-menu-styles"
-                                        id="switcher-icon-hover">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sidemenu-layout-styles">
-                        <p class="switcher-style-head">Sidemenu Layout Styles:</p>
-                        <div class="row switcher-style gx-0 pb-2 gy-2">
-                            <div class="col-sm-6">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-default-menu">
-                                        Default Menu
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="sidemenu-layout-styles"
-                                        id="switcher-default-menu" checked>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-closed-menu">
-                                        Closed Menu
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="sidemenu-layout-styles"
-                                        id="switcher-closed-menu">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-icontext-menu">
-                                        Icon Text
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="sidemenu-layout-styles"
-                                        id="switcher-icontext-menu">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-icon-overlay">
-                                        Icon Overlay
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="sidemenu-layout-styles"
-                                        id="switcher-icon-overlay">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-detached">
-                                        Detached
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="sidemenu-layout-styles"
-                                        id="switcher-detached">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-double-menu">
-                                        Double Menu
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="sidemenu-layout-styles"
-                                        id="switcher-double-menu">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="">
-                        <p class="switcher-style-head">Page Styles:</p>
-                        <div class="row switcher-style gx-0">
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-regular">
-                                        Regular
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="page-styles" id="switcher-regular"
-                                        checked>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-classic">
-                                        Classic
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="page-styles" id="switcher-classic">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-modern">
-                                        Modern
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="page-styles" id="switcher-modern">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="">
-                        <p class="switcher-style-head">Layout Width Styles:</p>
-                        <div class="row switcher-style gx-0">
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-full-width">
-                                        Full Width
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="layout-width" id="switcher-full-width"
-                                        checked>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-boxed">
-                                        Boxed
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="layout-width" id="switcher-boxed">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="">
-                        <p class="switcher-style-head">Menu Positions:</p>
-                        <div class="row switcher-style gx-0">
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-menu-fixed">
-                                        Fixed
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="menu-positions" id="switcher-menu-fixed"
-                                        checked>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-menu-scroll">
-                                        Scrollable
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="menu-positions" id="switcher-menu-scroll">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="">
-                        <p class="switcher-style-head">Header Positions:</p>
-                        <div class="row switcher-style gx-0">
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-header-fixed">
-                                        Fixed
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="header-positions"
-                                        id="switcher-header-fixed" checked>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-header-scroll">
-                                        Scrollable
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="header-positions"
-                                        id="switcher-header-scroll">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="">
-                        <p class="switcher-style-head">Loader:</p>
-                        <div class="row switcher-style gx-0">
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-loader-enable">
-                                        Enable
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="page-loader"
-                                        id="switcher-loader-enable">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-check switch-select">
-                                    <label class="form-check-label" for="switcher-loader-disable">
-                                        Disable
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="page-loader"
-                                        id="switcher-loader-disable" checked>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade border-0" id="switcher-profile" role="tabpanel" aria-labelledby="switcher-profile-tab" tabindex="0">
-                    <div>
-                        <div class="theme-colors">
-                            <p class="switcher-style-head">Menu Colors:</p>
-                            <div class="d-flex switcher-style pb-2">
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-white" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Light Menu" type="radio" name="menu-colors"
-                                        id="switcher-menu-light">
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-dark" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Dark Menu" type="radio" name="menu-colors"
-                                        id="switcher-menu-dark" checked>
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-primary" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Color Menu" type="radio" name="menu-colors"
-                                        id="switcher-menu-primary">
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-gradient" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Gradient Menu" type="radio" name="menu-colors"
-                                        id="switcher-menu-gradient">
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-transparent"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Transparent Menu"
-                                        type="radio" name="menu-colors" id="switcher-menu-transparent">
-                                </div>
-                            </div>
-                            <div class="px-4 pb-3 text-muted fs-11">Note:If you want to change color Menu dynamically change from below Theme Primary color picker</div>
-                        </div>
-                        <div class="theme-colors">
-                            <p class="switcher-style-head">Header Colors:</p>
-                            <div class="d-flex switcher-style pb-2">
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-white" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Light Header" type="radio" name="header-colors"
-                                        id="switcher-header-light" >
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-dark" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Dark Header" type="radio" name="header-colors"
-                                        id="switcher-header-dark">
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-primary" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Color Header" type="radio" name="header-colors"
-                                        id="switcher-header-primary" checked>
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-gradient" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Gradient Header" type="radio" name="header-colors"
-                                        id="switcher-header-gradient">
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-transparent" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Transparent Header" type="radio" name="header-colors"
-                                        id="switcher-header-transparent">
-                                </div>
-                            </div>
-                            <div class="px-4 pb-3 text-muted fs-11">Note:If you want to change color Header dynamically change from below Theme Primary color picker</div>
-                        </div>
-                        <div class="theme-colors">
-                            <p class="switcher-style-head">Theme Primary:</p>
-                            <div class="d-flex flex-wrap align-items-center switcher-style">
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-primary-1" type="radio"
-                                        name="theme-primary" id="switcher-primary">
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-primary-2" type="radio"
-                                        name="theme-primary" id="switcher-primary1">
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-primary-3" type="radio" name="theme-primary"
-                                        id="switcher-primary2">
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-primary-4" type="radio" name="theme-primary"
-                                        id="switcher-primary3">
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-primary-5" type="radio" name="theme-primary"
-                                        id="switcher-primary4">
-                                </div>
-                                <div class="form-check switch-select ps-0 mt-1 color-primary-light">
-                                    <div class="theme-container-primary"></div>
-                                    <div class="pickr-container-primary"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="theme-colors">
-                            <p class="switcher-style-head">Theme Background:</p>
-                            <div class="d-flex flex-wrap align-items-center switcher-style">
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-bg-1" type="radio"
-                                        name="theme-background" id="switcher-background">
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-bg-2" type="radio"
-                                        name="theme-background" id="switcher-background1">
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-bg-3" type="radio" name="theme-background"
-                                        id="switcher-background2">
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-bg-4" type="radio"
-                                        name="theme-background" id="switcher-background3">
-                                </div>
-                                <div class="form-check switch-select me-3">
-                                    <input class="form-check-input color-input color-bg-5" type="radio"
-                                        name="theme-background" id="switcher-background4">
-                                </div>
-                                <div class="form-check switch-select ps-0 mt-1 tooltip-static-demo color-bg-transparent">
-                                    <div class="theme-container-background"></div>
-                                    <div class="pickr-container-background"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="menu-image mb-3">
-                            <p class="switcher-style-head">Menu With Background Image:</p>
-                            <div class="d-flex flex-wrap align-items-center switcher-style">
-                                <div class="form-check switch-select m-2">
-                                    <input class="form-check-input bgimage-input bg-img1" type="radio"
-                                        name="theme-background" id="switcher-bg-img">
-                                </div>
-                                <div class="form-check switch-select m-2">
-                                    <input class="form-check-input bgimage-input bg-img2" type="radio"
-                                        name="theme-background" id="switcher-bg-img1">
-                                </div>
-                                <div class="form-check switch-select m-2">
-                                    <input class="form-check-input bgimage-input bg-img3" type="radio" name="theme-background"
-                                        id="switcher-bg-img2">
-                                </div>
-                                <div class="form-check switch-select m-2">
-                                    <input class="form-check-input bgimage-input bg-img4" type="radio"
-                                        name="theme-background" id="switcher-bg-img3">
-                                </div>
-                                <div class="form-check switch-select m-2">
-                                    <input class="form-check-input bgimage-input bg-img5" type="radio"
-                                        name="theme-background" id="switcher-bg-img4">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-grid canvas-footer"> 
-                    <a href="javascript:void(0);" id="reset-all" class="btn btn-danger m-1">Reset</a> 
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Switcher -->
-
 
     <!-- Loader -->
     <div id="loader" >
@@ -584,152 +305,17 @@
                     <!-- End::header-element -->
 
                     <!-- Start::header-element -->
-                    <div class="header-element meassage-dropdown">
-                        <!-- Start::header-link|dropdown-toggle -->
-                        <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-auto-close="outside"
-                            data-bs-toggle="dropdown">
-                            <i class="bx bx-envelope  header-link-icon"></i>
-                            <span class="badge  header-icon-badge pulse pulse-danger"></span>
-                        </a>
-                        <!-- End::header-link|dropdown-toggle -->
-                        <!-- Start::main-header-dropdown -->
-                        <div class="main-header-dropdown dropdown-menu dropdown-menu-end overflow-hidden border-transparent" data-popper-placement="none">
-                            <div class="p-3  rounded-top-1">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="mb-0 fs-17 fw-500">Messages</p>
-                                    <span class="badge bg-success fw-normal rounded-pill" id="message-data">5 Unread</span>
-                                </div>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <ul class="list-unstyled mb-0" id="header-notification-scroll1">
-                                <li class="dropdown-item">
-                                    <div class="d-flex align-items-start">
-                                        <div class="pe-2">
-                                            <img src="{{ asset('template/Solic/dist/assets') }}/images/faces/1.jpg" alt="img" class="rounded-circle avatar">
-                                        </div>
-                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="mb-0 fw-medium"><a href="chat.html">Gerninia<span
-                                                            class="text-muted fs-12 fw-normal ps-1">  6:45 am </span></a>
-                                                </p>
-                                                <span class="text-muted fw-normal fs-12 header-notification-text">Commented on file Guest list....</span>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);"
-                                                    class="min-w-fit-content text-muted me-1 dropdown-item-close3"><i
-                                                        class="ti ti-x fs-16"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="dropdown-item">
-                                    <div class="d-flex align-items-start">
-                                        <div class="pe-2">
-                                            <img src="{{ asset('template/Solic/dist/assets') }}/images/faces/2.jpg" alt="img" class="rounded-circle avatar">
-                                        </div>
-                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="mb-0 fw-medium"><a href="chat.html">Peter Theil<span
-                                                            class="text-muted fs-12 fw-normal ps-1"> 5 hours ago </span></a>
-                                                </p>
-                                                <span class="text-muted fw-normal fs-12 header-notification-text">Brizid is in the Warehouse...</span>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);"
-                                                    class="min-w-fit-content text-muted me-1 dropdown-item-close3"><i
-                                                        class="ti ti-x fs-16"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="dropdown-item">
-                                    <div class="d-flex align-items-start">
-                                        <div class="pe-2">
-                                            <img src="{{ asset('template/Solic/dist/assets') }}/images/faces/3.jpg" alt="img" class="rounded-circle avatar">
-                                        </div>
-                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="mb-0 fw-medium"><a href="chat.html">John vally<span
-                                                            class="text-muted fs-12 fw-normal ps-1">45 mintues ago </span></a>
-                                                </p>
-                                                <span class="text-muted fw-normal fs-12 header-notification-text">New Product Realease......</span>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);"
-                                                    class="min-w-fit-content text-muted me-1 dropdown-item-close3"><i
-                                                        class="ti ti-x fs-16"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="dropdown-item">
-                                    <div class="d-flex align-items-start">
-                                        <div class="pe-2">
-                                            <img src="{{ asset('template/Solic/dist/assets') }}/images/faces/4.jpg" alt="img" class="rounded-circle avatar">
-                                        </div>
-                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="mb-0 fw-medium"><a href="chat.html">Samonu Show<span
-                                                            class="text-muted fs-12 fw-normal ps-1">20 mintues ago </span></a>
-                                                </p>
-                                                <span class="text-muted fw-normal fs-12 header-notification-text">New Meetup Started......</span>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);"
-                                                    class="min-w-fit-content text-muted me-1 dropdown-item-close3"><i
-                                                        class="ti ti-x fs-16"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="dropdown-item">
-                                    <div class="d-flex align-items-start">
-                                        <div class="pe-2">
-                                            <img src="{{ asset('template/Solic/dist/assets') }}/images/faces/2.jpg" alt="img" class="rounded-circle avatar">
-                                        </div>
-                                        <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <p class="mb-0 fw-medium"><a href="chat.html">Senrio<span
-                                                            class="text-muted fs-12 fw-normal ps-1"> 10 hours ago </span></a>
-                                                </p>
-                                                <span class="text-muted fw-normal fs-12 header-notification-text">New product
-                                                    Launching...</span>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);"
-                                                    class="min-w-fit-content text-muted me-1 dropdown-item-close3"><i
-                                                        class="ti ti-x fs-16"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class=" p-3 empty-header-item3 border-top dropdown-footer">
-                                <div class="d-grid">
-                                    <a href="chat.html" class="btn text-muted p-0 text-primary">View all</a>
-                                </div>
-                            </div>
-                            <div class="p-5 empty-item3 d-none">
-                                <div class="text-center">
-                                    <span class="avatar avatar-xl avatar-rounded bg-primary-transparent">
-                                        <i class="ri-mail-close-line fs-2"></i>
-                                    </span>
-                                    <h6 class="fw-medium mt-3">No New Messages</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End::main-header-dropdown -->
-                    </div>
-                    <!-- End::header-element -->
-
-                    <!-- Start::header-element -->
                     @auth
                     <div class="header-element">
                         <!-- Start::header-link|dropdown-toggle -->
                         <a href="javascript:void(0);" class="header-link dropdown-toggle" id="mainHeaderProfile" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                             <div>
                                 <div class="me-sm-2 me-0">
-                                    <img src="{{ asset('default.jpg') }}" alt="User" width="32" height="32" class="rounded-circle">
+                                    @if(Auth::user()->foto_url)
+                                        <img src="{{ Auth::user()->foto_url }}" alt="User" width="32" height="32" class="rounded-circle" style="object-fit: cover;">
+                                    @else
+                                        <img src="{{ asset('default.jpg') }}" alt="User" width="32" height="32" class="rounded-circle">
+                                    @endif
                                 </div>
                             </div>
                         </a>
@@ -737,8 +323,9 @@
                         <div class="main-header-dropdown dropdown-menu pt-0 overflow-hidden header-profile-dropdown  border-transparent dropdown-menu-end" aria-labelledby="mainHeaderProfile">
                             <div class="main-header-profile header-img p-3 border-bottom text-center">
                                 <p class="fw-semibold mb-0 lh-1 fs-16">{{ Auth::user()->nama }}</p>
-                                <span class="op-7 fw-normal d-block fs-11">{{ Auth::user()->role->nama ?? 'User' }}</span>
+                                <span class="op-7 fw-normal d-block fs-11">{{ Auth::user()->roles->first()?->name ?? 'User' }}</span>
                             </div>
+                            <a class="dropdown-item d-flex" href="{{ route('profile.index') }}"><i class="fe fe-user fs-18 me-2 op-7"></i>Profile</a>
                             <a class="dropdown-item d-flex" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-header').submit();"><i class="fe fe-log-out fs-18 me-2 op-7"></i>Logout</a>
                             <form id="logout-form-header" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
@@ -746,16 +333,6 @@
                         </div>
                     </div>
                     @endauth  
-                    <!-- End::header-element -->
-
-                    <!-- Start::header-element -->
-                    <div class="header-element">
-                        <!-- Start::header-link|switcher-icon -->
-                        <a href="javascript:void(0);" class="header-link switcher-icon" data-bs-toggle="offcanvas" data-bs-target="#switcher-canvas">
-                            <i class="bx bx-cog header-link-icon"></i>
-                        </a>
-                        <!-- End::header-link|switcher-icon -->
-                    </div>
                     <!-- End::header-element -->
 
                 </div>
@@ -805,6 +382,7 @@
                         <!-- End::slide -->
 
                         <!-- Start::slide -->
+                        @canany(['view-aset', 'create-aset', 'edit-aset'])
                         <li class="slide has-sub">
                             <a href="javascript:void(0);" class="side-menu__item">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M17 6h2v2h-2zm0 4h2v2h-2zm-4-4h2v2h-2zm0 4h2v2h-2zM9 6h2v2H9zm0 4h2v2H9zm-4 0h2v2H5zm0-4h2v2H5zm12 8H5c-1.103 0-2-.897-2-2V6c0-1.103.897-2 2-2h12c1.103 0 2 .897 2 2v6c0 1.103-.897 2-2 2zm0-8H5v6h12V6z"></path></svg>
@@ -815,32 +393,31 @@
                                 <li class="slide side-menu__label1">
                                     <a href="javascript:void(0)" class="text-white">Aset</a>
                                 </li>
+                                @can('view-aset')
                                 <li class="slide">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M3 13h1v7c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-7h1a1 1 0 0 0 .707-1.707l-9-9a.999.999 0 0 0-1.414 0l-9 9A1 1 0 0 0 3 13zm7 7v-5h4v5h-4zm2-15.586 6 6V15l.001 5H16v-5c0-1.103-.897-2-2-2h-4c-1.103 0-2 .897-2 2v5H6v-9.586l6-6z"></path></svg>
-                                    <a href="{{ route('aset.index') }}" class="side-menu__label text-white">Dashboard</a>
+                                    <a href="{{ route('aset.index') }}" class="side-menu__label text-white">Data Aset</a>
                                 </li>
+                                @endcan
+                                @can('view-pengajuan')
                                 <li class="slide">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path></svg>
                                     <a href="{{ route('pengajuan.list') }}" class="side-menu__label text-white">Peminjaman</a>
                                 </li>
+                                @endcan
                             </ul>
                         </li>
+                        @endcanany
                         <!-- End::slide -->
                         
-                        <!-- Start::slide
-                        <li class="slide">
-                            <a href="{{ route('logaktivitas') }}" class="side-menu__item">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.103.897 2 2 2h14v-2H4V6z"></path><path d="M20 2H8c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm-2 9H10V9h8v2zm0-4H10V5h8v2z"></path></svg>
-                                <span class="side-menu__label text-white">Log Aktivitas</span>
-                            </a>
-                        </li> -->
-
+                        @can('view-approval')
                         <li class="slide">
                             <a href="{{ route('approval.index') }}" class="side-menu__item">
                             <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.999 14.413-3.713-3.705L7.7 11.292l2.299 2.295 5.294-5.294 1.414 1.414-6.706 6.706z"></path></svg>
                                 <span class="side-menu__label text-white">Approval</span>
                             </a>
                         </li>
+                        @endcan
                         <!-- End::slide -->
                         
                         <!-- Start::slide__category -->
@@ -848,6 +425,7 @@
                         <!-- End::slide__category -->
                         
                         <!-- Start::slide -->
+                        @can('view-user')
                         <li class="slide has-sub">
                             <a href="javascript:void(0);" class="side-menu__item">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
@@ -862,8 +440,15 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"></path></svg>
                                     <a href="{{ route('user') }}" class="side-menu__label text-white">Data User</a>
                                 </li>
+                                @role('Admin')
+                                <li class="slide">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
+                                    <a href="{{ route('access-management.index') }}" class="side-menu__label text-white">Akses User</a>
+                                </li>
+                                @endrole
                             </ul>
                         </li>
+                        @endcan
                         <!-- End::slide -->
 
                         <!-- Start::slide -->
@@ -894,13 +479,13 @@
             <div class="container-fluid">
 
                 <!-- Page Header -->
-                <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb text-fixed-white">
-                    <h1 class="page-title fw-medium fs-22 mb-0 text-fixed-white"> VEKTOR </h1>
+                <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
+                    <h1 class="page-title fw-medium fs-22 mb-0 text-body"> VEKTOR </h1>
                     <div class="ms-md-1 ms-0">
                         <nav>
                             <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item text-fixed-white"><a href="{{ route('dashboard') }}" class="text-fixed-white">Home</a></li>
-                                <li class="breadcrumb-item active text-fixed-white" aria-current="page">
+                                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}" class="text-body-secondary">Home</a></li>
+                                <li class="breadcrumb-item active text-body" aria-current="page">
                                     {{ $breadcrumbTitle }}
                                 </li>
                             </ol>
@@ -916,7 +501,7 @@
         <!-- End::app-content -->
 
         <!-- Footer Start -->
-        <footer class="footer mt-auto py-3 bg-white text-center">
+        <!-- <footer class="footer mt-auto py-3 bg-white text-center">
             <div class="container">
                 <span class="text-muted"> Copyright © <span id="year"></span> <a
                         href="javascript:void(0);" class="text-dark fw-medium">BBT</a>.
@@ -927,7 +512,7 @@
                     reserved
                 </span>
             </div>
-        </footer>
+        </footer> -->
         <!-- Footer End -->
 
     </div>
@@ -983,10 +568,6 @@
 
     <!-- Custom JS -->
     <script src="{{ asset('template/Solic/dist/assets') }}/js/custom.js"></script>
-
-    
-    <!-- Custom-Switcher JS -->
-    <script src="{{ asset('template/Solic/dist/assets') }}/js/custom-switcher.min.js"></script>
 
      <!-- Datatables Cdn -->
      <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
@@ -1088,58 +669,39 @@
             sessionKeysToRemove.forEach(key => sessionStorage.removeItem(key));
         })();
         
-        document.addEventListener('DOMContentLoaded', function() {
-            // Pastikan HTML tag selalu LTR
-            const html = document.documentElement;
-            html.setAttribute('dir', 'ltr');
-            html.removeAttribute('dir-rtl');
-            html.classList.remove('rtl');
-            html.classList.add('ltr');
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     // Pastikan HTML tag selalu LTR
+        //     const html = document.documentElement;
+        //     html.setAttribute('dir', 'ltr');
+        //     html.removeAttribute('dir-rtl');
+        //     html.classList.remove('rtl');
+        //     html.classList.add('ltr');
             
-            // Pastikan body selalu LTR
-            document.body.classList.remove('rtl');
-            document.body.classList.add('ltr');
+        //     // Pastikan body selalu LTR
+        //     document.body.classList.remove('rtl'); 
+        //     document.body.classList.add('ltr');
             
-            // Reset radio button ke LTR
-            const ltrRadio = document.getElementById('switcher-ltr');
-            const rtlRadio = document.getElementById('switcher-rtl');
-            if (ltrRadio) {
-                ltrRadio.checked = true;
-                ltrRadio.disabled = false;
-            }
-            if (rtlRadio) {
-                rtlRadio.checked = false;
-                rtlRadio.disabled = true;
-            }
+        //     // Reset radio button ke LTR
+        //     const ltrRadio = document.getElementById('switcher-ltr');
+        //     const rtlRadio = document.getElementById('switcher-rtl');
+        //     if (ltrRadio) {
+        //         ltrRadio.checked = true;
+        //         ltrRadio.disabled = false;
+        //     }
+        //     if (rtlRadio) {
+        //         rtlRadio.checked = false;
+        //         rtlRadio.disabled = true;
+        //     }
             
-            // Force reload CSS jika diperlukan
-            const links = document.querySelectorAll('link[rel="stylesheet"]');
-            links.forEach(link => {
-                if (link.href.includes('rtl')) {
-                    link.disabled = true;
-                }
-            });
-        });
+        //     // Force reload CSS jika diperlukan
+        //     const links = document.querySelectorAll('link[rel="stylesheet"]');
+        //     links.forEach(link => {
+        //         if (link.href.includes('rtl')) {
+        //             link.disabled = true;
+        //         }
+        //     });
+        // });
         
-        // Prevent RTL dari diaktifkan
-        document.addEventListener('change', function(e) {
-            if (e.target && e.target.id === 'switcher-rtl' && e.target.checked) {
-                // Reset kembali ke LTR
-                e.preventDefault();
-                e.target.checked = false;
-                const ltrRadio = document.getElementById('switcher-ltr');
-                if (ltrRadio) {
-                    ltrRadio.checked = true;
-                    ltrRadio.disabled = false;
-                }
-                alert('Mode RTL dinonaktifkan. Aplikasi ini menggunakan mode LTR (Left-to-Right).');
-                
-                // Force reset direction
-                document.documentElement.setAttribute('dir', 'ltr');
-                document.body.classList.remove('rtl');
-                document.body.classList.add('ltr');
-            }
-        });
         
         // Monitor perubahan attribute dir
         const observer = new MutationObserver(function(mutations) {
@@ -1159,6 +721,102 @@
             observer.observe(document.documentElement, {
                 attributes: true,
                 attributeFilter: ['dir']
+            });
+        });
+    </script>
+    
+    <!-- Force Override Warna Header dan Sidebar -->
+    <style>
+        /* Final Override - Pastikan semua elemen menggunakan #f25920 */
+        html body header.app-header,
+        html body .app-header,
+        html body .header-content-left,
+        html body .header-content-right,
+        html body aside.app-sidebar,
+        html body .app-sidebar,
+        html body .main-sidebar-header,
+        html body .main-sidebar,
+        html body .main-menu-container,
+        html body nav.main-menu-container,
+        html body .main-menu,
+        html body .slide,
+        html body .slide__category,
+        html body .side-menu__item,
+        html body .slide-menu,
+        html body .slide-menu.child1,
+        html body .slide-menu.mega-menu {
+            background: #f25920 !important;
+            background-color: #f25920 !important;
+        }
+        
+        /* Override dengan JavaScript untuk memastikan */
+        html body [class*="header"]:not([class*="dropdown-menu"]):not([class*="dropdown-item"]):not([class*="card-header"]),
+        html body [class*="sidebar"]:not([class*="dropdown-menu"]):not([class*="dropdown-item"]),
+        html body [class*="side-menu"]:not([class*="dropdown-menu"]):not([class*="dropdown-item"]) {
+            background: #f25920 !important;
+            background-color: #f25920 !important;
+        }
+        
+        /* Pastikan card-header tetap putih */
+        html body .card-header,
+        html body .card .card-header,
+        html body .card.custom-card .card-header {
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+        }
+    </style>
+    
+    <script>
+        // Force update warna setelah semua CSS dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            function forceColorUpdate() {
+                const targetColor = '#f25920';
+                
+                // Update Header (kecuali card-header)
+                const headerElements = document.querySelectorAll('.app-header, .main-header-container, .header-content-left, .header-content-right, [class*="header"]:not([class*="dropdown-menu"]):not([class*="card-header"])');
+                headerElements.forEach(el => {
+                    if (el && !el.closest('.dropdown-menu') && !el.classList.contains('card-header')) {
+                        el.style.setProperty('background-color', targetColor, 'important');
+                        el.style.setProperty('background', targetColor, 'important');
+                    }
+                });
+                
+                // Update Sidebar
+                const sidebarElements = document.querySelectorAll('.app-sidebar, .main-sidebar-header, .main-sidebar, .main-menu-container, [class*="sidebar"], [class*="side-menu"], [class*="slide"]:not([class*="menu"]:not([class*="side-menu"]))');
+                sidebarElements.forEach(el => {
+                    if (el && !el.closest('.dropdown-menu')) {
+                        el.style.setProperty('background-color', targetColor, 'important');
+                        el.style.setProperty('background', targetColor, 'important');
+                    }
+                });
+                
+                // Pastikan card-header tetap putih
+                const cardHeaders = document.querySelectorAll('.card-header, .card .card-header, .card.custom-card .card-header');
+                cardHeaders.forEach(el => {
+                    if (el) {
+                        el.style.setProperty('background-color', '#ffffff', 'important');
+                        el.style.setProperty('background', '#ffffff', 'important');
+                    }
+                });
+            }
+            
+            // Jalankan segera
+            forceColorUpdate();
+            
+            // Jalankan lagi setelah delay kecil untuk memastikan
+            setTimeout(forceColorUpdate, 100);
+            setTimeout(forceColorUpdate, 500);
+            
+            // Monitor perubahan DOM
+            const observer = new MutationObserver(function(mutations) {
+                forceColorUpdate();
+            });
+            
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['class', 'style']
             });
         });
     </script>

@@ -58,6 +58,19 @@
                             @enderror
                         </div>
                         <div class="col-md-6">
+                            <label for="role" class="form-label">Role</label>
+                            <select name="role" id="role" class="form-select @error('role') is-invalid @enderror" required>
+                                <option value="">Pilih Role</option>
+                                <option value="view" {{ (old('role', $user->roles->first()?->name) == 'view') ? 'selected' : '' }}>View (Read Only)</option>
+                                <option value="PIC" {{ (old('role', $user->roles->first()?->name) == 'PIC') ? 'selected' : '' }}>PIC</option>
+                                <option value="security" {{ (old('role', $user->roles->first()?->name) == 'security') ? 'selected' : '' }}>Security</option>
+                                <option value="Admin" {{ (old('role', $user->roles->first()?->name) == 'Admin') ? 'selected' : '' }}>Admin</option>
+                            </select>
+                            @error('role')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6">
                             <label for="password" class="form-label">Password Baru (Opsional)</label>
                             <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="Kosongkan jika tidak ingin mengubah password">
                             @error('password')

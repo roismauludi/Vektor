@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('pengajuan', function (Blueprint $table) {
             $table->id();
             $table->string('kode_pengajuan')->unique();
-            $table->enum('jenis', ['tower', 'central'])->index();
-            $table->string('tower_kode')->nullable()->index();
-            $table->string('central_kode')->nullable()->index();
+            // Jenis tidak lagi mengatur struktur aset (tower/central),
+            // semua pengajuan cukup menunjuk ke satu aset di master list_aset.
+            $table->string('jenis')->nullable()->index();
+            $table->string('aset_kode')->nullable()->index();
             $table->string('perusahaan_tamu');
             $table->string('perusahaan_pengutus');
             $table->string('jumlah');
@@ -37,12 +38,7 @@ return new class extends Migration
             $table->string('status')->default('open')->index();
             $table->string('progress');
             $table->timestamps();
-            $table->foreign('tower_kode')
-                ->references('kode_aset')
-                ->on('list_aset')
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
-            $table->foreign('central_kode')
+            $table->foreign('aset_kode')
                 ->references('kode_aset')
                 ->on('list_aset')
                 ->cascadeOnUpdate()
