@@ -190,6 +190,36 @@
             fill: #ffffff !important;
             color: #ffffff !important;
         }
+
+        .app-sidebar .menu-notif {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            margin-left: auto;
+            border-radius: 999px;
+            background: #ffffff !important;
+            color: #f25920 !important;
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .app-sidebar .slide.has-sub > .side-menu__item .menu-notif {
+            margin-right: 0.35rem;
+        }
+
+        .app-sidebar .slide-menu .slide {
+            display: flex;
+            align-items: center;
+        }
+
+        .app-sidebar .slide-menu .menu-notif {
+            margin-left: 0.5rem;
+            margin-right: 0.75rem;
+        }
         .app-sidebar .slide-left svg,
         .app-sidebar .slide-right svg {
             fill: #ffffff !important;
@@ -229,6 +259,40 @@
         * {
             --bs-primary: #f25920 !important;
             --bs-primary-rgb: 242, 89, 32 !important;
+        }
+
+        /* Page header di area oranye */
+        .page-header-breadcrumb {
+            position: relative;
+            z-index: 1;
+            padding-bottom: 2rem;
+        }
+
+        .page-header-breadcrumb .page-subtitle {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 36rem;
+        }
+
+        .page-header-breadcrumb .breadcrumb-item a {
+            color: rgba(255, 255, 255, 0.75) !important;
+        }
+
+        .page-header-breadcrumb .breadcrumb-item a:hover {
+            color: #fff !important;
+        }
+
+        .page-header-breadcrumb .breadcrumb-item.active {
+            color: #fff !important;
+        }
+
+        .page-header-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+            color: rgba(255, 255, 255, 0.55) !important;
+        }
+
+        .page-header-meta {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.85);
         }
     </style>
 
@@ -296,7 +360,7 @@
                 <div class="header-content-right">
 
                     <!-- Start::header-element -->
-                    <div class="header-element d-none d-lg-flex align-items-center">
+                    <div class="header-element d-flex align-items-center me-3">
                         <div class="d-flex align-items-center text-white gap-3">
                             <span class="fs-14 text-white" id="header-date"></span>
                             <span class="fs-16 fw-semibold text-white" id="header-time"></span>
@@ -387,6 +451,11 @@
                             <a href="javascript:void(0);" class="side-menu__item">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M17 6h2v2h-2zm0 4h2v2h-2zm-4-4h2v2h-2zm0 4h2v2h-2zM9 6h2v2H9zm0 4h2v2H9zm-4 0h2v2H5zm0-4h2v2H5zm12 8H5c-1.103 0-2-.897-2-2V6c0-1.103.897-2 2-2h12c1.103 0 2 .897 2 2v6c0 1.103-.897 2-2 2zm0-8H5v6h12V6z"></path></svg>
                                 <span class="side-menu__label text-white">Aset</span>
+                                @hasanyrole('Admin|Security')
+                                @if(($peminjamanDecisionCount ?? 0) > 0)
+                                    <span class="menu-notif">{{ $peminjamanDecisionCount > 99 ? '99+' : $peminjamanDecisionCount }}</span>
+                                @endif
+                                @endhasanyrole
                                 <i class="fe fe-chevron-right side-menu__angle"></i>
                             </a>
                             <ul class="slide-menu child1 mega-menu">
@@ -403,6 +472,11 @@
                                 <li class="slide">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path></svg>
                                     <a href="{{ route('pengajuan.list') }}" class="side-menu__label text-white">Peminjaman</a>
+                                    @hasanyrole('Admin|Security')
+                                    @if(($peminjamanDecisionCount ?? 0) > 0)
+                                        <span class="menu-notif">{{ $peminjamanDecisionCount > 99 ? '99+' : $peminjamanDecisionCount }}</span>
+                                    @endif
+                                    @endhasanyrole
                                 </li>
                                 @endcan
                             </ul>
@@ -415,6 +489,11 @@
                             <a href="{{ route('approval.index') }}" class="side-menu__item">
                             <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.999 14.413-3.713-3.705L7.7 11.292l2.299 2.295 5.294-5.294 1.414 1.414-6.706 6.706z"></path></svg>
                                 <span class="side-menu__label text-white">Approval</span>
+                                @hasanyrole('Admin|PIC')
+                                @if(($approvalPendingCount ?? 0) > 0)
+                                    <span class="menu-notif">{{ $approvalPendingCount > 99 ? '99+' : $approvalPendingCount }}</span>
+                                @endif
+                                @endhasanyrole
                             </a>
                         </li>
                         @endcan
@@ -479,17 +558,31 @@
             <div class="container-fluid">
 
                 <!-- Page Header -->
-                <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
-                    <h1 class="page-title fw-medium fs-22 mb-0 text-body"> VEKTOR </h1>
-                    <div class="ms-md-1 ms-0">
-                        <nav>
-                            <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}" class="text-body-secondary">Home</a></li>
-                                <li class="breadcrumb-item active text-body" aria-current="page">
-                                    {{ $breadcrumbTitle }}
-                                </li>
-                            </ol>
-                        </nav>
+                <div class="page-header-breadcrumb text-fixed-white">
+                    <div class="d-md-flex d-block align-items-start justify-content-between gap-3">
+                        <div class="page-header-left">
+                            <h1 class="page-title fw-semibold fs-22 mb-0 text-fixed-white">{{ $breadcrumbTitle }}</h1>
+                            @hasSection('page-subtitle')
+                                <p class="page-subtitle mb-0 mt-1">@yield('page-subtitle')</p>
+                            @endif
+                        </div>
+                        <div class="page-header-right ms-md-auto">
+                            <nav>
+                                <ol class="breadcrumb mb-0 justify-content-md-end">
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ route('dashboard') }}" class="text-fixed-white">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item active text-fixed-white" aria-current="page">
+                                        {{ $breadcrumbTitle }}
+                                    </li>
+                                </ol>
+                            </nav>
+                            @hasSection('page-actions')
+                                <div class="page-header-actions d-flex align-items-center gap-3 flex-wrap justify-content-md-end mt-2">
+                                    @yield('page-actions')
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
                 <!-- Page Header Close -->
@@ -577,8 +670,8 @@
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.6/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
 
   <!-- Internal Datatables JS -->
   <script src="{{ asset('template/Solic/dist/assets') }}/js/datatables.js"></script>
@@ -643,6 +736,114 @@
         });
     </script>
     @endif
+
+    @auth
+    {{-- Notifikasi Real-Time: polling setiap 15 detik --}}
+    <script>
+    window.addEventListener('load', function () {
+        var POLL_INTERVAL = 15000;
+        var CSRF_TOKEN    = '{{ csrf_token() }}';
+        var UNREAD_URL    = '{{ route("notifications.unread") }}';
+
+        console.log('[NOTIF] Sistem notifikasi aktif. Polling tiap 15 detik.');
+
+        // Buat Toast SweetAlert (fallback ke console jika Swal belum load)
+        function makeToast() {
+            if (typeof Swal === 'undefined') return null;
+            return Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 7000,
+                timerProgressBar: true,
+                didOpen: function(toast) {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
+            });
+        }
+
+        function markRead(id) {
+            fetch('/notifications/' + id + '/read', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': CSRF_TOKEN,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).catch(function() {});
+        }
+
+        function showNotification(notif) {
+            var Toast = makeToast();
+            var icon  = 'info';
+            var bg    = '#fff7ed';
+            var color = '#c2410c';
+
+            if (notif.type === 'pengajuan_diverifikasi') {
+                if (notif.data && notif.data.status === 'approved') {
+                    icon  = 'success';
+                    bg    = '#f0fdf4';
+                    color = '#15803d';
+                } else {
+                    icon  = 'error';
+                    bg    = '#fef2f2';
+                    color = '#b91c1c';
+                }
+            }
+
+            console.log('[NOTIF] Tampilkan notifikasi:', notif.title, notif.message);
+
+            if (Toast) {
+                Toast.fire({
+                    icon: icon,
+                    title: '<span style="color:' + color + ';font-weight:700;font-size:0.95rem">' + notif.title + '</span>',
+                    html: '<span style="color:#374151;font-size:0.85rem">' + notif.message + '</span>',
+                    background: bg,
+                    iconColor: color,
+                });
+            } else {
+                // Fallback jika SweetAlert belum load
+                console.warn('[NOTIF] SweetAlert belum tersedia, tampilkan fallback.');
+                var div = document.createElement('div');
+                div.setAttribute('style',
+                    'position:fixed;top:20px;right:20px;z-index:99999;' +
+                    'background:' + bg + ';border-left:4px solid ' + color + ';' +
+                    'padding:14px 18px;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,.15);' +
+                    'max-width:320px;font-family:sans-serif;cursor:pointer;'
+                );
+                div.innerHTML = '<strong style="color:' + color + ';display:block;margin-bottom:4px">' + notif.title + '</strong>' +
+                    '<span style="color:#374151;font-size:0.85rem">' + notif.message + '</span>';
+                div.onclick = function(){ document.body.removeChild(div); };
+                document.body.appendChild(div);
+                setTimeout(function(){ if(document.body.contains(div)) document.body.removeChild(div); }, 7000);
+            }
+
+            markRead(notif.id);
+        }
+
+        function pollNotifications() {
+            fetch(UNREAD_URL, {
+                headers: { 'Accept': 'application/json', 'X-CSRF-TOKEN': CSRF_TOKEN }
+            })
+            .then(function(res) {
+                if (!res.ok) { return []; }
+                return res.json();
+            })
+            .then(function(notifications) {
+                notifications.forEach(function(notif) {
+                    showNotification(notif);
+                });
+            })
+            .catch(function() {});
+        }
+
+        // Polling pertama setelah 2 detik, lalu setiap 15 detik
+        setTimeout(pollNotifications, 2000);
+        setInterval(pollNotifications, POLL_INTERVAL);
+    });
+    </script>
+    @endauth
 
     <!-- Reset Direction to LTR -->
     <script>
@@ -784,7 +985,7 @@
                 // Update Sidebar
                 const sidebarElements = document.querySelectorAll('.app-sidebar, .main-sidebar-header, .main-sidebar, .main-menu-container, [class*="sidebar"], [class*="side-menu"], [class*="slide"]:not([class*="menu"]:not([class*="side-menu"]))');
                 sidebarElements.forEach(el => {
-                    if (el && !el.closest('.dropdown-menu')) {
+                    if (el && !el.closest('.dropdown-menu') && !el.classList.contains('menu-notif')) {
                         el.style.setProperty('background-color', targetColor, 'important');
                         el.style.setProperty('background', targetColor, 'important');
                     }

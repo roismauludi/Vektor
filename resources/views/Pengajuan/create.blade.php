@@ -85,17 +85,19 @@
                             @enderror
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label">Jam Mulai</label>
-                            <input type="time" name="jam_mulai" value="{{ old('jam_mulai') }}"
+                            <label class="form-label">Jam Mulai <small class="text-muted">(min 08:30)</small></label>
+                            <input type="time" id="jam_mulai" name="jam_mulai" min="08:30" value="{{ old('jam_mulai') }}"
                                    class="form-control @error('jam_mulai') is-invalid @enderror">
+                            <div id="jam_mulai_error" class="invalid-feedback" style="display:none;">Jam mulai minimal pukul 08:30.</div>
                             @error('jam_mulai')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-3">
                             <label class="form-label">Jam Selesai <small class="text-muted">(maks 17:00)</small></label>
-                            <input type="time" name="jam_selesai" max="17:00" value="{{ old('jam_selesai') }}"
+                            <input type="time" id="jam_selesai" name="jam_selesai" max="17:00" value="{{ old('jam_selesai') }}"
                                    class="form-control @error('jam_selesai') is-invalid @enderror">
+                            <div id="jam_selesai_error" class="invalid-feedback" style="display:none;">Jam selesai maksimal pukul 17:00.</div>
                             @error('jam_selesai')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -315,6 +317,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateMasaBerlaku();
     identitasSelect.addEventListener('change', updateMasaBerlaku);
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const jamSelesaiInput = document.getElementById('jam_selesai');
+    const jamSelesaiError = document.getElementById('jam_selesai_error');
+    const MAX_TIME = '17:00';
+
+    function enforceMaxJamSelesai() {
+        if (!jamSelesaiInput.value) return;
+        if (jamSelesaiInput.value > MAX_TIME) {
+            jamSelesaiInput.value = MAX_TIME;
+            jamSelesaiInput.classList.add('is-invalid');
+            jamSelesaiError.style.display = 'block';
+        } else {
+            jamSelesaiInput.classList.remove('is-invalid');
+            jamSelesaiError.style.display = 'none';
+        }
+    }
+
+    jamSelesaiInput.addEventListener('change', enforceMaxJamSelesai);
+    jamSelesaiInput.addEventListener('blur', enforceMaxJamSelesai);
+    jamSelesaiInput.addEventListener('input', enforceMaxJamSelesai);
+
+    const jamMulaiInput = document.getElementById('jam_mulai');
+    const jamMulaiError = document.getElementById('jam_mulai_error');
+    const MIN_TIME = '08:30';
+
+    function enforceMinJamMulai() {
+        if (!jamMulaiInput.value) return;
+        if (jamMulaiInput.value < MIN_TIME) {
+            jamMulaiInput.value = MIN_TIME;
+            jamMulaiInput.classList.add('is-invalid');
+            jamMulaiError.style.display = 'block';
+        } else {
+            jamMulaiInput.classList.remove('is-invalid');
+            jamMulaiError.style.display = 'none';
+        }
+    }
+
+    jamMulaiInput.addEventListener('change', enforceMinJamMulai);
+    jamMulaiInput.addEventListener('blur', enforceMinJamMulai);
+    jamMulaiInput.addEventListener('input', enforceMinJamMulai);
 });
 </script>
 @endpush

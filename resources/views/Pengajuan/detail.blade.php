@@ -6,6 +6,61 @@
     $progressLower = strtolower(trim($pengajuan->progress));
     $isWaitingVerification = str_contains($progressLower, 'menunggu') && str_contains($progressLower, 'verifikasi');
 @endphp
+<style>
+    .photo-item { text-align: center; }
+    .photo-pair-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 0.85rem;
+        color: #1f2937;
+    }
+    .photo-frame {
+        width: 160px;
+        height: 160px;
+        margin: 0 auto;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #e5e7eb;
+        background: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #9ca3af;
+        font-size: 1.6rem;
+    }
+    .photo-frame img {
+        width: 160px;
+        height: 160px;
+        object-fit: cover;
+        display: block;
+    }
+    .photo-frame:hover img {
+        transform: scale(1.03);
+    }
+    .photo-preview-frame {
+        width: 100%;
+        height: 240px;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #9ca3af;
+        font-size: 2rem;
+    }
+    .photo-preview-frame img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+        display: block;
+    }
+    .photo-locked-message {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 2rem;
+    }
+</style>
 
 <div class="row mb-3">
     <div class="col-12">
@@ -27,10 +82,11 @@
                         <p class="text-muted mb-0">Detail Pengajuan</p>
                         <div class="d-flex align-items-center gap-2">
                             @role('Security')
-                            <form action="{{ route('pengajuan.cancel', $pengajuan->id) }}" method="post" class="mb-0">
+                            <form id="cancel-pengajuan-form" action="{{ route('pengajuan.cancel', $pengajuan->id) }}" method="post" class="mb-0">
                                 @csrf
                                 @method('POST')
-                                <button type="submit"
+                                <button type="button"
+                                        id="btn-cancel-pengajuan"
                                         class="btn btn-sm btn-danger"
                                         {{ $isWaitingVerification ? '' : 'disabled' }}>
                                     <i class="ri-close-circle-line me-1"></i>
@@ -159,14 +215,30 @@
         </div>
 
         @php
-            $hasPhotos =
-                $pengajuan->fotoPath('kendaraan') ||
-                $pengajuan->fotoPath('penyerahan_kunci') ||
-                $pengajuan->fotoPath('pengembalian_kunci') ||
-                $pengajuan->fotoPath('lainnya');
-            
-            // Tampilkan foto jika progress approved atau sudah ada foto yang diupload
-            $canShowPhotos = $progressLower === 'approved' || $hasPhotos;
+            $fotoRows = [
+                [
+                    'label' => 'Kendaraan',
+                    'pergi' => ['kategori' => 'kendaraan', 'pengembalian' => false],
+                    'kembali' => ['kategori' => 'kendaraan', 'pengembalian' => true],
+                ],
+                [
+                    'label' => 'Kunci',
+                    'pergi' => ['kategori' => 'penyerahan_kunci', 'pengembalian' => false],
+                    'kembali' => ['kategori' => 'pengembalian_kunci', 'pengembalian' => true],
+                ],
+                [
+                    'label' => 'Lainnya',
+                    'pergi' => ['kategori' => 'lainnya', 'pengembalian' => false],
+                    'kembali' => ['kategori' => 'lainnya', 'pengembalian' => true],
+                ],
+            ];
+
+            $hasPhotos = collect($fotoRows)->contains(function ($row) use ($pengajuan) {
+                return $pengajuan->fotoPath($row['pergi']['kategori'], $row['pergi']['pengembalian'])
+                    || $pengajuan->fotoPath($row['kembali']['kategori'], $row['kembali']['pengembalian']);
+            });
+
+            $canShowPhotos = in_array($progressLower, ['approved', 'in-progress', 'selesai'], true) || $hasPhotos;
         @endphp
 
         <div class="row">
@@ -189,125 +261,31 @@
                             </div>
                         @else
                             <div class="row g-4">
-                                <div class="col-md-6">
-                                    <div class="photo-upload-section">
-                                        <h6 class="mb-3 fw-semibold">Foto Kendaraan</h6>
-                                        @if($pengajuan->fotoPath('kendaraan'))
-                                            <div class="text-center">
-                                                <a href="#" 
-                                                   data-bs-toggle="modal" 
-                                                   data-bs-target="#modalFotoKendaraan"
-                                                   class="text-decoration-none d-inline-block">
-                                                    <img src="{{ asset('storage/'.$pengajuan->fotoPath('kendaraan')) }}" 
-                                                         alt="Foto Kendaraan" 
-                                                         class="img-thumbnail photo-thumbnail" 
-                                                         style="width: 100px; height: 100px; object-fit: cover; cursor: pointer; transition: transform 0.2s;">
-                                                    <div class="mt-2">
-                                                        <small class="text-muted">
-                                                            <i class="ri-eye-line me-1"></i>
-                                                            Klik untuk preview
-                                                        </small>
+                                @foreach ($fotoRows as $row)
+                                    @php
+                                        $pergiPath = $pengajuan->fotoPath($row['pergi']['kategori'], false);
+                                        $kembaliPath = $pengajuan->fotoPath($row['kembali']['kategori'], true);
+                                        $coverPath = $pergiPath ?: $kembaliPath;
+                                        $slug = \Illuminate\Support\Str::slug($row['label']);
+                                        $modalId = 'modalFoto-'.$slug;
+                                    @endphp
+                                    <div class="col-md-4">
+                                        <div class="photo-item">
+                                            <h6 class="photo-pair-title">{{ $row['label'] }}</h6>
+                                            @if ($coverPath)
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#{{ $modalId }}" class="d-inline-block">
+                                                    <div class="photo-frame">
+                                                        <img src="{{ asset('storage/'.$coverPath) }}" alt="{{ $row['label'] }}">
                                                     </div>
                                                 </a>
-                                            </div>
-                                        @else
-                                            <div class="text-center py-4 border rounded bg-light">
-                                                <i class="ri-image-line fs-3 text-muted mb-2 d-block"></i>
-                                                <p class="text-muted mb-0 small">Foto kendaraan belum diupload</p>
-                                            </div>
-                                        @endif
+                                            @else
+                                                <div class="photo-frame">
+                                                    <i class="ri-image-line"></i>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="photo-upload-section">
-                                        <h6 class="mb-3 fw-semibold">Foto Penyerahan Kunci kepada Vendor</h6>
-                                        @if($pengajuan->fotoPath('penyerahan_kunci'))
-                                            <div class="text-center">
-                                                <a href="#" 
-                                                   data-bs-toggle="modal" 
-                                                   data-bs-target="#modalFotoPenyerahanKunci"
-                                                   class="text-decoration-none d-inline-block">
-                                                    <img src="{{ asset('storage/'.$pengajuan->fotoPath('penyerahan_kunci')) }}" 
-                                                         alt="Foto Penyerahan Kunci" 
-                                                         class="img-thumbnail photo-thumbnail" 
-                                                         style="width: 100px; height: 100px; object-fit: cover; cursor: pointer; transition: transform 0.2s;">
-                                                    <div class="mt-2">
-                                                        <small class="text-muted">
-                                                            <i class="ri-eye-line me-1"></i>
-                                                            Klik untuk preview
-                                                        </small>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        @else
-                                            <div class="text-center py-4 border rounded bg-light">
-                                                <i class="ri-image-line fs-3 text-muted mb-2 d-block"></i>
-                                                <p class="text-muted mb-0 small">Foto penyerahan kunci belum diupload</p>
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="photo-upload-section">
-                                        <h6 class="mb-3 fw-semibold">Foto Pengembalian Kunci kepada Security</h6>
-                                        @if($pengajuan->fotoPath('pengembalian_kunci'))
-                                            <div class="text-center">
-                                                <a href="#" 
-                                                   data-bs-toggle="modal" 
-                                                   data-bs-target="#modalFotoPengembalianKunci"
-                                                   class="text-decoration-none d-inline-block">
-                                                    <img src="{{ asset('storage/'.$pengajuan->fotoPath('pengembalian_kunci')) }}" 
-                                                         alt="Foto Pengembalian Kunci" 
-                                                         class="img-thumbnail photo-thumbnail" 
-                                                         style="width: 100px; height: 100px; object-fit: cover; cursor: pointer; transition: transform 0.2s;">
-                                                    <div class="mt-2">
-                                                        <small class="text-muted">
-                                                            <i class="ri-eye-line me-1"></i>
-                                                            Klik untuk preview
-                                                        </small>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        @else
-                                            <div class="text-center py-4 border rounded bg-light">
-                                                <i class="ri-image-line fs-3 text-muted mb-2 d-block"></i>
-                                                <p class="text-muted mb-0 small">Foto pengembalian kunci belum diupload</p>
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="photo-upload-section">
-                                        <h6 class="mb-3 fw-semibold">Foto Lainnya</h6>
-                                        @if($pengajuan->fotoPath('lainnya'))
-                                            <div class="text-center">
-                                                <a href="#" 
-                                                   data-bs-toggle="modal" 
-                                                   data-bs-target="#modalFotoLainnya"
-                                                   class="text-decoration-none d-inline-block">
-                                                    <img src="{{ asset('storage/'.$pengajuan->fotoPath('lainnya')) }}" 
-                                                         alt="Foto Lainnya" 
-                                                         class="img-thumbnail photo-thumbnail" 
-                                                         style="width: 100px; height: 100px; object-fit: cover; cursor: pointer; transition: transform 0.2s;">
-                                                    <div class="mt-2">
-                                                        <small class="text-muted">
-                                                            <i class="ri-eye-line me-1"></i>
-                                                            Klik untuk preview
-                                                        </small>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        @else
-                                            <div class="text-center py-4 border rounded bg-light">
-                                                <i class="ri-image-line fs-3 text-muted mb-2 d-block"></i>
-                                                <p class="text-muted mb-0 small">Foto Lainnya belum diupload</p>
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         @endif
                     </div>
@@ -365,135 +343,81 @@
     </div>
 </div>
 
-                    @if($pengajuan->fotoPath('kendaraan'))
-                    <!-- Modal Foto Kendaraan -->
-                    <div class="modal fade" id="modalFotoKendaraan" tabindex="-1" aria-labelledby="modalFotoKendaraanLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalFotoKendaraanLabel">Foto Kendaraan</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <img src="{{ asset('storage/'.$pengajuan->fotoPath('kendaraan')) }}" 
-                                        alt="Foto Kendaraan" 
-                                        class="img-fluid rounded">
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="{{ asset('storage/'.$pengajuan->fotoPath('kendaraan')) }}" 
-                                    target="_blank" 
-                                    class="btn btn-primary">
-                                        <i class="ri-external-link-line me-1"></i>
-                                        Buka di Tab Baru
-                                    </a>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
-
-                    @if($pengajuan->fotoPath('penyerahan_kunci'))
-                    <!-- Modal Foto Penyerahan Kunci -->
-                    <div class="modal fade" id="modalFotoPenyerahanKunci" tabindex="-1" aria-labelledby="modalFotoPenyerahanKunciLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalFotoPenyerahanKunciLabel">Foto Penyerahan Kunci kepada Vendor</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <img src="{{ asset('storage/'.$pengajuan->fotoPath('penyerahan_kunci')) }}" 
-                                        alt="Foto Penyerahan Kunci" 
-                                        class="img-fluid rounded">
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="{{ asset('storage/'.$pengajuan->fotoPath('penyerahan_kunci')) }}" 
-                                    target="_blank" 
-                                    class="btn btn-primary">
-                                        <i class="ri-external-link-line me-1"></i>
-                                        Buka di Tab Baru
-                                    </a>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    @foreach ($fotoRows as $row)
+                        @php
+                            $slug = \Illuminate\Support\Str::slug($row['label']);
+                            $pergiPath = $pengajuan->fotoPath($row['pergi']['kategori'], false);
+                            $kembaliPath = $pengajuan->fotoPath($row['kembali']['kategori'], true);
+                        @endphp
+                        @if ($pergiPath || $kembaliPath)
+                            <div class="modal fade" id="modalFoto-{{ $slug }}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">{{ $row['label'] }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <p class="text-center fw-semibold mb-2">Pergi</p>
+                                                    <div class="photo-preview-frame">
+                                                        @if ($pergiPath)
+                                                            <a href="{{ asset('storage/'.$pergiPath) }}" target="_blank" class="d-block w-100 h-100">
+                                                                <img src="{{ asset('storage/'.$pergiPath) }}" alt="{{ $row['label'] }} Pergi">
+                                                            </a>
+                                                        @else
+                                                            <i class="ri-image-line"></i>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="text-center fw-semibold mb-2">Kembali</p>
+                                                    <div class="photo-preview-frame">
+                                                        @if ($kembaliPath)
+                                                            <a href="{{ asset('storage/'.$kembaliPath) }}" target="_blank" class="d-block w-100 h-100">
+                                                                <img src="{{ asset('storage/'.$kembaliPath) }}" alt="{{ $row['label'] }} Kembali">
+                                                            </a>
+                                                        @else
+                                                            <i class="ri-image-line"></i>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    @endif
-
-                    @if($pengajuan->fotoPath('pengembalian_kunci'))
-                    <!-- Modal Foto Pengembalian Kunci -->
-                    <div class="modal fade" id="modalFotoPengembalianKunci" tabindex="-1" aria-labelledby="modalFotoPengembalianKunciLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalFotoPengembalianKunciLabel">Foto Pengembalian Kunci kepada Security</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <img src="{{ asset('storage/'.$pengajuan->fotoPath('pengembalian_kunci')) }}" 
-                                        alt="Foto Pengembalian Kunci" 
-                                        class="img-fluid rounded">
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="{{ asset('storage/'.$pengajuan->fotoPath('pengembalian_kunci')) }}" 
-                                    target="_blank" 
-                                    class="btn btn-primary">
-                                        <i class="ri-external-link-line me-1"></i>
-                                        Buka di Tab Baru
-                                    </a>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
-
-                    @if($pengajuan->fotoPath('lainnya'))
-                    <!-- Modal Foto Lainnya -->
-                    <div class="modal fade" id="modalFotoLainnya" tabindex="-1" aria-labelledby="modalFotoLainnyaLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalFotoLainnyaLabel">Foto Lainnya</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <img src="{{ asset('storage/'.$pengajuan->fotoPath('lainnya')) }}" 
-                                        alt="Foto Lainnya" 
-                                        class="img-fluid rounded">
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="{{ asset('storage/'.$pengajuan->fotoPath('lainnya')) }}" 
-                                    target="_blank" 
-                                    class="btn btn-primary">
-                                        <i class="ri-external-link-line me-1"></i>
-                                        Buka di Tab Baru
-                                    </a>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
-
-@push('styles')
-<style>
-    .photo-thumbnail:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
-    
-    .photo-upload-section {
-        min-height: 150px;
-    }
-    
-    .photo-locked-message {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        border-radius: 8px;
-        padding: 2rem;
-    }
-</style>
-@endpush
+                        @endif
+                    @endforeach
 
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const btnCancel = document.getElementById('btn-cancel-pengajuan');
+    if (btnCancel && !btnCancel.disabled) {
+        btnCancel.addEventListener('click', function () {
+            Swal.fire({
+                title: 'Cancel Pengajuan?',
+                text: 'Pengajuan ini akan dibatalkan dan tidak dapat dikembalikan. Apakah Anda yakin?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Cancel',
+                cancelButtonText: 'Tidak',
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('cancel-pengajuan-form').submit();
+                }
+            });
+        });
+    }
+});
+</script>
+@endpush

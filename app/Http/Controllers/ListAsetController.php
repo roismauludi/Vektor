@@ -68,7 +68,18 @@ class ListAsetController extends Controller
             'kategori'  => 'required|string|max:255',
             'nama'      => 'required|string|max:255',
             'lokasi'    => 'required|string|max:255',
+            'kategori_lainnya' => 'nullable|string|max:255',
         ]);
+
+        if ($request->kategori === 'Lainnya') {
+            $request->validate([
+                'kategori_lainnya' => ['required', 'string', 'max:255'],
+            ]);
+
+            $validated['kategori'] = $request->kategori_lainnya;
+        }
+
+        unset($validated['kategori_lainnya']);
 
         $listAset->update($validated);
 

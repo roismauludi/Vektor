@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ListAset;
+use App\Models\Notification;
 use App\Models\Pengajuan;
 use App\Models\PengajuanLog;
 use Illuminate\Support\Facades\Auth;
@@ -19,9 +19,10 @@ class ApprovalController extends Controller
         ])
             ->orderByDesc('created_at')
             ->get();
-        
+
         return view('Approval.index', compact('pengajuan'));
     }
+
     public function detail($id)
     {
         $pengajuan = Pengajuan::with([
@@ -40,10 +41,25 @@ class ApprovalController extends Controller
 
         PengajuanLog::create([
             'kode_pengajuan' => $pengajuan->kode_pengajuan,
-            'aksi' => 'approved',
-            'creator_id' => Auth::id(),
+            'aksi'           => 'approved',
+            'creator_id'     => Auth::id(),
             'keterangan'     => 'Pengajuan diapprove oleh ' . Auth::user()->nama,
         ]);
+
+        // Kirim notifikasi ke Security (pembuat pengajuan)
+        if ($pengajuan->creator_id) {
+            try {
+                Notification::create([
+                    'user_id' => $pengajuan->creator_id,
+                    'type'    => 'pengajuan_diverifikasi',
+                    'title'   => 'Pengajuan Disetujui ✓',
+                    'message' => 'Pengajuan ' . $pengajuan->kode_pengajuan . ' telah disetujui oleh ' . Auth::user()->nama . '.',
+                    'data'    => ['kode_pengajuan' => $pengajuan->kode_pengajuan, 'status' => 'approved'],
+                ]);
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::warning('Gagal buat notifikasi approve: ' . $e->getMessage());
+            }
+        }
 
         return redirect()->route('approval.index')->with('success', 'Pengajuan berhasil diapprove');
     }
@@ -56,10 +72,26 @@ class ApprovalController extends Controller
 
         PengajuanLog::create([
             'kode_pengajuan' => $pengajuan->kode_pengajuan,
-            'aksi' => 'rejected',
-            'creator_id' => Auth::id(),
-            'keterangan' => $request->keterangan,
+            'aksi'           => 'rejected',
+            'creator_id'     => Auth::id(),
+            'keterangan'     => $request->keterangan,
         ]);
+
+        // Kirim notifikasi ke Security (pembuat pengajuan)
+        if ($pengajuan->creator_id) {
+            try {
+                Notification::create([
+                    'user_id' => $pengajuan->creator_id,
+                    'type'    => 'pengajuan_diverifikasi',
+                    'title'   => 'Pengajuan Ditolak ✗',
+                    'message' => 'Pengajuan ' . $pengajuan->kode_pengajuan . ' ditolak oleh ' . Auth::user()->nama . '. Alasan: ' . ($request->keterangan ?? '-'),
+                    'data'    => ['kode_pengajuan' => $pengajuan->kode_pengajuan, 'status' => 'rejected'],
+                ]);
+            } catch (\Throwable $e) {
+                \Illuminate\Support\Facades\Log::warning('Gagal buat notifikasi reject: ' . $e->getMessage());
+            }
+        }
+
         return redirect()->route('approval.index')->with('success', 'Pengajuan berhasil ditolak');
     }
 }

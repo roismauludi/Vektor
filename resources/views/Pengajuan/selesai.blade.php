@@ -45,7 +45,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="foto_kendaraan_kembali" class="form-label">
-                                    Foto Kendaraan Kembali <span class="text-danger">*</span>
+                                    Foto Kendaraan (Saat Kembali) <span class="text-danger">*</span>
                                 </label>
                                 <input type="file" 
                                        class="form-control @error('foto_kendaraan_kembali') is-invalid @enderror" 
@@ -58,6 +58,16 @@
                                 @error('foto_kendaraan_kembali')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                                @if($pengajuan->fotoPath('kendaraan', true))
+                                    <div class="mt-2">
+                                        <p class="text-muted mb-1">Foto saat ini:</p>
+                                        <a href="{{ asset('storage/'.$pengajuan->fotoPath('kendaraan', true)) }}"
+                                           target="_blank"
+                                           class="btn btn-sm btn-info">
+                                            Lihat Foto
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
@@ -77,6 +87,16 @@
                                 @error('foto_pengembalian_kunci')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                                @if($pengajuan->fotoPath('pengembalian_kunci', true))
+                                    <div class="mt-2">
+                                        <p class="text-muted mb-1">Foto saat ini:</p>
+                                        <a href="{{ asset('storage/'.$pengajuan->fotoPath('pengembalian_kunci', true)) }}"
+                                           target="_blank"
+                                           class="btn btn-sm btn-info">
+                                            Lihat Foto
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -85,7 +105,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="foto_lainnya" class="form-label">
-                                    Foto Lainnya <span class="text-danger">*</span>
+                                    Foto Lainnya (Saat Kembali) <span class="text-danger">*</span>
                                 </label>
                                 <input type="file" 
                                        class="form-control @error('foto_lainnya') is-invalid @enderror" 
@@ -98,6 +118,16 @@
                                 @error('foto_lainnya')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                                @if($pengajuan->fotoPath('lainnya', true))
+                                    <div class="mt-2">
+                                        <p class="text-muted mb-1">Foto saat ini:</p>
+                                        <a href="{{ asset('storage/'.$pengajuan->fotoPath('lainnya', true)) }}"
+                                           target="_blank"
+                                           class="btn btn-sm btn-info">
+                                            Lihat Foto
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -5,12 +5,12 @@
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0">Data Peminjaman</h5>
+                <h5 class="card-title mb-0">Data Pengajuan</h5>
                 <button type="button"
                         class="btn btn-outline-primary"
                         data-bs-toggle="modal"
                         data-bs-target="#modalPilihanPengajuan">
-                    Ajukan Peminjaman
+                    Ajukan Pengajuan
                 </button>
             </div>
 
@@ -93,7 +93,9 @@
                                 <td>
                                 @role('Security')
                                     @if ($progress === 'approved'
-                                        && (!$pengajuan->fotoPath('kendaraan') || !$pengajuan->fotoPath('penyerahan_kunci')))
+                                        && (! $pengajuan->fotoPath('kendaraan')
+                                            || ! $pengajuan->fotoPath('penyerahan_kunci')
+                                            || ! $pengajuan->fotoPath('lainnya')))
                                         <a href="{{ route('pengajuan.upload', $pengajuan->id) }}"
                                            class="btn btn-sm btn-success">
                                             <i class="ri-upload-line me-1"></i>

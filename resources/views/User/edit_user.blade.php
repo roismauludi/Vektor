@@ -64,7 +64,6 @@
                                 <option value="view" {{ (old('role', $user->roles->first()?->name) == 'view') ? 'selected' : '' }}>View (Read Only)</option>
                                 <option value="PIC" {{ (old('role', $user->roles->first()?->name) == 'PIC') ? 'selected' : '' }}>PIC</option>
                                 <option value="security" {{ (old('role', $user->roles->first()?->name) == 'security') ? 'selected' : '' }}>Security</option>
-                                <option value="Admin" {{ (old('role', $user->roles->first()?->name) == 'Admin') ? 'selected' : '' }}>Admin</option>
                             </select>
                             @error('role')
                                 <div class="invalid-feedback">{{ $message }}</div>

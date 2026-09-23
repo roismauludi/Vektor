@@ -8,6 +8,7 @@ use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\AccessManagementController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/', function () {
     return view('login');
@@ -20,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/stats', [DashboardController::class, 'stats'])->name('dashboard.stats');
 
     // User Management - berdasarkan permission
     Route::middleware('permission:view-user')->group(function () {
@@ -71,9 +73,8 @@ Route::middleware('auth')->group(function () {
     });
 
     
-    // Form Pengajuan - berdasarkan permission (role Admin atau security)
-    Route::middleware('role:Admin|Security')->group(function () {
-        Route::middleware('permission:create-pengajuan')->group(function () {
+    // Form Pengajuan - berdasarkan permission
+    Route::middleware('permission:create-pengajuan')->group(function () {
         Route::get('/pengajuan/create', [PengajuanController::class, 'createUmum'])->name('pengajuan.create');
         Route::post('/pengajuan', [PengajuanController::class, 'store'])->name('pengajuan.store');
     });
@@ -93,14 +94,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/pengajuan/{id}/cancel', [PengajuanController::class, 'cancel'])->name('pengajuan.cancel');
         Route::post('/pengajuan/{id}/cancel', [PengajuanController::class, 'cancel'])->name('pengajuan.cancel.post');
     });
-    });
     Route::middleware('permission:view-pengajuan')->group(function () {
         Route::get('/pengajuan/list', [PengajuanController::class, 'list'])->name('pengajuan.list');
         Route::get('/pengajuan/{id}/detail', [PengajuanController::class, 'detail'])->name('pengajuan.detail');
     });
     
 
-    // Route Approval - admin dan PIC
+    // Route Approval - admin dan PIC//
     Route::middleware('permission:view-approval')->group(function () {
         Route::get('/approval', [ApprovalController::class, 'index'])->name('approval.index');
         Route::get('/approval/{id}/detail', [ApprovalController::class, 'detail'])->name('approval.detail');
@@ -112,8 +112,11 @@ Route::middleware('auth')->group(function () {
         Route::put('/approval/{id}/reject', [ApprovalController::class, 'reject'])->name('approval.reject');
     });
     
-    // Profile - untuk semua user yang login
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    
+
+    Route::get('/notifications/unread', [NotificationController::class, 'unread'])->name('notifications.unread');
+    Route::post('/notifications/{id}/read', [NotificationController::class, 'markRead'])->name('notifications.read');
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.read-all');
+
 });

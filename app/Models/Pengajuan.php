@@ -63,16 +63,38 @@ class Pengajuan extends Model
         return $this->hasMany(PengajuanFoto::class, 'kode_pengajuan', 'kode_pengajuan');
     }
 
-    public function fotoPath(string $kategori): ?string
+    public function fotoPath(string $kategori, bool $pengembalian = false): ?string
     {
         $kategori = strtolower(trim($kategori));
+        $aliases = $this->fotoKategoriAliases($kategori, $pengembalian);
 
-        $foto = $this->relationLoaded('fotos')
-            ? $this->fotos->firstWhere('kategori', $kategori)
+        $matcher = function ($foto) use ($aliases, $pengembalian) {
+            return in_array(strtolower((string) $foto->kategori), $aliases, true)
+                && (bool) $foto->pengembalian === $pengembalian;
+        };
+
+        $fotos = $this->relationLoaded('fotos')
+            ? $this->fotos->filter($matcher)
             : $this->fotos()
-                ->where('kategori', $kategori)
-                ->first();
+                ->whereIn('kategori', $aliases)
+                ->where('pengembalian', $pengembalian)
+                ->get();
+
+        $foto = $fotos->firstWhere('kategori', $kategori) ?? $fotos->first();
 
         return $foto?->path;
+    }
+
+    private function fotoKategoriAliases(string $kategori, bool $pengembalian): array
+    {
+        if ($kategori === 'kendaraan' && $pengembalian) {
+            return ['kendaraan', 'kendaraan_kembali'];
+        }
+
+        if ($kategori === 'lainnya' && $pengembalian) {
+            return ['lainnya', 'lainnya_kembali'];
+        }
+
+        return [$kategori];
     }
 }

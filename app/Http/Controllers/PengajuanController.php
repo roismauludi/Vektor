@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\ListAset;
+use App\Models\Notification;
 use App\Models\Pengajuan;
 use App\Models\PengajuanDetail;
 use App\Models\PengajuanFoto;
 use App\Models\PengajuanLog;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -77,7 +79,16 @@ class PengajuanController extends Controller
             'kategori'             => 'required|string|in:Dismantel,Maintenance,Perbaikan,Pengecekan',
             'keperluan'           => 'required|string|max:500',
 
-            'jam_mulai'           => 'required|date_format:H:i',
+            'jam_mulai'           => [
+                'required',
+                'date_format:H:i',
+                function ($attribute, $value, $fail) {
+                    $jamMulai = \Carbon\Carbon::createFromFormat('H:i', $value);
+                    if ($jamMulai->lt(\Carbon\Carbon::createFromTime(8, 30))) {
+                        $fail('Jam mulai minimal pukul 08:30.');
+                    }
+                },
+            ],
             'jam_selesai'         => [
                 'required',
                 'date_format:H:i',
@@ -101,6 +112,8 @@ class PengajuanController extends Controller
             'details.*.nama_tamu' => 'required|string|max:255',
             'details.*.no_tlp'    => 'required|string|max:255',
             'details.*.email'     => 'required|email|max:255',
+        ], [
+            'jam_selesai.after'   => 'Jam selesai harus setelah jam mulai.',
         ]);
 
         $asetKode = $validated['aset_kode'];
@@ -182,6 +195,23 @@ class PengajuanController extends Controller
             return back()
                 ->withInput($request->except('details'))
                 ->with('error', 'Gagal menyimpan pengajuan: ' . $th->getMessage());
+        }
+
+        // Kirim notifikasi ke semua PIC dan Admin
+        try {
+            $penerima = User::role(['PIC', 'Admin'])->get();
+            foreach ($penerima as $user) {
+                Notification::create([
+                    'user_id' => $user->id,
+                    'type'    => 'pengajuan_baru',
+                    'title'   => 'Pengajuan Baru Masuk',
+                    'message' => 'Pengajuan ' . $kodePengajuan . ' dari ' . Auth::user()->nama . ' menunggu verifikasi Anda.',
+                    'data'    => ['kode_pengajuan' => $kodePengajuan],
+                ]);
+            }
+        } catch (\Throwable $e) {
+            // Jangan gagalkan proses utama jika notifikasi error
+            \Illuminate\Support\Facades\Log::warning('Gagal buat notifikasi pengajuan: ' . $e->getMessage());
         }
 
         return redirect()
@@ -294,6 +324,7 @@ class PengajuanController extends Controller
                 $required = ['kendaraan', 'penyerahan_kunci', 'lainnya'];
                 $uploadedCount = PengajuanFoto::where('kode_pengajuan', $pengajuan->kode_pengajuan)
                     ->whereIn('kategori', $required)
+                    ->where('pengembalian', false)
                     ->whereNotNull('path')
                     ->count();
 
@@ -361,7 +392,16 @@ class PengajuanController extends Controller
             'kategori'             => 'required|string|in:Dismantel,Maintenance,Perbaikan,Pengecekan',
             'keperluan'           => 'required|string|max:500',
 
-            'jam_mulai'           => 'required|date_format:H:i',
+            'jam_mulai'           => [
+                'required',
+                'date_format:H:i',
+                function ($attribute, $value, $fail) {
+                    $jamMulai = \Carbon\Carbon::createFromFormat('H:i', $value);
+                    if ($jamMulai->lt(\Carbon\Carbon::createFromTime(8, 30))) {
+                        $fail('Jam mulai minimal pukul 08:30.');
+                    }
+                },
+            ],
             'jam_selesai'         => [
                 'required',
                 'date_format:H:i',
@@ -382,6 +422,8 @@ class PengajuanController extends Controller
             'details.*.nama_tamu' => 'required|string|max:255',
             'details.*.no_tlp'    => 'required|string|max:255',
             'details.*.email'     => 'required|email|max:255',
+        ], [
+            'jam_selesai.after'   => 'Jam selesai harus setelah jam mulai.',
         ]);
 
         $validated['lama_berkerja'] =
@@ -456,6 +498,22 @@ class PengajuanController extends Controller
                 ->with('error', 'Gagal mengupdate pengajuan: ' . $th->getMessage());
         }
 
+        // Kirim notifikasi ke PIC dan Admin bahwa pengajuan telah direvisi dan dikirim ulang
+        try {
+            $penerima = User::role(['PIC', 'Admin'])->get();
+            foreach ($penerima as $user) {
+                Notification::create([
+                    'user_id' => $user->id,
+                    'type'    => 'pengajuan_baru',
+                    'title'   => 'Pengajuan Direvisi & Dikirim Ulang',
+                    'message' => 'Pengajuan ' . $pengajuan->kode_pengajuan . ' dari ' . Auth::user()->nama . ' telah direvisi dan menunggu verifikasi ulang.',
+                    'data'    => ['kode_pengajuan' => $pengajuan->kode_pengajuan],
+                ]);
+            }
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning('Gagal buat notifikasi update pengajuan: ' . $e->getMessage());
+        }
+
         return redirect()
             ->route('pengajuan.detail', $pengajuan->id)
             ->with('success', 'Pengajuan berhasil diupdate dan dikembalikan ke status Menunggu verifikasi');
@@ -494,13 +552,12 @@ class PengajuanController extends Controller
                 if ($request->hasFile('foto_kendaraan_kembali')) {
                     $this->upsertFotoKategori(
                         $pengajuan->kode_pengajuan,
-                        'kendaraan_kembali',
+                        'kendaraan',
                         $request->file('foto_kendaraan_kembali'),
                         self::FOTO_BASE_DIR,
                         true
                     );
                 }
-
 
                 if ($request->hasFile('foto_pengembalian_kunci')) {
                     $this->upsertFotoKategori(
@@ -515,23 +572,21 @@ class PengajuanController extends Controller
                 if ($request->hasFile('foto_lainnya')) {
                     $this->upsertFotoKategori(
                         $pengajuan->kode_pengajuan,
-                        'lainnya_kembali',
+                        'lainnya',
                         $request->file('foto_lainnya'),
                         self::FOTO_BASE_DIR,
                         true
                     );
                 }
 
-                // Reload pengajuan untuk mendapatkan foto terbaru
                 $pengajuan->load('fotos');
 
-                $required = ['kendaraan_kembali', 'pengembalian_kunci', 'lainnya_kembali'];
-                $uploadedCount = PengajuanFoto::where('kode_pengajuan', $pengajuan->kode_pengajuan)
-                    ->whereIn('kategori', $required)
-                    ->whereNotNull('path')
-                    ->count();
+                $hasAllReturnPhotos =
+                    $pengajuan->fotoPath('kendaraan', true)
+                    && $pengajuan->fotoPath('pengembalian_kunci', true)
+                    && $pengajuan->fotoPath('lainnya', true);
 
-                if ($uploadedCount === count($required)) {
+                if ($hasAllReturnPhotos) {
                     $pengajuan->progress = 'selesai';
                     $pengajuan->status = 'Close';
                     $pengajuan->save();

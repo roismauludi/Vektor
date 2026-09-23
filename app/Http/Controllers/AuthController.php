@@ -119,23 +119,35 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
- 
-        $credentials = $request->only('email', 'password');
+
         $remember = $request->has('remember');
 
-        if (Auth::attempt($credentials, $remember)) {
-            // Simpan waktu aktivitas terakhir saat login
-            session(['last_activity_time' => now()->toDateTimeString()]);
-            // Simpan informasi apakah user menggunakan remember me
-            session(['remember_me' => $remember]);
-            
-            session()->flash('success', 'Berhasil login!');
-            return redirect()->route('dashboard');
+        // Cek apakah email terdaftar di database
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return back()->withErrors([
+                'email' => 'Email tidak ditemukan.',
+            ])->withInput($request->only('email'));
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ])->withInput($request->only('email'));
+        // Email ada, tapi cek password
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->withErrors([
+                'password' => 'Password yang Anda masukkan salah.',
+            ])->withInput($request->only('email'));
+        }
+
+        // Kredensial benar, lakukan login
+        Auth::login($user, $remember);
+
+        // Simpan waktu aktivitas terakhir saat login
+        session(['last_activity_time' => now()->toDateTimeString()]);
+        // Simpan informasi apakah user menggunakan remember me
+        session(['remember_me' => $remember]);
+
+        session()->flash('success', 'Berhasil login!');
+        return redirect()->route('dashboard');
     }
 
      /**

@@ -69,7 +69,7 @@
         <!-- Logo Section -->
         <div class="flex flex-col items-center mb-8 logo-container">
             <p class="text-2xl font-bold">VEKTOR</p>
-            <p class="text-gray-500 text-sm">Sistem Peminjaman Aset</p>
+            <p class="text-gray-500 text-sm">Sistem Perizinanan Akses Infrastruktur</p>
         </div>
 
         <form method="POST" action="{{ route('login.post') }}">

@@ -72,7 +72,7 @@
                             <label for="role" class="form-label">Role</label>
                             <select name="role" id="role" class="form-select @error('role') is-invalid @enderror">
                                 <option value="">Pilih Role (opsional)</option>
-                                <option value="view" {{ old('role') == 'view' ? 'selected' : '' }}>View (Read Only)</option>
+                                <option value="view" {{ old('role') == 'view' ? 'selected' : '' }}>Karyawan</option>
                                 <option value="PIC" {{ old('role') == 'PIC' ? 'selected' : '' }}>PIC</option>
                                 <option value="security" {{ old('role') == 'security' ? 'selected' : '' }}>Security</option>
                             </select>

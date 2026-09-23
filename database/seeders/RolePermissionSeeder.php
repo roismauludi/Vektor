@@ -89,7 +89,7 @@ class RolePermissionSeeder extends Seeder
             'reject-pengajuan',
             'view-pengajuan',
             'detail-pengajuan',
-            'View-Approval',
+            'view-approval',
         ]);
 
         $viewRole->syncPermissions([
