@@ -59,7 +59,7 @@ class RolePermissionSeeder extends Seeder
         $adminRole = Role::firstOrCreate(['name' => 'Admin', 'guard_name' => 'web']);
         $securityRole = Role::firstOrCreate(['name' => 'Security', 'guard_name' => 'web']);
         $picRole = Role::firstOrCreate(['name' => 'PIC', 'guard_name' => 'web']);
-        $viewRole = Role::firstOrCreate(['name' => 'view', 'guard_name' => 'web']);
+        $viewRole = Role::firstOrCreate(['name' => 'View', 'guard_name' => 'web']);
 
         $adminRole->syncPermissions(Permission::all());
 
@@ -101,6 +101,6 @@ class RolePermissionSeeder extends Seeder
         ]);
 
         $this->command->info('Roles and Permissions created successfully!');
-        $this->command->info('Roles: Admin, Security, PIC, view');
+        $this->command->info('Roles: Admin, Security, PIC, View');
     }
 }

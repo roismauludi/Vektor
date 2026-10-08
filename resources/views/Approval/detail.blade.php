@@ -61,8 +61,10 @@
                                         Cek Identitas
                                     </a>
                                 </td>
-                                <td rowspan="{{ $rowspan }}">
-                                    {{ $pengajuan->progress }}
+                                <td rowspan="{{ $rowspan }}" id="progress-container">
+                                    <span id="progress-badge" class="badge {{ $pengajuan->progress === 'approved' ? 'bg-success' : ($pengajuan->progress === 'rejected' ? 'bg-danger' : 'bg-warning text-dark') }}">
+                                        {{ $pengajuan->progress }}
+                                    </span>
                                 </td>
                                 <td rowspan="{{ $rowspan }}">
                                     {{ $pengajuan->creator->nama }}
@@ -94,45 +96,63 @@
     </div>
 </div>
 
-<form id="approve-form" method="POST" style="display:none;">
-    @csrf
-    @method('PUT')
-</form>
-
-<form id="reject-form" method="POST" style="display:none;">
-    @csrf
-    @method('PUT')
-    <input type="hidden" name="keterangan" id="keterangan">
-</form>
-
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    const csrfToken = '{{ csrf_token() }}';
+
+    function updateUIStatus(newProgress) {
+        const badge = document.getElementById('progress-badge');
+        if (badge) {
+            badge.innerText = newProgress;
+            badge.className = 'badge ' + (newProgress === 'approved' ? 'bg-success' : (newProgress === 'rejected' ? 'bg-danger' : 'bg-warning text-dark'));
+        }
+        document.querySelectorAll('.btn-approve, .btn-reject').forEach(btn => {
+            btn.disabled = true;
+        });
+    }
 
     document.querySelectorAll('.btn-approve').forEach(button => {
         button.addEventListener('click', function () {
-
             Swal.fire({
                 title: 'Approve Pengajuan?',
                 text: 'Apakah Anda yakin ingin menyetujui pengajuan ini?',
-                // icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Ya, Approve',
                 cancelButtonText: 'Batal',
                 confirmButtonColor: '#198754'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    let form = document.getElementById('approve-form');
-                    form.action = `{{ route('approval.approve', $pengajuan->id) }}`;
-                    form.submit();
+                    Swal.showLoading();
+                    fetch(`{{ route('approval.approve', $pengajuan->id) }}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken,
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify({ _method: 'PUT' })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            updateUIStatus(data.progress || 'approved');
+                            Swal.fire('Berhasil!', data.message, 'success');
+                        } else {
+                            Swal.fire('Gagal!', data.message || 'Terjadi kesalahan.', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire('Error!', 'Gagal menghubungi server.', 'error');
+                    });
                 }
             });
         });
     });
 
-
     document.querySelectorAll('.btn-reject').forEach(button => {
         button.addEventListener('click', function () {
-
             Swal.fire({
                 title: 'Tolak Pengajuan?',
                 input: 'textarea',
@@ -150,15 +170,37 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    let form = document.getElementById('reject-form');
-                    form.action = `{{ route('approval.reject', $pengajuan->id) }}`;
-                    document.getElementById('keterangan').value = result.value;
-                    form.submit();
+                    Swal.showLoading();
+                    fetch(`{{ route('approval.reject', $pengajuan->id) }}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken,
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify({
+                            _method: 'PUT',
+                            keterangan: result.value
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            updateUIStatus(data.progress || 'rejected');
+                            Swal.fire('Berhasil!', data.message, 'success');
+                        } else {
+                            Swal.fire('Gagal!', data.message || 'Terjadi kesalahan.', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire('Error!', 'Gagal menghubungi server.', 'error');
+                    });
                 }
             });
         });
     });
-
 });
 </script>
 @endsection

@@ -101,9 +101,8 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6">
+                        <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="foto_lainnya" class="form-label">
                                     Foto Lainnya <span class="text-danger">*</span>
@@ -134,6 +133,42 @@
                         </div>
                     </div>
 
+                    @php
+                        $extraFotos = $pengajuan->fotos ? $pengajuan->fotos->filter(function($f) {
+                            return !$f->pengembalian && !in_array(strtolower($f->kategori), ['kendaraan', 'penyerahan_kunci', 'lainnya']);
+                        }) : collect();
+                    @endphp
+
+                    @if($extraFotos->count() > 0)
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Foto Tambahan Terupload:</label>
+                            <div class="row">
+                                @foreach($extraFotos as $extra)
+                                    <div class="col-md-6 mb-2">
+                                        <div class="p-2 border rounded bg-light d-flex justify-content-between align-items-center">
+                                            <span class="text-truncate me-2 small fw-semibold">
+                                                {{ ucfirst(str_replace('_', ' ', $extra->kategori)) }}
+                                            </span>
+                                            <a href="{{ asset('storage/'.$extra->path) }}" target="_blank" class="btn btn-sm btn-info">
+                                                Lihat Foto
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- Container untuk Kolom Foto Tambahan Dinamis -->
+                    <div id="extra-foto-container" class="row"></div>
+
+                    <!-- Tombol Tambah Kolom Foto -->
+                    <div class="mb-3">
+                        <button type="button" id="btn-add-foto" class="btn btn-outline-success">
+                            <i class="ri-add-line me-1"></i> Tambah Kolom Foto
+                        </button>
+                    </div>
+
                     <div class="mt-4 d-flex">
                         <a href="{{ route('pengajuan.list') }}" 
                            class="btn btn-secondary ms-2">
@@ -150,6 +185,54 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let fotoCounter = 0;
+    const container = document.getElementById('extra-foto-container');
+    const btnAdd = document.getElementById('btn-add-foto');
+
+    if (btnAdd && container) {
+        btnAdd.addEventListener('click', function() {
+            fotoCounter++;
+            const col = document.createElement('div');
+            col.className = 'col-md-6 mb-3 extra-foto-row';
+            col.id = `extra-foto-row-${fotoCounter}`;
+            col.innerHTML = `
+                <div class="card p-3 border shadow-sm">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <label class="form-label mb-0 fw-semibold text-primary">
+                            Foto Tambahan #${fotoCounter}
+                        </label>
+                        <button type="button" class="btn btn-sm btn-outline-danger btn-remove-row" data-target="extra-foto-row-${fotoCounter}">
+                            <i class="ri-delete-bin-line me-1"></i> Hapus
+                        </button>
+                    </div>
+                    <input type="file" 
+                           class="form-control mb-1" 
+                           name="foto_tambahan[]" 
+                           accept="image/jpeg,image/jpg,image/png">
+                    <small class="form-text text-muted">
+                        Format: JPG, JPEG, PNG (Maksimal 5MB)
+                    </small>
+                </div>
+            `;
+            container.appendChild(col);
+        });
+
+        container.addEventListener('click', function(e) {
+            const removeBtn = e.target.closest('.btn-remove-row');
+            if (removeBtn) {
+                const targetId = removeBtn.getAttribute('data-target');
+                const row = document.getElementById(targetId);
+                if (row) {
+                    row.remove();
+                }
+            }
+        });
+    }
+});
+</script>
 
 @endsection
 

@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/stats', [DashboardController::class, 'stats'])->name('dashboard.stats');
+    Route::get('/dashboard/card-detail/{key}', [DashboardController::class, 'cardDetail'])->name('dashboard.card-detail');
 
     // User Management - berdasarkan permission
     Route::middleware('permission:view-user')->group(function () {
@@ -97,6 +98,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('permission:view-pengajuan')->group(function () {
         Route::get('/pengajuan/list', [PengajuanController::class, 'list'])->name('pengajuan.list');
         Route::get('/pengajuan/{id}/detail', [PengajuanController::class, 'detail'])->name('pengajuan.detail');
+        Route::get('/pengajuan/{id}/export-pdf', [PengajuanController::class, 'exportPdf'])->name('pengajuan.export-pdf');
     });
     
 

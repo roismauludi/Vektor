@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
-    /**
-     * Ambil notifikasi yang belum dibaca milik user yang login.
-     * Dipakai oleh JS polling di frontend.
-     */
     public function unread()
     {
         $notifications = Notification::where('user_id', Auth::id())

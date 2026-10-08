@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pengajuan;
 use App\Models\PengajuanLog;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -67,12 +68,16 @@ class DashboardController extends Controller
     {
         $totalPengajuan = Pengajuan::count();
 
+        $rawCounts = Pengajuan::selectRaw('LOWER(progress) as prog, COUNT(*) as total')
+            ->groupBy('prog')
+            ->pluck('total', 'prog');
+
         $progressSummary = [
-            'Menunggu verifikasi' => Pengajuan::whereRaw('LOWER(progress) = ?', ['menunggu verifikasi'])->count(),
-            'Approved'            => Pengajuan::whereRaw('LOWER(progress) = ?', ['approved'])->count(),
-            'Rejected'            => Pengajuan::whereRaw('LOWER(progress) IN (?, ?)', ['reject', 'rejected'])->count(),
-            'In-Progress'         => Pengajuan::whereRaw('LOWER(progress) = ?', ['in-progress'])->count(),
-            'Selesai'             => Pengajuan::whereRaw('LOWER(progress) = ?', ['selesai'])->count(),
+            'Menunggu verifikasi' => $rawCounts['menunggu verifikasi'] ?? 0,
+            'Approved'            => $rawCounts['approved'] ?? 0,
+            'Rejected'            => ($rawCounts['reject'] ?? 0) + ($rawCounts['rejected'] ?? 0),
+            'In-Progress'         => $rawCounts['in-progress'] ?? 0,
+            'Selesai'             => $rawCounts['selesai'] ?? 0,
         ];
 
         $knownTotal = array_sum($progressSummary);
@@ -168,5 +173,64 @@ class DashboardController extends Controller
                 ];
             })
             ->all();
+    }
+
+    public function cardDetail($key)
+    {
+        $query = Pengajuan::with(['aset', 'creator:id,nama'])->orderByDesc('created_at');
+
+        switch (strtolower(trim($key))) {
+            case 'menunggu':
+                $query->whereRaw('LOWER(progress) = ?', ['menunggu verifikasi']);
+                $title = 'Menunggu Verifikasi';
+                break;
+            case 'approved':
+                $query->whereRaw('LOWER(progress) = ?', ['approved']);
+                $title = 'Approved';
+                break;
+            case 'rejected':
+                $query->whereIn(DB::raw('LOWER(progress)'), ['reject', 'rejected']);
+                $title = 'Rejected';
+                break;
+            case 'inprogress':
+                $query->whereRaw('LOWER(progress) = ?', ['in-progress']);
+                $title = 'In-Progress';
+                break;
+            case 'selesai':
+                $query->whereRaw('LOWER(progress) = ?', ['selesai']);
+                $title = 'Selesai';
+                break;
+            case 'total':
+            default:
+                $title = 'Total Pengajuan';
+                break;
+        }
+
+        $canExportPdf = auth()->check() && !auth()->user()->hasAnyRole(['view', 'View', 'karyawan', 'Karyawan']);
+
+        $pengajuanList = $query->get()->map(function ($item) use ($canExportPdf) {
+            $progLower = strtolower(trim($item->progress));
+            return [
+                'id'             => $item->id,
+                'kode_pengajuan' => $item->kode_pengajuan,
+                'kategori'       => $item->kategori,
+                'jenis'          => optional($item->aset)->kategori ?? $item->jenis ?? '-',
+                'kode_aset'      => optional($item->aset)->kode_aset ?? $item->aset_kode ?? '-',
+                'nama_aset'      => optional($item->aset)->nama ?? '-',
+                'perusahaan_tamu'=> $item->perusahaan_tamu,
+                'progress'       => $item->progress,
+                'status'         => $item->status,
+                'creator'        => optional($item->creator)->nama ?? '-',
+                'created_at'     => optional($item->created_at)->format('d-m-Y H:i'),
+                'detail_url'     => route('pengajuan.detail', $item->id),
+                'pdf_url'        => ($progLower === 'selesai' && $canExportPdf) ? route('pengajuan.export-pdf', $item->id) : null,
+            ];
+        });
+
+        return response()->json([
+            'title' => $title,
+            'count' => $pengajuanList->count(),
+            'data'  => $pengajuanList,
+        ]);
     }
 }

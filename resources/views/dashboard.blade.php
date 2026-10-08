@@ -59,10 +59,11 @@
             overflow: hidden;
             transition: transform 0.25s ease, box-shadow 0.25s ease;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
         }
 
         .stat-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px);
             box-shadow: 0 12px 32px var(--vektor-orange-glow);
         }
 
@@ -275,7 +276,7 @@
     <div class="row g-3 mb-4">
         @foreach ($statCards as $card)
             <div class="col-12 col-sm-6 col-xl-4">
-                <div class="card stat-card h-100 {{ $card['primary'] ? 'stat-card-primary' : 'stat-card-accent' }}">
+                <div class="card stat-card h-100 {{ $card['primary'] ? 'stat-card-primary' : 'stat-card-accent' }}" data-stat-key="{{ $card['key'] }}">
                     <div class="card-body d-flex align-items-center justify-content-between">
                         <div>
                             <div class="stat-label {{ $card['primary'] ? 'text-white-50' : '' }}">{{ $card['label'] }}</div>
@@ -391,6 +392,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
                         <h5 class="card-title mb-0">Ringkasan Pengajuan</h5>
+                        <div id="export-buttons-container"></div>
                     </div>
                     <form method="GET" action="{{ route('dashboard') }}" id="filterForm">
                         <div class="row g-2 align-items-end mb-4">
@@ -471,6 +473,56 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Detail Stat Card --}}
+    <div class="modal fade" id="modalCardDetail" tabindex="-1" aria-labelledby="modalCardDetailLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header text-white" style="background: linear-gradient(135deg, var(--vektor-orange) 0%, var(--vektor-orange-dark) 100%);">
+                    <h5 class="modal-title fw-bold text-white d-flex align-items-center gap-2" id="modalCardDetailLabel">
+                        <i class="ri-list-check-3 me-1"></i>
+                        <span id="modalCardTitle">Detail Pengajuan</span>
+                        <span class="badge bg-white text-dark rounded-pill fs-6 ms-2" id="modalCardCount">0</span>
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div id="modalLoadingState" class="text-center py-5">
+                        <div class="spinner-border" role="status" style="color: var(--vektor-orange) !important;">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="text-muted mt-3 mb-0">Memuat data pengajuan...</p>
+                    </div>
+                    <div id="modalEmptyState" class="text-center py-5 d-none">
+                        <i class="ri-inbox-archive-line fs-1 text-muted d-block mb-2"></i>
+                        <h6 class="text-muted fw-semibold">Tidak Ada Data Pengajuan</h6>
+                        <p class="text-muted small mb-0">Belum ada data pengajuan untuk kategori ini.</p>
+                    </div>
+                    <div class="table-responsive d-none" id="modalTableContainer">
+                        <table class="table table-hover align-middle w-100">
+                            <thead class="table-light">
+                                <tr>
+                                    <th width="5%">No</th>
+                                    <th>Kode Pengajuan</th>
+                                    <th>Jenis / Aset</th>
+                                    <th>Perusahaan Tamu</th>
+                                    <th>Kategori</th>
+                                    <th>Progress</th>
+                                    <th>Tanggal</th>
+                                    <th class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="modalTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -705,6 +757,103 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('visibilitychange', () => {
         if (!document.hidden) fetchStats();
     });
+
+    // Relokasi tombol DataTables ke header atas Ringkasan Pengajuan
+    function relocateDataTablesButtons() {
+        const targetContainer = document.getElementById('export-buttons-container');
+        const dtButtons = document.querySelector('#file-export_wrapper .dt-buttons') || document.querySelector('.dt-buttons');
+        if (targetContainer && dtButtons && !targetContainer.contains(dtButtons)) {
+            dtButtons.classList.remove('mb-3');
+            dtButtons.classList.add('mb-0');
+            targetContainer.appendChild(dtButtons);
+        }
+    }
+
+    // Modal Stat Card Detail Handler
+    const cardModalEl = document.getElementById('modalCardDetail');
+    const cardModal = cardModalEl ? new bootstrap.Modal(cardModalEl) : null;
+
+    document.querySelectorAll('.stat-card').forEach(card => {
+        card.addEventListener('click', function () {
+            const key = this.getAttribute('data-stat-key');
+            if (!key || !cardModal) return;
+
+            const titleEl = document.getElementById('modalCardTitle');
+            const countEl = document.getElementById('modalCardCount');
+            const loadingState = document.getElementById('modalLoadingState');
+            const emptyState = document.getElementById('modalEmptyState');
+            const tableContainer = document.getElementById('modalTableContainer');
+            const tableBody = document.getElementById('modalTableBody');
+
+            loadingState.classList.remove('d-none');
+            emptyState.classList.add('d-none');
+            tableContainer.classList.add('d-none');
+            tableBody.innerHTML = '';
+            
+            cardModal.show();
+
+            fetch(`{{ url('/dashboard/card-detail') }}/${key}`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json())
+            .then(resData => {
+                titleEl.textContent = 'Detail Pengajuan: ' + resData.title;
+                countEl.textContent = resData.count;
+                loadingState.classList.add('d-none');
+
+                if (!resData.data || resData.data.length === 0) {
+                    emptyState.classList.remove('d-none');
+                } else {
+                    tableContainer.classList.remove('d-none');
+                    tableBody.innerHTML = resData.data.map((item, idx) => {
+                        let progressBadgeClass = 'bg-secondary';
+                        const progLower = item.progress ? item.progress.toLowerCase().trim() : '';
+                        if (progLower === 'approved') progressBadgeClass = 'bg-primary';
+                        else if (progLower === 'in-progress') progressBadgeClass = 'bg-warning text-dark';
+                        else if (progLower === 'selesai') progressBadgeClass = 'bg-success';
+                        else if (progLower === 'rejected' || progLower === 'reject' || progLower === 'cancel') progressBadgeClass = 'bg-danger';
+                        else if (progLower.includes('menunggu')) progressBadgeClass = 'bg-warning text-dark';
+
+                        let pdfBtn = '';
+                        if (item.pdf_url) {
+                            pdfBtn = `<a href="${item.pdf_url}" class="btn btn-sm btn-danger me-1" target="_blank" title="Export PDF">
+                                <i class="ri-file-pdf-line me-1"></i> PDF
+                            </a>`;
+                        }
+
+                        return `<tr>
+                            <td>${idx + 1}</td>
+                            <td class="fw-semibold text-primary">${item.kode_pengajuan}</td>
+                            <td>${item.jenis}<br><small class="text-muted">${item.kode_aset}</small></td>
+                            <td>${item.perusahaan_tamu}</td>
+                            <td>${item.kategori}</td>
+                            <td><span class="badge ${progressBadgeClass}">${item.progress}</span></td>
+                            <td>${item.created_at}</td>
+                            <td class="text-center">
+                                ${pdfBtn}
+                                <a href="${item.detail_url}" class="btn btn-sm btn-outline-primary" title="Lihat Detail">
+                                    <i class="ri-eye-line me-1"></i> Detail
+                                </a>
+                            </td>
+                        </tr>`;
+                    }).join('');
+                }
+            })
+            .catch(err => {
+                console.error('Error fetching card details:', err);
+                loadingState.classList.add('d-none');
+                emptyState.classList.remove('d-none');
+            });
+        });
+    });
+
+    relocateDataTablesButtons();
+    setTimeout(relocateDataTablesButtons, 100);
+    setTimeout(relocateDataTablesButtons, 500);
+    setTimeout(relocateDataTablesButtons, 1200);
 });
 </script>
 @endpush

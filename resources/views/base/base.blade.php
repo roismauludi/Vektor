@@ -44,6 +44,10 @@
     <!-- Choices Css -->
     <link rel="stylesheet" href="{{ asset('template/Solic/dist/assets') }}/libs/choices.js/public/assets/styles/choices.min.css">
 
+    <!-- DataTables Css -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css">
+
     <!-- Custom Style untuk Header dan Sidebar -->
     <style>
         /* CSS Variables untuk warna konsisten */
@@ -445,49 +449,33 @@
                         </li>
                         <!-- End::slide -->
 
-                        <!-- Start::slide -->
-                        @canany(['view-aset', 'create-aset', 'edit-aset'])
-                        <li class="slide has-sub">
-                            <a href="javascript:void(0);" class="side-menu__item">
+                        @can('view-aset')
+                        <li class="slide">
+                            <a href="{{ route('aset.index') }}" class="side-menu__item">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M17 6h2v2h-2zm0 4h2v2h-2zm-4-4h2v2h-2zm0 4h2v2h-2zM9 6h2v2H9zm0 4h2v2H9zm-4 0h2v2H5zm0-4h2v2H5zm12 8H5c-1.103 0-2-.897-2-2V6c0-1.103.897-2 2-2h12c1.103 0 2 .897 2 2v6c0 1.103-.897 2-2 2zm0-8H5v6h12V6z"></path></svg>
-                                <span class="side-menu__label text-white">Aset</span>
+                                <span class="side-menu__label text-white">Data Aset</span>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('view-pengajuan')
+                        <li class="slide">
+                            <a href="{{ route('pengajuan.list') }}" class="side-menu__item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path></svg>
+                                <span class="side-menu__label text-white">Peminjaman</span>
                                 @hasanyrole('Admin|Security')
                                 @if(($peminjamanDecisionCount ?? 0) > 0)
                                     <span class="menu-notif">{{ $peminjamanDecisionCount > 99 ? '99+' : $peminjamanDecisionCount }}</span>
                                 @endif
                                 @endhasanyrole
-                                <i class="fe fe-chevron-right side-menu__angle"></i>
                             </a>
-                            <ul class="slide-menu child1 mega-menu">
-                                <li class="slide side-menu__label1">
-                                    <a href="javascript:void(0)" class="text-white">Aset</a>
-                                </li>
-                                @can('view-aset')
-                                <li class="slide">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M3 13h1v7c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-7h1a1 1 0 0 0 .707-1.707l-9-9a.999.999 0 0 0-1.414 0l-9 9A1 1 0 0 0 3 13zm7 7v-5h4v5h-4zm2-15.586 6 6V15l.001 5H16v-5c0-1.103-.897-2-2-2h-4c-1.103 0-2 .897-2 2v5H6v-9.586l6-6z"></path></svg>
-                                    <a href="{{ route('aset.index') }}" class="side-menu__label text-white">Data Aset</a>
-                                </li>
-                                @endcan
-                                @can('view-pengajuan')
-                                <li class="slide">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M19.903 8.586a.997.997 0 0 0-.196-.293l-6-6a.997.997 0 0 0-.293-.196c-.03-.014-.062-.022-.094-.033a.991.991 0 0 0-.259-.051C13.04 2.011 13.021 2 13 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V9c0-.021-.011-.04-.013-.062a.952.952 0 0 0-.051-.259c-.01-.032-.019-.063-.033-.093zM16.586 8H14V5.414L16.586 8zM6 20V4h6v5a1 1 0 0 0 1 1h5l.002 10H6z"></path></svg>
-                                    <a href="{{ route('pengajuan.list') }}" class="side-menu__label text-white">Peminjaman</a>
-                                    @hasanyrole('Admin|Security')
-                                    @if(($peminjamanDecisionCount ?? 0) > 0)
-                                        <span class="menu-notif">{{ $peminjamanDecisionCount > 99 ? '99+' : $peminjamanDecisionCount }}</span>
-                                    @endif
-                                    @endhasanyrole
-                                </li>
-                                @endcan
-                            </ul>
                         </li>
-                        @endcanany
-                        <!-- End::slide -->
-                        
+                        @endcan
+
                         @can('view-approval')
                         <li class="slide">
                             <a href="{{ route('approval.index') }}" class="side-menu__item">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.999 14.413-3.713-3.705L7.7 11.292l2.299 2.295 5.294-5.294 1.414 1.414-6.706 6.706z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.999 14.413-3.713-3.705L7.7 11.292l2.299 2.295 5.294-5.294 1.414 1.414-6.706 6.706z"></path></svg>
                                 <span class="side-menu__label text-white">Approval</span>
                                 @hasanyrole('Admin|PIC')
                                 @if(($approvalPendingCount ?? 0) > 0)
@@ -497,38 +485,28 @@
                             </a>
                         </li>
                         @endcan
-                        <!-- End::slide -->
                         
                         <!-- Start::slide__category -->
                         <li class="slide__category"><span class="category-name text-white">Akun</span></li>
                         <!-- End::slide__category -->
                         
-                        <!-- Start::slide -->
                         @can('view-user')
-                        <li class="slide has-sub">
-                            <a href="javascript:void(0);" class="side-menu__item">
+                        <li class="slide">
+                            <a href="{{ route('user') }}" class="side-menu__item">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
-                                <span class="side-menu__label text-white">Pengguna</span>
-                                <i class="fe fe-chevron-right side-menu__angle"></i>
+                                <span class="side-menu__label text-white">Data User</span>
                             </a>
-                            <ul class="slide-menu child1 mega-menu">
-                                <li class="slide side-menu__label1">
-                                    <a href="javascript:void(0)" class="text-white">Pengguna</a>
-                                </li>
-                                <li class="slide">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"></path></svg>
-                                    <a href="{{ route('user') }}" class="side-menu__label text-white">Data User</a>
-                                </li>
-                                @role('Admin')
-                                <li class="slide">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
-                                    <a href="{{ route('access-management.index') }}" class="side-menu__label text-white">Akses User</a>
-                                </li>
-                                @endrole
-                            </ul>
                         </li>
                         @endcan
-                        <!-- End::slide -->
+
+                        @role('Admin')
+                        <li class="slide">
+                            <a href="{{ route('access-management.index') }}" class="side-menu__item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"></path></svg>
+                                <span class="side-menu__label text-white">Akses User</span>
+                            </a>
+                        </li>
+                        @endrole
 
                         <!-- Start::slide -->
                         <li class="slide">
@@ -657,16 +635,18 @@
     <!-- Custom JS -->
     <script src="{{ asset('template/Solic/dist/assets') }}/js/index.js"></script>
 
-    @stack('scripts')
-
     <!-- Custom JS -->
     <script src="{{ asset('template/Solic/dist/assets') }}/js/custom.js"></script>
+
+     <!-- jQuery JS -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
      <!-- Datatables Cdn -->
      <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.6/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
@@ -675,6 +655,8 @@
 
   <!-- Internal Datatables JS -->
   <script src="{{ asset('template/Solic/dist/assets') }}/js/datatables.js"></script>
+
+    @stack('scripts')
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -779,16 +761,20 @@
             var icon  = 'info';
             var bg    = '#fff7ed';
             var color = '#c2410c';
+            var iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
 
             if (notif.type === 'pengajuan_diverifikasi') {
-                if (notif.data && notif.data.status === 'approved') {
+                var status = notif.data && notif.data.status ? notif.data.status.toLowerCase() : '';
+                if (status === 'approved' || status === 'approve') {
                     icon  = 'success';
                     bg    = '#f0fdf4';
                     color = '#15803d';
+                    iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="16 9 10.5 15.5 8 13"></polyline></svg>';
                 } else {
                     icon  = 'error';
                     bg    = '#fef2f2';
                     color = '#b91c1c';
+                    iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b91c1c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
                 }
             }
 
@@ -797,6 +783,7 @@
             if (Toast) {
                 Toast.fire({
                     icon: icon,
+                    iconHtml: iconSvg,
                     title: '<span style="color:' + color + ';font-weight:700;font-size:0.95rem">' + notif.title + '</span>',
                     html: '<span style="color:#374151;font-size:0.85rem">' + notif.message + '</span>',
                     background: bg,
@@ -964,6 +951,36 @@
         html body .card.custom-card .card-header {
             background: #ffffff !important;
             background-color: #ffffff !important;
+        }
+
+        /* Fix SweetAlert2 Toast Icon distortion & template line overflow */
+        .swal2-toast .swal2-icon {
+            border: none !important;
+            background: transparent !important;
+            width: 32px !important;
+            height: 32px !important;
+            min-width: 32px !important;
+            min-height: 32px !important;
+            margin: 0 12px 0 0 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            overflow: visible !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+        .swal2-toast .swal2-icon .swal2-icon-content {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        .swal2-toast .swal2-icon::before,
+        .swal2-toast .swal2-icon::after,
+        .swal2-toast .swal2-icon .swal2-x-mark,
+        .swal2-toast .swal2-icon .swal2-success-ring,
+        .swal2-toast .swal2-icon .swal2-success-fix,
+        .swal2-toast .swal2-icon [class^='swal2-success-line'] {
+            display: none !important;
         }
     </style>
     

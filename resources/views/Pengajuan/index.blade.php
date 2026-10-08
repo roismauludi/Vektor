@@ -119,6 +119,13 @@
                                     @endrole
 
                                     @endif
+                                    @if ($progress === 'selesai' && auth()->check() && !auth()->user()->hasAnyRole(['view', 'View', 'karyawan', 'Karyawan']))
+                                        <a href="{{ route('pengajuan.export-pdf', $pengajuan->id) }}"
+                                           class="btn btn-sm btn-danger ms-1">
+                                            <i class="ri-file-pdf-line me-1"></i>
+                                            PDF
+                                        </a>
+                                    @endif
                                     <a href="{{ route('pengajuan.detail', $pengajuan->id) }}"
                                        class="btn btn-sm btn-outline-primary ms-1">
                                         <i class="ri-eye-line me-1"></i>

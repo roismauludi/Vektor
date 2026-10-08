@@ -62,17 +62,6 @@
     }
 </style>
 
-<div class="row mb-3">
-    <div class="col-12">
-        <div class="d-flex justify-content-end">
-            <a href="{{ route('pengajuan.list') }}" class="btn btn-outline-secondary">
-                <i class="ri-arrow-left-line me-1"></i>
-                Kembali
-            </a>
-        </div>
-    </div>
-</div>
-
 <div class="row">
     <div class="col-12">
         <div class="row">
@@ -81,6 +70,12 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <p class="text-muted mb-0">Detail Pengajuan</p>
                         <div class="d-flex align-items-center gap-2">
+                            @if(strtolower(trim($pengajuan->progress)) === 'selesai' && auth()->check() && !auth()->user()->hasAnyRole(['view', 'View', 'karyawan', 'Karyawan']))
+                            <a href="{{ route('pengajuan.export-pdf', $pengajuan->id) }}" class="btn btn-sm btn-danger">
+                                <i class="ri-file-pdf-line me-1"></i>
+                                Export PDF
+                            </a>
+                            @endif
                             @role('Security')
                             <form id="cancel-pengajuan-form" action="{{ route('pengajuan.cancel', $pengajuan->id) }}" method="post" class="mb-0">
                                 @csrf
@@ -95,7 +90,7 @@
                             </form>
                             @endrole
                             <a href="{{ route('pengajuan.list') }}" class="btn btn-sm btn-outline-secondary">
-                                <i class="ri-arrow-right-line ms-1"></i>
+                                <i class="ri-arrow-left-line me-1"></i>
                                 Kembali
                             </a>
                         </div>
@@ -149,10 +144,18 @@
                                 <tr>
                                     <th>File Identitas</th>
                                     <td>
-                                        <a href="{{ asset('storage/'.$pengajuan->identitas_file) }}" target="_blank"    
-                                           class="btn btn-sm btn-primary">
-                                            Cek Identitas
-                                        </a>    
+                                        @if(auth()->check() && !auth()->user()->hasAnyRole(['view', 'View', 'karyawan', 'Karyawan']))
+                                            @if($pengajuan->identitas_file)
+                                                <a href="{{ asset('storage/'.$pengajuan->identitas_file) }}" target="_blank"    
+                                                   class="btn btn-sm btn-primary">
+                                                    Cek Identitas
+                                                </a>
+                                            @else
+                                                <span class="text-muted">Tidak ada file</span>
+                                            @endif
+                                        @else
+                                            <span class="text-muted"><i class="ri-lock-2-line me-1"></i> Tidak memiliki akses</span>
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr>
@@ -215,6 +218,8 @@
         </div>
 
         @php
+            $standardCats = ['kendaraan', 'penyerahan_kunci', 'pengembalian_kunci', 'lainnya'];
+
             $fotoRows = [
                 [
                     'label' => 'Kendaraan',
@@ -233,9 +238,45 @@
                 ],
             ];
 
+            // Ambil foto tambahan di luar 3 foto standar
+            $extraFotos = $pengajuan->fotos ? $pengajuan->fotos->filter(function($f) use ($standardCats) {
+                return !in_array(strtolower(trim($f->kategori)), $standardCats, true);
+            }) : collect();
+
+            if ($extraFotos->count() > 0) {
+                $extraGroups = [];
+                foreach ($extraFotos as $foto) {
+                    $cat = strtolower(trim($foto->kategori));
+                    $baseName = preg_replace('/_\d+$/', '', $cat);
+                    $baseName = str_replace(['tambahan_kembali_', 'tambahan_'], '', $baseName);
+                    $groupKey = 'tambahan_' . $baseName;
+                    
+                    if (!isset($extraGroups[$groupKey])) {
+                        $extraGroups[$groupKey] = [
+                            'label' => 'Foto Tambahan ' . ($baseName != '' ? $baseName : (count($extraGroups) + 1)),
+                            'pergi' => ['kategori' => $foto->kategori, 'pengembalian' => false, 'path' => !$foto->pengembalian ? $foto->path : null],
+                            'kembali' => ['kategori' => $foto->kategori, 'pengembalian' => true, 'path' => $foto->pengembalian ? $foto->path : null],
+                        ];
+                    } else {
+                        if ($foto->pengembalian) {
+                            $extraGroups[$groupKey]['kembali']['path'] = $foto->path;
+                            $extraGroups[$groupKey]['kembali']['kategori'] = $foto->kategori;
+                        } else {
+                            $extraGroups[$groupKey]['pergi']['path'] = $foto->path;
+                            $extraGroups[$groupKey]['pergi']['kategori'] = $foto->kategori;
+                        }
+                    }
+                }
+
+                foreach ($extraGroups as $extraRow) {
+                    $fotoRows[] = $extraRow;
+                }
+            }
+
             $hasPhotos = collect($fotoRows)->contains(function ($row) use ($pengajuan) {
-                return $pengajuan->fotoPath($row['pergi']['kategori'], $row['pergi']['pengembalian'])
-                    || $pengajuan->fotoPath($row['kembali']['kategori'], $row['kembali']['pengembalian']);
+                $pPath = isset($row['pergi']['path']) ? $row['pergi']['path'] : $pengajuan->fotoPath($row['pergi']['kategori'], $row['pergi']['pengembalian']);
+                $kPath = isset($row['kembali']['path']) ? $row['kembali']['path'] : $pengajuan->fotoPath($row['kembali']['kategori'], $row['kembali']['pengembalian']);
+                return $pPath || $kPath;
             });
 
             $canShowPhotos = in_array($progressLower, ['approved', 'in-progress', 'selesai'], true) || $hasPhotos;
@@ -263,8 +304,8 @@
                             <div class="row g-4">
                                 @foreach ($fotoRows as $row)
                                     @php
-                                        $pergiPath = $pengajuan->fotoPath($row['pergi']['kategori'], false);
-                                        $kembaliPath = $pengajuan->fotoPath($row['kembali']['kategori'], true);
+                                        $pergiPath = isset($row['pergi']['path']) ? $row['pergi']['path'] : $pengajuan->fotoPath($row['pergi']['kategori'], false);
+                                        $kembaliPath = isset($row['kembali']['path']) ? $row['kembali']['path'] : $pengajuan->fotoPath($row['kembali']['kategori'], true);
                                         $coverPath = $pergiPath ?: $kembaliPath;
                                         $slug = \Illuminate\Support\Str::slug($row['label']);
                                         $modalId = 'modalFoto-'.$slug;
@@ -346,8 +387,8 @@
                     @foreach ($fotoRows as $row)
                         @php
                             $slug = \Illuminate\Support\Str::slug($row['label']);
-                            $pergiPath = $pengajuan->fotoPath($row['pergi']['kategori'], false);
-                            $kembaliPath = $pengajuan->fotoPath($row['kembali']['kategori'], true);
+                            $pergiPath = isset($row['pergi']['path']) ? $row['pergi']['path'] : $pengajuan->fotoPath($row['pergi']['kategori'], false);
+                            $kembaliPath = isset($row['kembali']['path']) ? $row['kembali']['path'] : $pengajuan->fotoPath($row['kembali']['kategori'], true);
                         @endphp
                         @if ($pergiPath || $kembaliPath)
                             <div class="modal fade" id="modalFoto-{{ $slug }}" tabindex="-1" aria-hidden="true">

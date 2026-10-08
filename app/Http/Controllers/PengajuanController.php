@@ -197,9 +197,9 @@ class PengajuanController extends Controller
                 ->with('error', 'Gagal menyimpan pengajuan: ' . $th->getMessage());
         }
 
-        // Kirim notifikasi ke semua PIC dan Admin
+        // Kirim notifikasi ke semua PIC
         try {
-            $penerima = User::role(['PIC', 'Admin'])->get();
+            $penerima = User::role(['PIC'])->get();
             foreach ($penerima as $user) {
                 Notification::create([
                     'user_id' => $user->id,
@@ -284,6 +284,8 @@ class PengajuanController extends Controller
             'foto_kendaraan' => 'nullable|file|mimes:jpg,jpeg,png|max:5120',
             'foto_penyerahan_kunci' => 'nullable|file|mimes:jpg,jpeg,png|max:5120',
             'foto_lainnya' => 'nullable|file|mimes:jpg,jpeg,png|max:5120',
+            'foto_tambahan' => 'nullable|array',
+            'foto_tambahan.*' => 'nullable|file|mimes:jpg,jpeg,png|max:5120',
         ]);
 
         try {
@@ -316,6 +318,21 @@ class PengajuanController extends Controller
                         self::FOTO_BASE_DIR,
                         false
                     );
+                }
+
+                if ($request->hasFile('foto_tambahan')) {
+                    foreach ($request->file('foto_tambahan') as $index => $file) {
+                        if ($file && $file->isValid()) {
+                            $kategoriName = 'tambahan_' . ($index + 1) . '_' . time();
+                            $this->upsertFotoKategori(
+                                $pengajuan->kode_pengajuan,
+                                $kategoriName,
+                                $file,
+                                self::FOTO_BASE_DIR,
+                                false
+                            );
+                        }
+                    }
                 }
 
                 // Reload pengajuan untuk mendapatkan foto terbaru
@@ -498,9 +515,9 @@ class PengajuanController extends Controller
                 ->with('error', 'Gagal mengupdate pengajuan: ' . $th->getMessage());
         }
 
-        // Kirim notifikasi ke PIC dan Admin bahwa pengajuan telah direvisi dan dikirim ulang
+        // Kirim notifikasi ke PIC bahwa pengajuan telah direvisi dan dikirim ulang
         try {
-            $penerima = User::role(['PIC', 'Admin'])->get();
+            $penerima = User::role(['PIC'])->get();
             foreach ($penerima as $user) {
                 Notification::create([
                     'user_id' => $user->id,
@@ -545,6 +562,8 @@ class PengajuanController extends Controller
             'foto_kendaraan_kembali' => 'nullable|file|mimes:jpg,jpeg,png|max:5120',
             'foto_pengembalian_kunci' => 'nullable|file|mimes:jpg,jpeg,png|max:5120',
             'foto_lainnya' => 'nullable|file|mimes:jpg,jpeg,png|max:5120',
+            'foto_tambahan' => 'nullable|array',
+            'foto_tambahan.*' => 'nullable|file|mimes:jpg,jpeg,png|max:5120',
         ]);
 
         try {
@@ -577,6 +596,21 @@ class PengajuanController extends Controller
                         self::FOTO_BASE_DIR,
                         true
                     );
+                }
+
+                if ($request->hasFile('foto_tambahan')) {
+                    foreach ($request->file('foto_tambahan') as $index => $file) {
+                        if ($file && $file->isValid()) {
+                            $kategoriName = 'tambahan_kembali_' . ($index + 1) . '_' . time();
+                            $this->upsertFotoKategori(
+                                $pengajuan->kode_pengajuan,
+                                $kategoriName,
+                                $file,
+                                self::FOTO_BASE_DIR,
+                                true
+                            );
+                        }
+                    }
                 }
 
                 $pengajuan->load('fotos');
@@ -680,5 +714,103 @@ class PengajuanController extends Controller
         ]);
 
         return redirect()->route('pengajuan.list')->with('success', 'Pengajuan berhasil dibatalkan');
+    }
+
+    public function exportPdf($id)
+    {
+        if (auth()->check() && auth()->user()->hasAnyRole(['view', 'View', 'karyawan', 'Karyawan'])) {
+            return back()->with('error', 'Role View tidak memiliki akses untuk mengunduh PDF.');
+        }
+
+        $pengajuan = Pengajuan::with(['aset', 'creator', 'details', 'fotos', 'logs.creator'])->findOrFail($id);
+
+        if (strtolower(trim($pengajuan->progress)) !== 'selesai') {
+            return back()->with('error', 'Export PDF hanya tersedia untuk pengajuan yang telah selesai.');
+        }
+
+        $standardCats = ['kendaraan', 'penyerahan_kunci', 'pengembalian_kunci', 'lainnya'];
+
+        $fotoRows = [
+            [
+                'label' => 'Kendaraan',
+                'pergi' => ['kategori' => 'kendaraan', 'pengembalian' => false],
+                'kembali' => ['kategori' => 'kendaraan', 'pengembalian' => true],
+            ],
+            [
+                'label' => 'Kunci',
+                'pergi' => ['kategori' => 'penyerahan_kunci', 'pengembalian' => false],
+                'kembali' => ['kategori' => 'pengembalian_kunci', 'pengembalian' => true],
+            ],
+            [
+                'label' => 'Lainnya',
+                'pergi' => ['kategori' => 'lainnya', 'pengembalian' => false],
+                'kembali' => ['kategori' => 'lainnya', 'pengembalian' => true],
+            ],
+        ];
+
+        $extraFotos = $pengajuan->fotos ? $pengajuan->fotos->filter(function($f) use ($standardCats) {
+            return !in_array(strtolower(trim($f->kategori)), $standardCats, true);
+        }) : collect();
+
+        if ($extraFotos->count() > 0) {
+            $extraGroups = [];
+            foreach ($extraFotos as $foto) {
+                $cat = strtolower(trim($foto->kategori));
+                $baseName = preg_replace('/_\d+$/', '', $cat);
+                $baseName = str_replace(['tambahan_kembali_', 'tambahan_'], '', $baseName);
+                $groupKey = 'tambahan_' . $baseName;
+                
+                if (!isset($extraGroups[$groupKey])) {
+                    $extraGroups[$groupKey] = [
+                        'label' => 'Foto Tambahan ' . ($baseName != '' ? $baseName : (count($extraGroups) + 1)),
+                        'pergi' => ['kategori' => $foto->kategori, 'pengembalian' => false, 'path' => !$foto->pengembalian ? $foto->path : null],
+                        'kembali' => ['kategori' => $foto->kategori, 'pengembalian' => true, 'path' => $foto->pengembalian ? $foto->path : null],
+                    ];
+                } else {
+                    if ($foto->pengembalian) {
+                        $extraGroups[$groupKey]['kembali']['path'] = $foto->path;
+                        $extraGroups[$groupKey]['kembali']['kategori'] = $foto->kategori;
+                    } else {
+                        $extraGroups[$groupKey]['pergi']['path'] = $foto->path;
+                        $extraGroups[$groupKey]['pergi']['kategori'] = $foto->kategori;
+                    }
+                }
+            }
+            foreach ($extraGroups as $extraRow) {
+                $fotoRows[] = $extraRow;
+            }
+        }
+
+        foreach ($fotoRows as &$row) {
+            $pergiPath = isset($row['pergi']['path']) ? $row['pergi']['path'] : $pengajuan->fotoPath($row['pergi']['kategori'], false);
+            $kembaliPath = isset($row['kembali']['path']) ? $row['kembali']['path'] : $pengajuan->fotoPath($row['kembali']['kategori'], true);
+            
+            $row['pergi_base64'] = $this->imageToBase64($pergiPath);
+            $row['kembali_base64'] = $this->imageToBase64($kembaliPath);
+        }
+        unset($row);
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('Pengajuan.pdf', compact('pengajuan', 'fotoRows'))
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->download('Pengajuan_' . $pengajuan->kode_pengajuan . '.pdf');
+    }
+
+    private function imageToBase64(?string $relativePath): ?string
+    {
+        if (!$relativePath) {
+            return null;
+        }
+        $fullPath = storage_path('app/public/' . $relativePath);
+        if (!file_exists($fullPath)) {
+            $fullPath = public_path('storage/' . $relativePath);
+        }
+        if (file_exists($fullPath)) {
+            $type = pathinfo($fullPath, PATHINFO_EXTENSION);
+            $mime = 'image/' . (strtolower($type) === 'png' ? 'png' : 'jpeg');
+            $data = file_get_contents($fullPath);
+            return 'data:' . $mime . ';base64,' . base64_encode($data);
+        }
+        return null;
     }
 }

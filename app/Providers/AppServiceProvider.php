@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
 
                 if ($user->hasAnyRole(['Admin', 'Security'])) {
                     $peminjamanDecisionCount = Pengajuan::query()
-                        ->whereRaw('LOWER(progress) IN (?, ?)', ['approved', 'rejected'])
+                        ->whereRaw('LOWER(progress) IN (?, ?, ?, ?)', ['approved', 'approve', 'rejected', 'reject'])
                         ->count();
                 }
             }
