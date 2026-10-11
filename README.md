@@ -15,7 +15,7 @@ VEKTOR adalah aplikasi web untuk mengelola aset dan alur **pengajuan–persetuju
 
 | Role     | Deskripsi singkat                                      |
 |----------|--------------------------------------------------------|
-| Admin    | Akses penuh ke seluruh fitur aplikasi                  |
+| Admin    | Mengelola data pengguna, dan permission                |
 | Security | Mengelola pengajuan dan melihat data aset              |
 | PIC      | Melihat dan menyetujui/menolak pengajuan               |
 | view     | Akses terbatas (hanya melihat)                         |
@@ -77,29 +77,3 @@ php artisan serve
 # Terminal 2
 npm run dev
 ```
-
-Aplikasi dapat diakses di [http://localhost:8000](http://localhost:8000).
-
-## Struktur Teknologi
-
-- **Backend:** Laravel 12, PHP 8.2+
-- **Frontend:** Blade, Tailwind CSS 4, Vite
-- **Autentikasi & Authorization:** Laravel Auth + [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
-- **Database:** SQLite (default) / MySQL
-
-## Perintah Berguna
-
-```bash
-# Build asset production
-npm run build
-
-# Reset cache permission
-php artisan permission:cache-reset
-
-# Jalankan seeder admin saja
-php artisan db:seed --class=CreateAdminUserSeeder
-```
-
-## Lisensi
-
-Proyek ini menggunakan [MIT License](https://opensource.org/licenses/MIT).
