@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     // Access Management - untuk user yang punya akses kelola user (misalnya admin)
     Route::middleware('role:Admin')->group(function () {
         Route::get('/access-management', [AccessManagementController::class, 'index'])->name('access-management.index');
+        Route::get('/access-management/logs', [AccessManagementController::class, 'logs'])->name('access-management.logs');
         Route::put('/access-management/{id}/role', [AccessManagementController::class, 'updateRole'])->name('access-management.update-role');
         Route::put('/access-management/{id}/permissions', [AccessManagementController::class, 'updatePermissions'])->name('access-management.update-permissions');
         Route::get('/access-management/{id}/permissions', [AccessManagementController::class, 'getUserPermissions'])->name('access-management.get-permissions');

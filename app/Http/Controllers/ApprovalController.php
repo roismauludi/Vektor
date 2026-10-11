@@ -37,7 +37,29 @@ class ApprovalController extends Controller
 
     public function approve(Request $request, $id)
     {
-        $pengajuan = Pengajuan::findOrFail($id);
+        $pengajuan = Pengajuan::with('creator')->findOrFail($id);
+
+        if ($pengajuan->creator_id === Auth::id()) {
+            if ($request->expectsJson() || $request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Anda tidak dapat menyetujui pengajuan yang Anda buat sendiri.'
+                ], 403);
+            }
+            return redirect()->back()->with('error', 'Anda tidak dapat menyetujui pengajuan yang Anda buat sendiri.');
+        }
+
+        // Restriksi RBAC: Admin tidak dapat menyetujui pengajuan apapun (hanya PIC yang memiliki hak persetujuan)
+        if (Auth::user()->hasRole('Admin')) {
+            if ($request->expectsJson() || $request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Admin tidak dapat menyetujui pengajuan. Hak persetujuan hanya dimiliki oleh PIC.'
+                ], 403);
+            }
+            return redirect()->back()->with('error', 'Admin tidak dapat menyetujui pengajuan. Hak persetujuan hanya dimiliki oleh PIC.');
+        }
+
         $pengajuan->progress = 'approved';
         $pengajuan->save();
 
@@ -82,7 +104,29 @@ class ApprovalController extends Controller
 
     public function reject(Request $request, $id)
     {
-        $pengajuan = Pengajuan::findOrFail($id);
+        $pengajuan = Pengajuan::with('creator')->findOrFail($id);
+
+        if ($pengajuan->creator_id === Auth::id()) {
+            if ($request->expectsJson() || $request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Anda tidak dapat menolak pengajuan yang Anda buat sendiri.'
+                ], 403);
+            }
+            return redirect()->back()->with('error', 'Anda tidak dapat menolak pengajuan yang Anda buat sendiri.');
+        }
+
+        // Restriksi RBAC: Admin tidak dapat menolak pengajuan apapun (hanya PIC yang memiliki hak persetujuan)
+        if (Auth::user()->hasRole('Admin')) {
+            if ($request->expectsJson() || $request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Admin tidak dapat menolak pengajuan. Hak persetujuan hanya dimiliki oleh PIC.'
+                ], 403);
+            }
+            return redirect()->back()->with('error', 'Admin tidak dapat menolak pengajuan. Hak persetujuan hanya dimiliki oleh PIC.');
+        }
+
         $pengajuan->progress = 'rejected';
         $pengajuan->save();
 

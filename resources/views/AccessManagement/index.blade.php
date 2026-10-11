@@ -419,9 +419,9 @@ function updateRole(userId) {
         },
         body: JSON.stringify({ role: role })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
+    .then(async response => {
+        const data = await response.json();
+        if (response.ok && data.success) {
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
@@ -429,8 +429,13 @@ function updateRole(userId) {
                 timer: 2000,
                 showConfirmButton: false
             }).then(() => {
-                // Reload agar tampilan permission dari role terupdate
                 location.reload();
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: data.message || 'Gagal mengupdate role'
             });
         }
     })
@@ -445,7 +450,7 @@ function updateRole(userId) {
 
 function copyFromRole(userId) {
     const roleSelect = document.getElementById('copyRole' + userId);
-    const roleName = roleSelect.value;
+    const roleName = roleSelect?.value;
     
     if (!roleName) {
         Swal.fire({
@@ -475,9 +480,9 @@ function copyFromRole(userId) {
                 },
                 body: JSON.stringify({ role_name: roleName })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
+            .then(async response => {
+                const data = await response.json();
+                if (response.ok && data.success) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Berhasil',
@@ -486,6 +491,12 @@ function copyFromRole(userId) {
                         showConfirmButton: false
                     });
                     loadUserPermissions(userId);
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: data.message || 'Gagal copy permission'
+                    });
                 }
             })
             .catch(error => {
@@ -540,9 +551,9 @@ function savePermissions(userId) {
         },
         body: JSON.stringify({ permissions: extraPermissions })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
+    .then(async response => {
+        const data = await response.json();
+        if (response.ok && data.success) {
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
@@ -551,6 +562,12 @@ function savePermissions(userId) {
                 showConfirmButton: false
             }).then(() => {
                 location.reload();
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: data.message || 'Gagal menyimpan permissions'
             });
         }
     })

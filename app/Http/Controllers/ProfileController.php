@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PermissionLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +14,12 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('Profile.index', compact('user'));
+        $permissionLogs = PermissionLog::with('admin')
+            ->where('user_id', $user->id)
+            ->orderByDesc('created_at')
+            ->get();
+
+        return view('Profile.index', compact('user', 'permissionLogs'));
     }
 
     public function update(Request $request)
@@ -42,7 +48,7 @@ class ProfileController extends Controller
         
             $file = $request->file('foto');
         
-            // Buat slug dari nama (atau bisa pakai username kalau ada field username)
+            // Buat slug dari nama
             $usernameSlug = Str::slug($user->nama ?? 'user');
         
             // Buat nama file: username + timestamp + random

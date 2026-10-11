@@ -198,7 +198,7 @@
 
                         <div class="d-flex justify-content-end gap-2">
                             <button type="reset" class="btn btn-light">Reset</button>
-                            <button type="submit" class="btn btn-primary">Ajukan Peminjaman</button>
+                            <button type="submit" class="btn btn-primary">Ajukan Izin Akses</button>
                         </div>
                     </div>
                 </form>

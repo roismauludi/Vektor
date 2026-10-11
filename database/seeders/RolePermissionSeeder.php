@@ -61,7 +61,10 @@ class RolePermissionSeeder extends Seeder
         $picRole = Role::firstOrCreate(['name' => 'PIC', 'guard_name' => 'web']);
         $viewRole = Role::firstOrCreate(['name' => 'View', 'guard_name' => 'web']);
 
-        $adminRole->syncPermissions(Permission::all());
+        $adminPermissions = Permission::all()->reject(function ($perm) {
+            return in_array($perm->name, ['approve-pengajuan', 'reject-pengajuan']);
+        });
+        $adminRole->syncPermissions($adminPermissions);
 
         $securityRole->syncPermissions([
             'view-dashboard',

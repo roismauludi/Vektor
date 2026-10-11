@@ -354,6 +354,87 @@
                         </div>
                     </div>
                 </form>
+
+                <!-- Riwayat Perubahan Akses & Permission Section -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card info-card">
+                            <div class="card-body">
+                                <h5 class="section-title">
+                                    <i class="ri-history-line me-2"></i>Riwayat Perubahan Akses & Permission
+                                </h5>
+                                @if(isset($permissionLogs) && $permissionLogs->count() > 0)
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Waktu</th>
+                                                    <th>Diubah Oleh</th>
+                                                    <th>Aksi</th>
+                                                    <th>Keterangan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($permissionLogs as $index => $log)
+                                                    <tr>
+                                                        <td>{{ $index + 1 }}</td>
+                                                        <td>
+                                                            <small class="text-muted">
+                                                                <i class="ri-time-line me-1"></i>
+                                                                {{ $log->created_at ? $log->created_at->format('d M Y, H:i') : '-' }}
+                                                            </small>
+                                                        </td>
+                                                        <td>
+                                                            <span class="fw-semibold">{{ $log->admin->nama ?? 'Administrator' }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="badge bg-{{ $log->aksi == 'update_role' ? 'primary' : ($log->aksi == 'update_permissions' ? 'info' : 'warning') }}">
+                                                                {{ ucwords(str_replace('_', ' ', $log->aksi)) }}
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            @php
+                                                                $added = $log->added_permissions;
+                                                                $removed = $log->removed_permissions;
+                                                            @endphp
+
+                                                            @if(!empty($added) || !empty($removed))
+                                                                <div class="d-flex flex-column gap-1">
+                                                                    @if(!empty($added))
+                                                                        <div>
+                                                                            <span class="badge bg-success-transparent text-success border border-success-subtle">
+                                                                                <i class="ri-add-circle-line me-1"></i>Menambah: {{ implode(', ', $added) }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                    @if(!empty($removed))
+                                                                        <div>
+                                                                            <span class="badge bg-danger-transparent text-danger border border-danger-subtle">
+                                                                                <i class="ri-indeterminate-circle-line me-1"></i>Menghapus: {{ implode(', ', $removed) }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            @else
+                                                                <span>{{ $log->keterangan }}</span>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @else
+                                    <div class="text-center py-4 text-muted">
+                                        <i class="ri-shield-check-line fs-1 d-block mb-2 text-secondary"></i>
+                                        Belum ada riwayat perubahan permission untuk akun Anda.
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
